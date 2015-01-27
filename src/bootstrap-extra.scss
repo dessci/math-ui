@@ -8,7 +8,7 @@ math-item, .math-item {
     margin: -4px;  /* -(border-width + padding) */
     outline: none;
     cursor: pointer;
-   
+
     &:hover, &.highlight {
         border: 3px solid $item-hover-border;
     }
@@ -45,9 +45,6 @@ math-item, .math-item {
     top: 100%;
     z-index: 1;
     margin-top: 3px;
-    width: 100em;
-    background-color: transparent;
-    text-align: left;
 }
 
 .math-ui-eqn-menu > .well {
@@ -56,12 +53,18 @@ math-item, .math-item {
     border-radius: 3px;
     display: inline-block;
 
-    .nav>li>a {
-        padding: 5px 10px;
+    .nav {
+        white-space: nowrap;
+
+        & > li {
+            float: none;
+            display: inline-block;
+
+            & > a, & > .title {
+                padding: 5px 10px;
+                display: inline-block;
+            }
+        }
     }
-    .nav>li>.title {
-        padding: 5px 10px;
-        position: relative;
-        display: block;
-    }
+
 }
