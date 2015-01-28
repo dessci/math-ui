@@ -34,8 +34,7 @@ module FlorianMath {
     }
 
     function loadjQuery() {
-        var match = navigator.userAgent.match(/msie (.+);/i),
-            IEpre9 = match && parseFloat(match[1]) < 9,
+        var IEpre9 = navigator.userAgent.match(/MSIE [6-8]/i),
             version = IEpre9 ? '1.11.2' : '2.1.3',
             script = document.createElement('script');
         script.src = 'https://code.jquery.com/jquery-' + version + '.min.js';

@@ -7,7 +7,7 @@ module.exports = function(grunt) {
         },
         concat: {
             bs_css: {
-                src: ['tmp/bs-base.css', 'tmp/bs-extra.css'],
+                src: ['tmp/bs-base2.css', 'tmp/bs-extra.css'],
                 dest: 'dist/math-ui-twbs.css'
             },
             math_item: {
@@ -33,13 +33,25 @@ module.exports = function(grunt) {
                 dest: 'tmp/bootstrap.js',
                 options: {
                     process: function (content) {
-                        return '(function (jQuery) {\n' + content + '})(FlorianMath.jQueryLib);\n';
+                        return '(function (jQuery) {\n' + content.replace(/modal-open/g, 'math-ui-modal-open') +
+                            '})(FlorianMath.jQueryLib);\n';
+                    }
+                }
+            },
+            bs_css: {
+                src: 'tmp/bs-base1.css',
+                dest: 'tmp/bs-base2.css',
+                options: {
+                    process: function (content) {
+                        content = content.replace(/^(\.math-ui \.modal-dialog \{[^]*?margin:.*?)(;[^]*?\})/m,
+                            '$1 0;\n  max-width: 100vw$2');
+                        return content.replace(/\.math-ui \.modal-open/g, '.math-ui-modal-open');
                     }
                 }
             }
         },
         exec: {
-            bs_css: 'node convert.js libs/bootstrap/bootstrap.css > tmp/bs-base.css'
+            bs_css: 'node convert.js libs/bootstrap/bootstrap.css > tmp/bs-base1.css'
         },
         mkdir: {
             tmp: {
@@ -77,9 +89,25 @@ module.exports = function(grunt) {
                 files: ['src/math-ui.ts'],
                 tasks: ['typescript:math_ui', 'concat:math_ui']
             },
+            math_item: {
+                files: ['src/loader.ts'],
+                tasks: ['typescript:math_item', 'concat:math_item']
+            },
+            math_item_element: {
+                files: ['libs/math-item/math-item-element.js'],
+                tasks: ['concat:math_item']
+            },
+            bs_js: {
+                files: ['libs/bootstrap/bootstrap.js'],
+                tasks: ['copy:bs_js', 'concat:math_ui']
+            },
+            bs_extra: {
+                files: ['src/bootstrap-extra.scss'],
+                tasks: ['sass:bs_extra', 'concat:bs_css']
+            },
             bs_css: {
-                files: ['src/bootstrap-extra.scss', 'libs/bootstrap/bootstrap.css'],
-                tasks: ['sass:bs_extra', 'exec:bs_css', 'concat:bs_css']
+                files: ['libs/bootstrap/bootstrap.css'],
+                tasks: ['exec:bs_css', 'copy:bs_css', 'concat:bs_css']
             }
         }
     });

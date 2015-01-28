@@ -30,10 +30,10 @@ math-item, .math-item {
     width: 100%;
 }
 
-.modal-body > .nav-pills {
+.math-ui .modal-body > .nav-pills {
     padding-bottom: 15px;
 }
-.modal-body > textarea.form-control {
+.math-ui .modal-body > textarea.form-control {
     height: 20em;
     cursor: text;
     background-color: transparent;
@@ -52,6 +52,7 @@ math-item, .math-item {
     margin: 0;
     border-radius: 3px;
     display: inline-block;
+    background-color: #fff;
 
     .nav {
         white-space: nowrap;
