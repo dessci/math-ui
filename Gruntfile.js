@@ -48,6 +48,13 @@ module.exports = function(grunt) {
                         return content.replace(/\.math-ui \.modal-open/g, '.math-ui-modal-open');
                     }
                 }
+            },
+            gh_pages: {
+                files: [
+                    { expand: true, src: ['dist/**'], dest: 'gh-pages/' },
+                    { expand: true, src: ['examples/**'], dest: 'gh-pages/' },
+                    { expand: true, src: ['media/**'], dest: 'gh-pages/' }
+                ]
             }
         },
         exec: {
@@ -124,5 +131,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['clean', 'mkdir', 'exec', 'sass', 'typescript', 'copy', 'concat']);
     grunt.registerTask('serve', ['connect', 'watch']);
+    grunt.registerTask('gh-pages', ['copy:gh_pages']);
 
 };
