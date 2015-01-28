@@ -952,7 +952,11 @@ var FlorianMath;
             promise = new FlorianMath.Promise(function (resolve) {
                 resolver = resolve;
             });
-            promise.resolve = resolver;
+            promise.isResolved = false;
+            promise.resolve = function (val) {
+                promise.isResolved = true;
+                resolver(val);
+            };
             return promise;
         }
     };

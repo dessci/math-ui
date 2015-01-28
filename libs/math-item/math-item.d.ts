@@ -28,6 +28,7 @@ declare module FlorianMath {
     }
     interface PromiseWithResolve<T> extends Promise<T> {
         resolve(val?: T): void;
+        isResolved: boolean;
     }
     interface IUtils {
         common: {

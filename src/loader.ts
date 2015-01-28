@@ -1,4 +1,4 @@
-/// <reference path="math-item.d.ts" />
+/// <reference path="../libs/math-item/math-item.d.ts" />
 /// <reference path="jquery.d.ts" />
 
 module FlorianMath {
@@ -6,7 +6,7 @@ module FlorianMath {
 
     var dom = _utils.dom;
     export var jQueryLib: JQueryStatic;
-    export var lookAndFeel;
+    export var lookAndFeel: PromiseWithResolve<any> = _utils.makePromiseWithResolve<any>();
 
     // a validator is needed for IE8
     function dynamicLoad(elem: HTMLScriptElement, validator: () => boolean, failMessage: string) {
@@ -46,7 +46,7 @@ module FlorianMath {
     function loadLnFjs() {
         var script = document.createElement('script');
         script.src = '../dist/math-ui-twbs.js';
-        return dynamicLoad(script, () => lookAndFeel !== undefined, 'look-and-feel');
+        return dynamicLoad(script, () => lookAndFeel.isResolved, 'look-and-feel');
     }
 
     dom.ready().then(() => {

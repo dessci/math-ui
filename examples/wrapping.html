@@ -391,11 +391,14 @@
                     return mathitem.rendered();
                 })).then(progress.appendChild(document.createTextNode('> rendered')));
             });
-            /*$('#math-ui-dashboard-trigger').on('click', function (event) {
-                event.preventDefault();
-                event.stopPropagation();
-                FlorianMath.lookAndFeel.showDashboard();
-            });*/
+            FlorianMath.lookAndFeel.then(function (lnf) {
+                var $ = FlorianMath.jQueryLib;
+                $('#math-ui-dashboard-trigger').on('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    lnf.showDashboard();
+                });
+            });
         })();
     </script>
 </body>

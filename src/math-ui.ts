@@ -1,4 +1,4 @@
-﻿/// <reference path="math-item.d.ts" />
+﻿/// <reference path="../libs/math-item/math-item.d.ts" />
 /// <reference path="jquery.d.ts" />
 /// <reference path="../tmp/loader.d.ts" />
 
@@ -105,7 +105,7 @@ module FlorianMath {
             result.push({ label: 'Zoom', action: () => { zoomAction(mathItem) } });
         if (mathItem.getMarkup)
             result.push({ label: 'View Markup', action: () => { sourceAction(mathItem) } });
-        result.push({ label: 'Dashboard', action: () => { lookAndFeel.showDashboard() } });
+        result.push({ label: 'Dashboard', action: () => { lnf.showDashboard() } });
         return result;
     }
 
@@ -129,7 +129,6 @@ module FlorianMath {
             $(lis[sel+1]).addClass('active');
         }
         function triggerSelected() {
-            console.log('trigger');
             el.blur();
             _utils.dom.async(() => {
                 menuItems[selected].action();
@@ -222,11 +221,12 @@ module FlorianMath {
         }
     }
 
-    // Set the 'lookAndFeel' property to signal a successful load
-    lookAndFeel = new BootstrapLookAndFeel();
+    // Resolve 'lookAndFeel' to signal a successful load
+    var lnf = new BootstrapLookAndFeel();
+    lookAndFeel.resolve(lnf);
 
     _.each(container, (mathItem: HTMLMathItemElement) => {
-        lookAndFeel.init(mathItem);
+        lnf.init(mathItem);
     });
 
 }
