@@ -55,17 +55,28 @@ math-item, .math-item {
     background-color: #fff;
 
     .nav {
-        white-space: nowrap;
-
         & > li {
             float: none;
-            display: inline-block;
-
+            text-align: left;
             & > a, & > .title {
                 padding: 5px 10px;
-                display: inline-block;
+                display: block;
+                white-space: nowrap;
             }
         }
     }
+}
 
+@media (min-width: 600px) {
+    .math-ui-eqn-menu > .well {
+        .nav {
+            white-space: nowrap;
+            & > li {
+                display: inline-block;
+                & > a, & > .title {
+                    display: inline-block;
+                }
+            }
+        }
+    }
 }
