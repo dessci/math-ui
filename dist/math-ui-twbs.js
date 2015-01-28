@@ -1,3 +1,4 @@
+(function (jQuery) {
 /*!
  * Bootstrap v3.3.2 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -78,7 +79,7 @@ if (typeof jQuery === 'undefined') {
 
     this.checkScrollbar()
     this.setScrollbar()
-    this.$body.addClass('modal-open')
+    this.$body.addClass('math-ui-modal-open')
 
     this.escape()
     this.resize()
@@ -181,7 +182,7 @@ if (typeof jQuery === 'undefined') {
     var that = this
     this.$element.hide()
     this.backdrop(function () {
-      that.$body.removeClass('modal-open')
+      that.$body.removeClass('math-ui-modal-open')
       that.resetAdjustments()
       that.resetScrollbar()
       that.$element.trigger('hidden.bs.modal')
@@ -343,3 +344,183 @@ if (typeof jQuery === 'undefined') {
   })
 
 }(jQuery);
+})(FlorianMath.jQueryLib);
+
+/// <reference path="../libs/math-item/math-item.d.ts" />
+/// <reference path="jquery.d.ts" />
+/// <reference path="../tmp/loader.d.ts" />
+var FlorianMath;
+(function (FlorianMath) {
+    'use strict';
+    var _ = FlorianMath._utils.common, $ = FlorianMath.jQueryLib;
+    function getName(mathItem) {
+        return 'Equation ' + (mathItem._id + 1);
+    }
+    // Zoom
+    function zoomAction(mathItem) {
+        var inner = $('<div class="panel-body" />'), popup = $('<div class="math-ui math-ui-zoom" />').append($('<div class="panel panel-default" />').append(inner));
+        mathItem.clonePresentation(inner[0]);
+        $(mathItem).append(popup);
+        $(document).on('mousedown keydown', function (ev) {
+            ev.stopPropagation();
+            popup.remove();
+        });
+    }
+    // View Markup
+    function sourceDataToLabel(sd) {
+        var label = sd.type;
+        if (sd.subtype)
+            label += ' (' + sd.subtype + ')';
+        return label;
+    }
+    function sourceAction(mathItem) {
+        var tabs = $('<ul class="nav nav-pills" />'), markup = $('<textarea class="form-control" readonly />'), content = $('<div class="modal-content" />').append($('<div class="modal-header" />').append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>')).append($('<h4 class="modal-title" />').append('Markup for ' + getName(mathItem)))).append($('<div class="modal-body" />').append(tabs, markup)).append($('<div class="modal-footer" />').append($('<button type="button" class="btn btn-primary">Select All</button>')).append($('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'))), modal = $('<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" />').append($('<div class="modal-dialog modal-lg" />').append(content)), wrapper = $('<div class="math-ui" />').append(modal), selected = -1, sources = [];
+        function setSelected(s) {
+            var tabItems = tabs.children();
+            if (s === selected)
+                return;
+            selected = s;
+            tabItems.removeClass('active');
+            markup.text(sources[s].markup);
+            $(tabItems[s]).addClass('active');
+        }
+        mathItem.getMarkup().then(function (_sources) {
+            sources = _sources;
+            _.each(sources, function (sourceData) {
+                tabs.append($('<li role="presentation" />').append($('<a href="#" />').append(sourceDataToLabel(sourceData))));
+            });
+            setSelected(0);
+        });
+        tabs.on('click', function (ev) {
+            tabs.find('a').each(function (k, elem) {
+                ev.preventDefault();
+                if (elem === ev.target)
+                    setSelected(k);
+            });
+        });
+        content.find('.modal-footer > button').first().on('click', function () {
+            markup.focus().select();
+        });
+        $(document.body).append(wrapper);
+        modal.on('hidden.bs.modal', function () {
+            wrapper.remove();
+        }).modal();
+    }
+    // Equation menu
+    function makeMenuItems(mathItem) {
+        var result = [];
+        if (mathItem.clonePresentation)
+            result.push({ label: 'Zoom', action: function () {
+                zoomAction(mathItem);
+            } });
+        if (mathItem.getMarkup)
+            result.push({ label: 'View Markup', action: function () {
+                sourceAction(mathItem);
+            } });
+        result.push({ label: 'Dashboard', action: function () {
+            lnf.showDashboard();
+        } });
+        return result;
+    }
+    function stopEvent(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+    }
+    function gotFocus(mathItem) {
+        var el = $(mathItem), menuItems = makeMenuItems(mathItem), items = $('<ul class="nav nav-pills" />'), menu = $('<div class="math-ui math-ui-eqn-menu" />').append($('<div class="well" />').append(items)), selected = -1;
+        function setSelected(sel) {
+            sel = (sel + menuItems.length) % menuItems.length;
+            if (sel === selected)
+                return;
+            selected = sel;
+            var lis = menu.find('li');
+            lis.removeClass('active');
+            $(lis[sel + 1]).addClass('active');
+        }
+        function triggerSelected() {
+            el.blur();
+            FlorianMath._utils.dom.async(function () {
+                menuItems[selected].action();
+            });
+        }
+        items.append($('<li />').append($('<span class="title" />').append(getName(mathItem))));
+        _.each(menuItems, function (menuItem) {
+            items.append($('<li role="presentation" />').append($('<a tabindex="-1" href="#" />').append(menuItem.label)));
+        });
+        menu.on('mousedown', function (ev) {
+            if (ev.which !== 1)
+                return;
+            menu.find('a').each(function (k, elem) {
+                if (elem === ev.target) {
+                    stopEvent(ev);
+                    setSelected(k);
+                    triggerSelected();
+                }
+            });
+        });
+        el.on('keydown', function (ev) {
+            if (ev.which === 39 || ev.which === 40)
+                setSelected(selected + 1);
+            else if (ev.which === 37 || ev.which === 38)
+                setSelected(selected - 1);
+            else if (ev.which === 13)
+                triggerSelected();
+            else if (ev.which === 27)
+                el.blur();
+            else
+                return;
+            stopEvent(ev);
+        }).on('blur', function () {
+            menu.remove();
+        }).append(menu);
+        setSelected(0);
+    }
+    // Main class
+    var BootstrapLookAndFeel = (function () {
+        function BootstrapLookAndFeel() {
+            this.highlighted = false;
+        }
+        BootstrapLookAndFeel.prototype.init = function (mathItem) {
+            $(mathItem).attr('tabindex', 0).on('focus', function (ev) {
+                stopEvent(ev);
+                gotFocus(mathItem);
+            });
+        };
+        BootstrapLookAndFeel.prototype.highlightAll = function () {
+            var on = this.highlighted = !this.highlighted;
+            _.each(FlorianMath.container, function (mathItem) {
+                var el = $(mathItem);
+                on ? el.addClass('highlight') : el.removeClass('highlight');
+            });
+        };
+        BootstrapLookAndFeel.prototype.showDashboard = function () {
+            var _this = this;
+            var body = $('<div class="modal-body" />').append($('<div class="btn-group-vertical" />').append($('<button type="button" class="btn btn-primary form-control">Highlight All Equations</button>')).append($('<button type="button" class="btn btn-primary form-control">About</button>')).append($('<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>'))), modal = $('<div class="modal math-ui-dashboard" tabindex="-1" role="dialog" aria-hidden="true" />').append($('<div class="modal-dialog modal-sm" />').append($('<div class="modal-content" />').append($('<div class="modal-header" />').append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>')).append($('<h4 class="modal-title" />').append('Dashboard'))).append(body))), wrapper = $('<div class="math-ui" />').append(modal);
+            body.on('click', function (ev) {
+                body.find('button').each(function (k, elem) {
+                    if (k <= 1 && elem === ev.target) {
+                        ev.preventDefault();
+                        modal.modal('hide');
+                        if (k === 0) {
+                            _this.highlightAll();
+                        }
+                        else {
+                            window.location.href = 'https://github.com/dessci/math-item-element';
+                        }
+                    }
+                });
+            });
+            $(document.body).append(wrapper);
+            modal.on('hidden.bs.modal', function () {
+                wrapper.remove();
+            }).modal();
+        };
+        return BootstrapLookAndFeel;
+    })();
+    // Resolve 'lookAndFeel' to signal a successful load
+    var lnf = new BootstrapLookAndFeel();
+    FlorianMath.lookAndFeel.resolve(lnf);
+    _.each(FlorianMath.container, function (mathItem) {
+        lnf.init(mathItem);
+    });
+})(FlorianMath || (FlorianMath = {}));

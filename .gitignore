@@ -1,6 +1,0 @@
-node_modules
-*.log
-.sass-cache
-dist
-tmp
-.ntvs_analysis.dat

@@ -1,0 +1,2835 @@
+/*!
+ * Bootstrap v3.3.2 (http://getbootstrap.com)
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+/*!
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=4133676f2d0441365200)
+ * Config saved to config.json and https://gist.github.com/4133676f2d0441365200
+ */
+
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+.math-ui {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+.math-ui {
+  margin: 0;
+}
+
+.math-ui [hidden] {
+  display: none;
+}
+
+.math-ui a {
+  background-color: transparent;
+}
+
+.math-ui a:active,
+.math-ui a:hover {
+  outline: 0;
+}
+
+.math-ui button,
+.math-ui textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.math-ui button {
+  overflow: visible;
+}
+
+.math-ui button {
+  text-transform: none;
+}
+
+.math-ui button {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+.math-ui button[disabled] {
+  cursor: default;
+}
+
+.math-ui button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.math-ui textarea {
+  overflow: auto;
+}
+
+.math-ui a,
+.math-ui button,
+.math-ui div,
+.math-ui h4,
+.math-ui li,
+.math-ui span,
+.math-ui textarea,
+.math-ui ul {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.math-ui a:before,
+.math-ui button:before,
+.math-ui div:before,
+.math-ui h4:before,
+.math-ui li:before,
+.math-ui span:before,
+.math-ui textarea:before,
+.math-ui ul:before,
+.math-ui a:after,
+.math-ui button:after,
+.math-ui div:after,
+.math-ui h4:after,
+.math-ui li:after,
+.math-ui span:after,
+.math-ui textarea:after,
+.math-ui ul:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.math-ui {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.math-ui {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.42857143;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+.math-ui button,
+.math-ui textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.math-ui a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.math-ui a:hover,
+.math-ui a:focus {
+  color: #23527c;
+  text-decoration: underline;
+}
+
+.math-ui a:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.math-ui .img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.math-ui .img-rounded {
+  border-radius: 6px;
+}
+
+.math-ui .img-thumbnail {
+  padding: 4px;
+  line-height: 1.42857143;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+.math-ui .img-circle {
+  border-radius: 50%;
+}
+
+.math-ui .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.math-ui .sr-only-focusable:active,
+.math-ui .sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+}
+
+.math-ui h4,
+.math-ui .h1,
+.math-ui .h2,
+.math-ui .h3,
+.math-ui .h4,
+.math-ui .h5,
+.math-ui .h6 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+
+.math-ui h4 .small,
+.math-ui .h1 .small,
+.math-ui .h2 .small,
+.math-ui .h3 .small,
+.math-ui .h4 .small,
+.math-ui .h5 .small,
+.math-ui .h6 .small {
+  font-weight: normal;
+  line-height: 1;
+  color: #777777;
+}
+
+.math-ui .h1,
+.math-ui .h2,
+.math-ui .h3 {
+  margin-top: 22px;
+  margin-bottom: 11px;
+}
+
+.math-ui .h1 .small,
+.math-ui .h2 .small,
+.math-ui .h3 .small {
+  font-size: 65%;
+}
+
+.math-ui h4,
+.math-ui .h4,
+.math-ui .h5,
+.math-ui .h6 {
+  margin-top: 11px;
+  margin-bottom: 11px;
+}
+
+.math-ui h4 .small,
+.math-ui .h4 .small,
+.math-ui .h5 .small,
+.math-ui .h6 .small {
+  font-size: 75%;
+}
+
+.math-ui .h1 {
+  font-size: 41px;
+}
+
+.math-ui .h2 {
+  font-size: 34px;
+}
+
+.math-ui .h3 {
+  font-size: 28px;
+}
+
+.math-ui h4,
+.math-ui .h4 {
+  font-size: 20px;
+}
+
+.math-ui .h5 {
+  font-size: 16px;
+}
+
+.math-ui .h6 {
+  font-size: 14px;
+}
+
+.math-ui .lead {
+  margin-bottom: 22px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .math-ui .lead {
+    font-size: 24px;
+  }
+}
+
+.math-ui .small {
+  font-size: 87%;
+}
+
+.math-ui .mark {
+  background-color: #fcf8e3;
+  padding: .2em;
+}
+
+.math-ui .text-left {
+  text-align: left;
+}
+
+.math-ui .text-right {
+  text-align: right;
+}
+
+.math-ui .text-center {
+  text-align: center;
+}
+
+.math-ui .text-justify {
+  text-align: justify;
+}
+
+.math-ui .text-nowrap {
+  white-space: nowrap;
+}
+
+.math-ui .text-lowercase {
+  text-transform: lowercase;
+}
+
+.math-ui .text-uppercase {
+  text-transform: uppercase;
+}
+
+.math-ui .text-capitalize {
+  text-transform: capitalize;
+}
+
+.math-ui .text-muted {
+  color: #777777;
+}
+
+.math-ui .text-primary {
+  color: #337ab7;
+}
+
+.math-ui a.text-primary:hover {
+  color: #286090;
+}
+
+.math-ui .text-success {
+  color: #3c763d;
+}
+
+.math-ui a.text-success:hover {
+  color: #2b542c;
+}
+
+.math-ui .text-info {
+  color: #31708f;
+}
+
+.math-ui a.text-info:hover {
+  color: #245269;
+}
+
+.math-ui .text-warning {
+  color: #8a6d3b;
+}
+
+.math-ui a.text-warning:hover {
+  color: #66512c;
+}
+
+.math-ui .text-danger {
+  color: #a94442;
+}
+
+.math-ui a.text-danger:hover {
+  color: #843534;
+}
+
+.math-ui .bg-primary {
+  color: #fff;
+  background-color: #337ab7;
+}
+
+.math-ui a.bg-primary:hover {
+  background-color: #286090;
+}
+
+.math-ui .bg-success {
+  background-color: #dff0d8;
+}
+
+.math-ui a.bg-success:hover {
+  background-color: #c1e2b3;
+}
+
+.math-ui .bg-info {
+  background-color: #d9edf7;
+}
+
+.math-ui a.bg-info:hover {
+  background-color: #afd9ee;
+}
+
+.math-ui .bg-warning {
+  background-color: #fcf8e3;
+}
+
+.math-ui a.bg-warning:hover {
+  background-color: #f7ecb5;
+}
+
+.math-ui .bg-danger {
+  background-color: #f2dede;
+}
+
+.math-ui a.bg-danger:hover {
+  background-color: #e4b9b9;
+}
+
+.math-ui .page-header {
+  padding-bottom: 10px;
+  margin: 44px 0 22px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.math-ui ul {
+  margin-top: 0;
+  margin-bottom: 11px;
+}
+
+.math-ui ul ul {
+  margin-bottom: 0;
+}
+
+.math-ui .list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+.math-ui .list-inline {
+  padding-left: 0;
+  list-style: none;
+  margin-left: -5px;
+}
+
+.math-ui .list-inline > li {
+  display: inline-block;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+@media (min-width: 768px) {
+
+}
+
+.math-ui .initialism {
+  font-size: 90%;
+  text-transform: uppercase;
+}
+
+.math-ui .blockquote-reverse {
+  padding-right: 15px;
+  padding-left: 0;
+  border-right: 5px solid #eeeeee;
+  border-left: 0;
+  text-align: right;
+}
+
+.math-ui .blockquote-reverse .small:before {
+  content: '';
+}
+
+.math-ui .blockquote-reverse .small:after {
+  content: '\00A0 \2014';
+}
+
+.math-ui .pre-scrollable {
+  max-height: 340px;
+  overflow-y: scroll;
+}
+
+.math-ui .form-control {
+  display: block;
+  width: 100%;
+  height: 36px;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.42857143;
+  color: #555555;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.math-ui .form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.math-ui .form-control::-moz-placeholder {
+  color: #999999;
+  opacity: 1;
+}
+
+.math-ui .form-control:-ms-input-placeholder {
+  color: #999999;
+}
+
+.math-ui .form-control::-webkit-input-placeholder {
+  color: #999999;
+}
+
+.math-ui .form-control[disabled],
+.math-ui .form-control[readonly] {
+  cursor: not-allowed;
+  background-color: #eeeeee;
+  opacity: 1;
+}
+
+.math-ui textarea.form-control {
+  height: auto;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+
+}
+
+.math-ui .form-group {
+  margin-bottom: 15px;
+}
+
+.math-ui .radio,
+.math-ui .checkbox {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.math-ui .radio + .radio,
+.math-ui .checkbox + .checkbox {
+  margin-top: -5px;
+}
+
+.math-ui .radio-inline,
+.math-ui .checkbox-inline {
+  display: inline-block;
+  padding-left: 20px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.math-ui .radio-inline + .radio-inline,
+.math-ui .checkbox-inline + .checkbox-inline {
+  margin-top: 0;
+  margin-left: 10px;
+}
+
+.math-ui .radio-inline.disabled,
+.math-ui .checkbox-inline.disabled {
+  cursor: not-allowed;
+}
+
+.math-ui .form-control-static {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 0;
+}
+
+.math-ui .form-control-static.input-lg,
+.math-ui .form-control-static.input-sm {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.math-ui .input-sm {
+  height: 33px;
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.math-ui textarea.input-sm {
+  height: auto;
+}
+
+.math-ui .form-group-sm .form-control {
+  height: 33px;
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.math-ui textarea.form-group-sm .form-control {
+  height: auto;
+}
+
+.math-ui .form-group-sm .form-control-static {
+  height: 33px;
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.math-ui .input-lg {
+  height: 49px;
+  padding: 10px 16px;
+  font-size: 20px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+
+.math-ui textarea.input-lg {
+  height: auto;
+}
+
+.math-ui .form-group-lg .form-control {
+  height: 49px;
+  padding: 10px 16px;
+  font-size: 20px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+
+.math-ui textarea.form-group-lg .form-control {
+  height: auto;
+}
+
+.math-ui .form-group-lg .form-control-static {
+  height: 49px;
+  padding: 10px 16px;
+  font-size: 20px;
+  line-height: 1.3333333;
+}
+
+.math-ui .has-feedback {
+  position: relative;
+}
+
+.math-ui .has-feedback .form-control {
+  padding-right: 45px;
+}
+
+.math-ui .form-control-feedback {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.math-ui .input-lg + .form-control-feedback {
+  width: 49px;
+  height: 49px;
+  line-height: 49px;
+}
+
+.math-ui .input-sm + .form-control-feedback {
+  width: 33px;
+  height: 33px;
+  line-height: 33px;
+}
+
+.math-ui .has-success .help-block,
+.math-ui .has-success .control-label,
+.math-ui .has-success .radio,
+.math-ui .has-success .checkbox,
+.math-ui .has-success .radio-inline,
+.math-ui .has-success .checkbox-inline {
+  color: #3c763d;
+}
+
+.math-ui .has-success .form-control {
+  border-color: #3c763d;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.math-ui .has-success .form-control:focus {
+  border-color: #2b542c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+}
+
+.math-ui .has-success .input-group-addon {
+  color: #3c763d;
+  border-color: #3c763d;
+  background-color: #dff0d8;
+}
+
+.math-ui .has-success .form-control-feedback {
+  color: #3c763d;
+}
+
+.math-ui .has-warning .help-block,
+.math-ui .has-warning .control-label,
+.math-ui .has-warning .radio,
+.math-ui .has-warning .checkbox,
+.math-ui .has-warning .radio-inline,
+.math-ui .has-warning .checkbox-inline {
+  color: #8a6d3b;
+}
+
+.math-ui .has-warning .form-control {
+  border-color: #8a6d3b;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.math-ui .has-warning .form-control:focus {
+  border-color: #66512c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
+}
+
+.math-ui .has-warning .input-group-addon {
+  color: #8a6d3b;
+  border-color: #8a6d3b;
+  background-color: #fcf8e3;
+}
+
+.math-ui .has-warning .form-control-feedback {
+  color: #8a6d3b;
+}
+
+.math-ui .has-error .help-block,
+.math-ui .has-error .control-label,
+.math-ui .has-error .radio,
+.math-ui .has-error .checkbox,
+.math-ui .has-error .radio-inline,
+.math-ui .has-error .checkbox-inline {
+  color: #a94442;
+}
+
+.math-ui .has-error .form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.math-ui .has-error .form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+}
+
+.math-ui .has-error .input-group-addon {
+  color: #a94442;
+  border-color: #a94442;
+  background-color: #f2dede;
+}
+
+.math-ui .has-error .form-control-feedback {
+  color: #a94442;
+}
+
+.math-ui .help-block {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+}
+
+@media (min-width: 768px) {
+  .math-ui .form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .math-ui .form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+
+  .math-ui .form-inline .form-control-static {
+    display: inline-block;
+  }
+
+  .math-ui .form-inline .input-group {
+    display: inline-table;
+    vertical-align: middle;
+  }
+
+  .math-ui .form-inline .input-group .input-group-addon,
+  .math-ui .form-inline .input-group .input-group-btn,
+  .math-ui .form-inline .input-group .form-control {
+    width: auto;
+  }
+
+  .math-ui .form-inline .input-group > .form-control {
+    width: 100%;
+  }
+
+  .math-ui .form-inline .control-label {
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .math-ui .form-inline .radio,
+  .math-ui .form-inline .checkbox {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .math-ui .form-inline .has-feedback .form-control-feedback {
+    top: 0;
+  }
+}
+
+.math-ui .form-horizontal .radio,
+.math-ui .form-horizontal .checkbox,
+.math-ui .form-horizontal .radio-inline,
+.math-ui .form-horizontal .checkbox-inline {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 7px;
+}
+
+.math-ui .form-horizontal .radio,
+.math-ui .form-horizontal .checkbox {
+  min-height: 29px;
+}
+
+.math-ui .form-horizontal .form-group {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+@media (min-width: 768px) {
+  .math-ui .form-horizontal .control-label {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+  }
+}
+
+.math-ui .form-horizontal .has-feedback .form-control-feedback {
+  right: 15px;
+}
+
+@media (min-width: 768px) {
+  .math-ui .form-horizontal .form-group-lg .control-label {
+    padding-top: 14.333333px;
+  }
+}
+
+@media (min-width: 768px) {
+  .math-ui .form-horizontal .form-group-sm .control-label {
+    padding-top: 6px;
+  }
+}
+
+.math-ui .btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.math-ui .btn:focus,
+.math-ui .btn:active:focus,
+.math-ui .btn.active:focus,
+.math-ui .btn.focus,
+.math-ui .btn:active.focus,
+.math-ui .btn.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.math-ui .btn:hover,
+.math-ui .btn:focus,
+.math-ui .btn.focus {
+  color: #333333;
+  text-decoration: none;
+}
+
+.math-ui .btn:active,
+.math-ui .btn.active {
+  outline: 0;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.math-ui .btn.disabled,
+.math-ui .btn[disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.math-ui .btn-default {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+
+.math-ui .btn-default:hover,
+.math-ui .btn-default:focus,
+.math-ui .btn-default.focus,
+.math-ui .btn-default:active,
+.math-ui .btn-default.active,
+.math-ui .open > .dropdown-toggle.btn-default {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
+.math-ui .btn-default:active,
+.math-ui .btn-default.active,
+.math-ui .open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+
+.math-ui .btn-default.disabled,
+.math-ui .btn-default[disabled],
+.math-ui .btn-default.disabled:hover,
+.math-ui .btn-default[disabled]:hover,
+.math-ui .btn-default.disabled:focus,
+.math-ui .btn-default[disabled]:focus,
+.math-ui .btn-default.disabled.focus,
+.math-ui .btn-default[disabled].focus,
+.math-ui .btn-default.disabled:active,
+.math-ui .btn-default[disabled]:active,
+.math-ui .btn-default.disabled.active,
+.math-ui .btn-default[disabled].active {
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+
+.math-ui .btn-default .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+
+.math-ui .btn-primary {
+  color: #ffffff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.math-ui .btn-primary:hover,
+.math-ui .btn-primary:focus,
+.math-ui .btn-primary.focus,
+.math-ui .btn-primary:active,
+.math-ui .btn-primary.active,
+.math-ui .open > .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+
+.math-ui .btn-primary:active,
+.math-ui .btn-primary.active,
+.math-ui .open > .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+
+.math-ui .btn-primary.disabled,
+.math-ui .btn-primary[disabled],
+.math-ui .btn-primary.disabled:hover,
+.math-ui .btn-primary[disabled]:hover,
+.math-ui .btn-primary.disabled:focus,
+.math-ui .btn-primary[disabled]:focus,
+.math-ui .btn-primary.disabled.focus,
+.math-ui .btn-primary[disabled].focus,
+.math-ui .btn-primary.disabled:active,
+.math-ui .btn-primary[disabled]:active,
+.math-ui .btn-primary.disabled.active,
+.math-ui .btn-primary[disabled].active {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.math-ui .btn-primary .badge {
+  color: #337ab7;
+  background-color: #ffffff;
+}
+
+.math-ui .btn-success {
+  color: #ffffff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.math-ui .btn-success:hover,
+.math-ui .btn-success:focus,
+.math-ui .btn-success.focus,
+.math-ui .btn-success:active,
+.math-ui .btn-success.active,
+.math-ui .open > .dropdown-toggle.btn-success {
+  color: #ffffff;
+  background-color: #449d44;
+  border-color: #398439;
+}
+
+.math-ui .btn-success:active,
+.math-ui .btn-success.active,
+.math-ui .open > .dropdown-toggle.btn-success {
+  background-image: none;
+}
+
+.math-ui .btn-success.disabled,
+.math-ui .btn-success[disabled],
+.math-ui .btn-success.disabled:hover,
+.math-ui .btn-success[disabled]:hover,
+.math-ui .btn-success.disabled:focus,
+.math-ui .btn-success[disabled]:focus,
+.math-ui .btn-success.disabled.focus,
+.math-ui .btn-success[disabled].focus,
+.math-ui .btn-success.disabled:active,
+.math-ui .btn-success[disabled]:active,
+.math-ui .btn-success.disabled.active,
+.math-ui .btn-success[disabled].active {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.math-ui .btn-success .badge {
+  color: #5cb85c;
+  background-color: #ffffff;
+}
+
+.math-ui .btn-info {
+  color: #ffffff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+
+.math-ui .btn-info:hover,
+.math-ui .btn-info:focus,
+.math-ui .btn-info.focus,
+.math-ui .btn-info:active,
+.math-ui .btn-info.active,
+.math-ui .open > .dropdown-toggle.btn-info {
+  color: #ffffff;
+  background-color: #31b0d5;
+  border-color: #269abc;
+}
+
+.math-ui .btn-info:active,
+.math-ui .btn-info.active,
+.math-ui .open > .dropdown-toggle.btn-info {
+  background-image: none;
+}
+
+.math-ui .btn-info.disabled,
+.math-ui .btn-info[disabled],
+.math-ui .btn-info.disabled:hover,
+.math-ui .btn-info[disabled]:hover,
+.math-ui .btn-info.disabled:focus,
+.math-ui .btn-info[disabled]:focus,
+.math-ui .btn-info.disabled.focus,
+.math-ui .btn-info[disabled].focus,
+.math-ui .btn-info.disabled:active,
+.math-ui .btn-info[disabled]:active,
+.math-ui .btn-info.disabled.active,
+.math-ui .btn-info[disabled].active {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+
+.math-ui .btn-info .badge {
+  color: #5bc0de;
+  background-color: #ffffff;
+}
+
+.math-ui .btn-warning {
+  color: #ffffff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
+.math-ui .btn-warning:hover,
+.math-ui .btn-warning:focus,
+.math-ui .btn-warning.focus,
+.math-ui .btn-warning:active,
+.math-ui .btn-warning.active,
+.math-ui .open > .dropdown-toggle.btn-warning {
+  color: #ffffff;
+  background-color: #ec971f;
+  border-color: #d58512;
+}
+
+.math-ui .btn-warning:active,
+.math-ui .btn-warning.active,
+.math-ui .open > .dropdown-toggle.btn-warning {
+  background-image: none;
+}
+
+.math-ui .btn-warning.disabled,
+.math-ui .btn-warning[disabled],
+.math-ui .btn-warning.disabled:hover,
+.math-ui .btn-warning[disabled]:hover,
+.math-ui .btn-warning.disabled:focus,
+.math-ui .btn-warning[disabled]:focus,
+.math-ui .btn-warning.disabled.focus,
+.math-ui .btn-warning[disabled].focus,
+.math-ui .btn-warning.disabled:active,
+.math-ui .btn-warning[disabled]:active,
+.math-ui .btn-warning.disabled.active,
+.math-ui .btn-warning[disabled].active {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
+.math-ui .btn-warning .badge {
+  color: #f0ad4e;
+  background-color: #ffffff;
+}
+
+.math-ui .btn-danger {
+  color: #ffffff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.math-ui .btn-danger:hover,
+.math-ui .btn-danger:focus,
+.math-ui .btn-danger.focus,
+.math-ui .btn-danger:active,
+.math-ui .btn-danger.active,
+.math-ui .open > .dropdown-toggle.btn-danger {
+  color: #ffffff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+
+.math-ui .btn-danger:active,
+.math-ui .btn-danger.active,
+.math-ui .open > .dropdown-toggle.btn-danger {
+  background-image: none;
+}
+
+.math-ui .btn-danger.disabled,
+.math-ui .btn-danger[disabled],
+.math-ui .btn-danger.disabled:hover,
+.math-ui .btn-danger[disabled]:hover,
+.math-ui .btn-danger.disabled:focus,
+.math-ui .btn-danger[disabled]:focus,
+.math-ui .btn-danger.disabled.focus,
+.math-ui .btn-danger[disabled].focus,
+.math-ui .btn-danger.disabled:active,
+.math-ui .btn-danger[disabled]:active,
+.math-ui .btn-danger.disabled.active,
+.math-ui .btn-danger[disabled].active {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.math-ui .btn-danger .badge {
+  color: #d9534f;
+  background-color: #ffffff;
+}
+
+.math-ui .btn-link {
+  color: #337ab7;
+  font-weight: normal;
+  border-radius: 0;
+}
+
+.math-ui .btn-link,
+.math-ui .btn-link:active,
+.math-ui .btn-link.active,
+.math-ui .btn-link[disabled] {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.math-ui .btn-link,
+.math-ui .btn-link:hover,
+.math-ui .btn-link:focus,
+.math-ui .btn-link:active {
+  border-color: transparent;
+}
+
+.math-ui .btn-link:hover,
+.math-ui .btn-link:focus {
+  color: #23527c;
+  text-decoration: underline;
+  background-color: transparent;
+}
+
+.math-ui .btn-link[disabled]:hover,
+.math-ui .btn-link[disabled]:focus {
+  color: #777777;
+  text-decoration: none;
+}
+
+.math-ui .btn-lg,
+.math-ui .btn-group-lg > .btn {
+  padding: 10px 16px;
+  font-size: 20px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+
+.math-ui .btn-sm,
+.math-ui .btn-group-sm > .btn {
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.math-ui .btn-xs,
+.math-ui .btn-group-xs > .btn {
+  padding: 1px 5px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.math-ui .btn-block {
+  display: block;
+  width: 100%;
+}
+
+.math-ui .btn-block + .btn-block {
+  margin-top: 5px;
+}
+
+.math-ui .btn-group,
+.math-ui .btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.math-ui .btn-group > .btn,
+.math-ui .btn-group-vertical > .btn {
+  position: relative;
+  float: left;
+}
+
+.math-ui .btn-group > .btn:hover,
+.math-ui .btn-group-vertical > .btn:hover,
+.math-ui .btn-group > .btn:focus,
+.math-ui .btn-group-vertical > .btn:focus,
+.math-ui .btn-group > .btn:active,
+.math-ui .btn-group-vertical > .btn:active,
+.math-ui .btn-group > .btn.active,
+.math-ui .btn-group-vertical > .btn.active {
+  z-index: 2;
+}
+
+.math-ui .btn-group .btn + .btn,
+.math-ui .btn-group .btn + .btn-group,
+.math-ui .btn-group .btn-group + .btn,
+.math-ui .btn-group .btn-group + .btn-group {
+  margin-left: -1px;
+}
+
+.math-ui .btn-toolbar {
+  margin-left: -5px;
+}
+
+.math-ui .btn-toolbar .btn-group,
+.math-ui .btn-toolbar .input-group {
+  float: left;
+}
+
+.math-ui .btn-toolbar > .btn,
+.math-ui .btn-toolbar > .btn-group,
+.math-ui .btn-toolbar > .input-group {
+  margin-left: 5px;
+}
+
+.math-ui .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+
+.math-ui .btn-group > .btn:first-child {
+  margin-left: 0;
+}
+
+.math-ui .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.math-ui .btn-group > .btn:last-child:not(:first-child),
+.math-ui .btn-group > .dropdown-toggle:not(:first-child) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.math-ui .btn-group > .btn-group {
+  float: left;
+}
+
+.math-ui .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+
+.math-ui .btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child,
+.math-ui .btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.math-ui .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.math-ui .btn-group .dropdown-toggle:active,
+.math-ui .btn-group.open .dropdown-toggle {
+  outline: 0;
+}
+
+.math-ui .btn-group > .btn + .dropdown-toggle {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.math-ui .btn-group > .btn-lg + .dropdown-toggle {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.math-ui .btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.math-ui .btn-group.open .dropdown-toggle.btn-link {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.math-ui .btn .caret {
+  margin-left: 0;
+}
+
+.math-ui .btn-lg .caret {
+  border-width: 5px 5px 0;
+  border-bottom-width: 0;
+}
+
+.math-ui .dropup .btn-lg .caret {
+  border-width: 0 5px 5px;
+}
+
+.math-ui .btn-group-vertical > .btn,
+.math-ui .btn-group-vertical > .btn-group,
+.math-ui .btn-group-vertical > .btn-group > .btn {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+}
+
+.math-ui .btn-group-vertical > .btn-group > .btn {
+  float: none;
+}
+
+.math-ui .btn-group-vertical > .btn + .btn,
+.math-ui .btn-group-vertical > .btn + .btn-group,
+.math-ui .btn-group-vertical > .btn-group + .btn,
+.math-ui .btn-group-vertical > .btn-group + .btn-group {
+  margin-top: -1px;
+  margin-left: 0;
+}
+
+.math-ui .btn-group-vertical > .btn:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.math-ui .btn-group-vertical > .btn:first-child:not(:last-child) {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.math-ui .btn-group-vertical > .btn:last-child:not(:first-child) {
+  border-bottom-left-radius: 4px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.math-ui .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+
+.math-ui .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child,
+.math-ui .btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.math-ui .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.math-ui .btn-group-justified {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+}
+
+.math-ui .btn-group-justified > .btn,
+.math-ui .btn-group-justified > .btn-group {
+  float: none;
+  display: table-cell;
+  width: 1%;
+}
+
+.math-ui .btn-group-justified > .btn-group .btn {
+  width: 100%;
+}
+
+.math-ui .btn-group-justified > .btn-group .dropdown-menu {
+  left: auto;
+}
+
+.math-ui .input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+}
+
+.math-ui .input-group[class*="col-"] {
+  float: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.math-ui .input-group .form-control {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.math-ui .input-group-lg > .form-control,
+.math-ui .input-group-lg > .input-group-addon,
+.math-ui .input-group-lg > .input-group-btn > .btn {
+  height: 49px;
+  padding: 10px 16px;
+  font-size: 20px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+
+.math-ui textarea.input-group-lg > .form-control,
+.math-ui textarea.input-group-lg > .input-group-addon,
+.math-ui textarea.input-group-lg > .input-group-btn > .btn {
+  height: auto;
+}
+
+.math-ui .input-group-sm > .form-control,
+.math-ui .input-group-sm > .input-group-addon,
+.math-ui .input-group-sm > .input-group-btn > .btn {
+  height: 33px;
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.math-ui textarea.input-group-sm > .form-control,
+.math-ui textarea.input-group-sm > .input-group-addon,
+.math-ui textarea.input-group-sm > .input-group-btn > .btn {
+  height: auto;
+}
+
+.math-ui .input-group-addon,
+.math-ui .input-group-btn,
+.math-ui .input-group .form-control {
+  display: table-cell;
+}
+
+.math-ui .input-group-addon:not(:first-child):not(:last-child),
+.math-ui .input-group-btn:not(:first-child):not(:last-child),
+.math-ui .input-group .form-control:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.math-ui .input-group-addon,
+.math-ui .input-group-btn {
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.math-ui .input-group-addon {
+  padding: 6px 12px;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1;
+  color: #555555;
+  text-align: center;
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.math-ui .input-group-addon.input-sm {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 3px;
+}
+
+.math-ui .input-group-addon.input-lg {
+  padding: 10px 16px;
+  font-size: 20px;
+  border-radius: 6px;
+}
+
+.math-ui .input-group .form-control:first-child,
+.math-ui .input-group-addon:first-child,
+.math-ui .input-group-btn:first-child > .btn,
+.math-ui .input-group-btn:first-child > .btn-group > .btn,
+.math-ui .input-group-btn:first-child > .dropdown-toggle,
+.math-ui .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.math-ui .input-group-btn:last-child > .btn-group:not(:last-child) > .btn {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.math-ui .input-group-addon:first-child {
+  border-right: 0;
+}
+
+.math-ui .input-group .form-control:last-child,
+.math-ui .input-group-addon:last-child,
+.math-ui .input-group-btn:last-child > .btn,
+.math-ui .input-group-btn:last-child > .btn-group > .btn,
+.math-ui .input-group-btn:last-child > .dropdown-toggle,
+.math-ui .input-group-btn:first-child > .btn:not(:first-child),
+.math-ui .input-group-btn:first-child > .btn-group:not(:first-child) > .btn {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.math-ui .input-group-addon:last-child {
+  border-left: 0;
+}
+
+.math-ui .input-group-btn {
+  position: relative;
+  font-size: 0;
+  white-space: nowrap;
+}
+
+.math-ui .input-group-btn > .btn {
+  position: relative;
+}
+
+.math-ui .input-group-btn > .btn + .btn {
+  margin-left: -1px;
+}
+
+.math-ui .input-group-btn > .btn:hover,
+.math-ui .input-group-btn > .btn:focus,
+.math-ui .input-group-btn > .btn:active {
+  z-index: 2;
+}
+
+.math-ui .input-group-btn:first-child > .btn,
+.math-ui .input-group-btn:first-child > .btn-group {
+  margin-right: -1px;
+}
+
+.math-ui .input-group-btn:last-child > .btn,
+.math-ui .input-group-btn:last-child > .btn-group {
+  margin-left: -1px;
+}
+
+.math-ui .nav {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.math-ui .nav > li {
+  position: relative;
+  display: block;
+}
+
+.math-ui .nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.math-ui .nav > li > a:hover,
+.math-ui .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+
+.math-ui .nav > li.disabled > a {
+  color: #777777;
+}
+
+.math-ui .nav > li.disabled > a:hover,
+.math-ui .nav > li.disabled > a:focus {
+  color: #777777;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+.math-ui .nav .open > a,
+.math-ui .nav .open > a:hover,
+.math-ui .nav .open > a:focus {
+  background-color: #eeeeee;
+  border-color: #337ab7;
+}
+
+.math-ui .nav .nav-divider {
+  height: 1px;
+  margin: 10px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+.math-ui .nav-tabs {
+  border-bottom: 1px solid #dddddd;
+}
+
+.math-ui .nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+
+.math-ui .nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+
+.math-ui .nav-tabs > li > a:hover {
+  border-color: #eeeeee #eeeeee #dddddd;
+}
+
+.math-ui .nav-tabs > li.active > a,
+.math-ui .nav-tabs > li.active > a:hover,
+.math-ui .nav-tabs > li.active > a:focus {
+  color: #555555;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-bottom-color: transparent;
+  cursor: default;
+}
+
+.math-ui .nav-tabs.nav-justified {
+  width: 100%;
+  border-bottom: 0;
+}
+
+.math-ui .nav-tabs.nav-justified > li {
+  float: none;
+}
+
+.math-ui .nav-tabs.nav-justified > li > a {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.math-ui .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+  top: auto;
+  left: auto;
+}
+
+@media (min-width: 768px) {
+  .math-ui .nav-tabs.nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+
+  .math-ui .nav-tabs.nav-justified > li > a {
+    margin-bottom: 0;
+  }
+}
+
+.math-ui .nav-tabs.nav-justified > li > a {
+  margin-right: 0;
+  border-radius: 4px;
+}
+
+.math-ui .nav-tabs.nav-justified > .active > a,
+.math-ui .nav-tabs.nav-justified > .active > a:hover,
+.math-ui .nav-tabs.nav-justified > .active > a:focus {
+  border: 1px solid #dddddd;
+}
+
+@media (min-width: 768px) {
+  .math-ui .nav-tabs.nav-justified > li > a {
+    border-bottom: 1px solid #dddddd;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .math-ui .nav-tabs.nav-justified > .active > a,
+  .math-ui .nav-tabs.nav-justified > .active > a:hover,
+  .math-ui .nav-tabs.nav-justified > .active > a:focus {
+    border-bottom-color: #ffffff;
+  }
+}
+
+.math-ui .nav-pills > li {
+  float: left;
+}
+
+.math-ui .nav-pills > li > a {
+  border-radius: 4px;
+}
+
+.math-ui .nav-pills > li + li {
+  margin-left: 2px;
+}
+
+.math-ui .nav-pills > li.active > a,
+.math-ui .nav-pills > li.active > a:hover,
+.math-ui .nav-pills > li.active > a:focus {
+  color: #ffffff;
+  background-color: #337ab7;
+}
+
+.math-ui .nav-stacked > li {
+  float: none;
+}
+
+.math-ui .nav-stacked > li + li {
+  margin-top: 2px;
+  margin-left: 0;
+}
+
+.math-ui .nav-justified {
+  width: 100%;
+}
+
+.math-ui .nav-justified > li {
+  float: none;
+}
+
+.math-ui .nav-justified > li > a {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.math-ui .nav-justified > .dropdown .dropdown-menu {
+  top: auto;
+  left: auto;
+}
+
+@media (min-width: 768px) {
+  .math-ui .nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+
+  .math-ui .nav-justified > li > a {
+    margin-bottom: 0;
+  }
+}
+
+.math-ui .nav-tabs-justified {
+  border-bottom: 0;
+}
+
+.math-ui .nav-tabs-justified > li > a {
+  margin-right: 0;
+  border-radius: 4px;
+}
+
+.math-ui .nav-tabs-justified > .active > a,
+.math-ui .nav-tabs-justified > .active > a:hover,
+.math-ui .nav-tabs-justified > .active > a:focus {
+  border: 1px solid #dddddd;
+}
+
+@media (min-width: 768px) {
+  .math-ui .nav-tabs-justified > li > a {
+    border-bottom: 1px solid #dddddd;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .math-ui .nav-tabs-justified > .active > a,
+  .math-ui .nav-tabs-justified > .active > a:hover,
+  .math-ui .nav-tabs-justified > .active > a:focus {
+    border-bottom-color: #ffffff;
+  }
+}
+
+.math-ui .tab-content > .tab-pane {
+  display: none;
+  visibility: hidden;
+}
+
+.math-ui .tab-content > .active {
+  display: block;
+  visibility: visible;
+}
+
+.math-ui .nav-tabs .dropdown-menu {
+  margin-top: -1px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.math-ui .list-group {
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+
+.math-ui .list-group-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+}
+
+.math-ui .list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.math-ui .list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.math-ui a.list-group-item {
+  color: #555555;
+}
+
+.math-ui a.list-group-item .list-group-item-heading {
+  color: #333333;
+}
+
+.math-ui a.list-group-item:hover,
+.math-ui a.list-group-item:focus {
+  text-decoration: none;
+  color: #555555;
+  background-color: #f5f5f5;
+}
+
+.math-ui .list-group-item.disabled,
+.math-ui .list-group-item.disabled:hover,
+.math-ui .list-group-item.disabled:focus {
+  background-color: #eeeeee;
+  color: #777777;
+  cursor: not-allowed;
+}
+
+.math-ui .list-group-item.disabled .list-group-item-heading,
+.math-ui .list-group-item.disabled:hover .list-group-item-heading,
+.math-ui .list-group-item.disabled:focus .list-group-item-heading {
+  color: inherit;
+}
+
+.math-ui .list-group-item.disabled .list-group-item-text,
+.math-ui .list-group-item.disabled:hover .list-group-item-text,
+.math-ui .list-group-item.disabled:focus .list-group-item-text {
+  color: #777777;
+}
+
+.math-ui .list-group-item.active,
+.math-ui .list-group-item.active:hover,
+.math-ui .list-group-item.active:focus {
+  z-index: 2;
+  color: #ffffff;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+.math-ui .list-group-item.active .list-group-item-heading,
+.math-ui .list-group-item.active:hover .list-group-item-heading,
+.math-ui .list-group-item.active:focus .list-group-item-heading,
+.math-ui .list-group-item.active .list-group-item-heading > .small,
+.math-ui .list-group-item.active:hover .list-group-item-heading > .small,
+.math-ui .list-group-item.active:focus .list-group-item-heading > .small {
+  color: inherit;
+}
+
+.math-ui .list-group-item.active .list-group-item-text,
+.math-ui .list-group-item.active:hover .list-group-item-text,
+.math-ui .list-group-item.active:focus .list-group-item-text {
+  color: #c7ddef;
+}
+
+.math-ui .list-group-item-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+
+.math-ui a.list-group-item-success {
+  color: #3c763d;
+}
+
+.math-ui a.list-group-item-success .list-group-item-heading {
+  color: inherit;
+}
+
+.math-ui a.list-group-item-success:hover,
+.math-ui a.list-group-item-success:focus {
+  color: #3c763d;
+  background-color: #d0e9c6;
+}
+
+.math-ui a.list-group-item-success.active,
+.math-ui a.list-group-item-success.active:hover,
+.math-ui a.list-group-item-success.active:focus {
+  color: #fff;
+  background-color: #3c763d;
+  border-color: #3c763d;
+}
+
+.math-ui .list-group-item-info {
+  color: #31708f;
+  background-color: #d9edf7;
+}
+
+.math-ui a.list-group-item-info {
+  color: #31708f;
+}
+
+.math-ui a.list-group-item-info .list-group-item-heading {
+  color: inherit;
+}
+
+.math-ui a.list-group-item-info:hover,
+.math-ui a.list-group-item-info:focus {
+  color: #31708f;
+  background-color: #c4e3f3;
+}
+
+.math-ui a.list-group-item-info.active,
+.math-ui a.list-group-item-info.active:hover,
+.math-ui a.list-group-item-info.active:focus {
+  color: #fff;
+  background-color: #31708f;
+  border-color: #31708f;
+}
+
+.math-ui .list-group-item-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+}
+
+.math-ui a.list-group-item-warning {
+  color: #8a6d3b;
+}
+
+.math-ui a.list-group-item-warning .list-group-item-heading {
+  color: inherit;
+}
+
+.math-ui a.list-group-item-warning:hover,
+.math-ui a.list-group-item-warning:focus {
+  color: #8a6d3b;
+  background-color: #faf2cc;
+}
+
+.math-ui a.list-group-item-warning.active,
+.math-ui a.list-group-item-warning.active:hover,
+.math-ui a.list-group-item-warning.active:focus {
+  color: #fff;
+  background-color: #8a6d3b;
+  border-color: #8a6d3b;
+}
+
+.math-ui .list-group-item-danger {
+  color: #a94442;
+  background-color: #f2dede;
+}
+
+.math-ui a.list-group-item-danger {
+  color: #a94442;
+}
+
+.math-ui a.list-group-item-danger .list-group-item-heading {
+  color: inherit;
+}
+
+.math-ui a.list-group-item-danger:hover,
+.math-ui a.list-group-item-danger:focus {
+  color: #a94442;
+  background-color: #ebcccc;
+}
+
+.math-ui a.list-group-item-danger.active,
+.math-ui a.list-group-item-danger.active:hover,
+.math-ui a.list-group-item-danger.active:focus {
+  color: #fff;
+  background-color: #a94442;
+  border-color: #a94442;
+}
+
+.math-ui .list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.math-ui .list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.math-ui .panel {
+  margin-bottom: 22px;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.math-ui .panel-body {
+  padding: 15px;
+}
+
+.math-ui .panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.math-ui .panel-heading > .dropdown .dropdown-toggle {
+  color: inherit;
+}
+
+.math-ui .panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 18px;
+  color: inherit;
+}
+
+.math-ui .panel-title > a,
+.math-ui .panel-title > .small,
+.math-ui .panel-title > .small > a {
+  color: inherit;
+}
+
+.math-ui .panel-footer {
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.math-ui .panel > .list-group,
+.math-ui .panel > .panel-collapse > .list-group {
+  margin-bottom: 0;
+}
+
+.math-ui .panel > .list-group .list-group-item,
+.math-ui .panel > .panel-collapse > .list-group .list-group-item {
+  border-width: 1px 0;
+  border-radius: 0;
+}
+
+.math-ui .panel > .list-group:first-child .list-group-item:first-child,
+.math-ui .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {
+  border-top: 0;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.math-ui .panel > .list-group:last-child .list-group-item:last-child,
+.math-ui .panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {
+  border-bottom: 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.math-ui .panel-heading + .list-group .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.math-ui .list-group + .panel-footer {
+  border-top-width: 0;
+}
+
+.math-ui .panel > .table,
+.math-ui .panel > .table-responsive > .table,
+.math-ui .panel > .panel-collapse > .table {
+  margin-bottom: 0;
+}
+
+.math-ui .panel > .table:first-child,
+.math-ui .panel > .table-responsive:first-child > .table:first-child {
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.math-ui .panel > .table:last-child,
+.math-ui .panel > .table-responsive:last-child > .table:last-child {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.math-ui .panel > .panel-body + .table,
+.math-ui .panel > .panel-body + .table-responsive,
+.math-ui .panel > .table + .panel-body,
+.math-ui .panel > .table-responsive + .panel-body {
+  border-top: 1px solid #dddddd;
+}
+
+.math-ui .panel > .table-bordered,
+.math-ui .panel > .table-responsive > .table-bordered {
+  border: 0;
+}
+
+.math-ui .panel > .table-responsive {
+  border: 0;
+  margin-bottom: 0;
+}
+
+.math-ui .panel-group {
+  margin-bottom: 22px;
+}
+
+.math-ui .panel-group .panel {
+  margin-bottom: 0;
+  border-radius: 4px;
+}
+
+.math-ui .panel-group .panel + .panel {
+  margin-top: 5px;
+}
+
+.math-ui .panel-group .panel-heading {
+  border-bottom: 0;
+}
+
+.math-ui .panel-group .panel-heading + .panel-collapse > .panel-body,
+.math-ui .panel-group .panel-heading + .panel-collapse > .list-group {
+  border-top: 1px solid #dddddd;
+}
+
+.math-ui .panel-group .panel-footer {
+  border-top: 0;
+}
+
+.math-ui .panel-group .panel-footer + .panel-collapse .panel-body {
+  border-bottom: 1px solid #dddddd;
+}
+
+.math-ui .panel-default {
+  border-color: #dddddd;
+}
+
+.math-ui .panel-default > .panel-heading {
+  color: #333333;
+  background-color: #f5f5f5;
+  border-color: #dddddd;
+}
+
+.math-ui .panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #dddddd;
+}
+
+.math-ui .panel-default > .panel-heading .badge {
+  color: #f5f5f5;
+  background-color: #333333;
+}
+
+.math-ui .panel-default > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #dddddd;
+}
+
+.math-ui .panel-primary {
+  border-color: #337ab7;
+}
+
+.math-ui .panel-primary > .panel-heading {
+  color: #ffffff;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+.math-ui .panel-primary > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #337ab7;
+}
+
+.math-ui .panel-primary > .panel-heading .badge {
+  color: #337ab7;
+  background-color: #ffffff;
+}
+
+.math-ui .panel-primary > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #337ab7;
+}
+
+.math-ui .panel-success {
+  border-color: #d6e9c6;
+}
+
+.math-ui .panel-success > .panel-heading {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.math-ui .panel-success > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #d6e9c6;
+}
+
+.math-ui .panel-success > .panel-heading .badge {
+  color: #dff0d8;
+  background-color: #3c763d;
+}
+
+.math-ui .panel-success > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #d6e9c6;
+}
+
+.math-ui .panel-info {
+  border-color: #bce8f1;
+}
+
+.math-ui .panel-info > .panel-heading {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.math-ui .panel-info > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #bce8f1;
+}
+
+.math-ui .panel-info > .panel-heading .badge {
+  color: #d9edf7;
+  background-color: #31708f;
+}
+
+.math-ui .panel-info > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #bce8f1;
+}
+
+.math-ui .panel-warning {
+  border-color: #faebcc;
+}
+
+.math-ui .panel-warning > .panel-heading {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+
+.math-ui .panel-warning > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #faebcc;
+}
+
+.math-ui .panel-warning > .panel-heading .badge {
+  color: #fcf8e3;
+  background-color: #8a6d3b;
+}
+
+.math-ui .panel-warning > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #faebcc;
+}
+
+.math-ui .panel-danger {
+  border-color: #ebccd1;
+}
+
+.math-ui .panel-danger > .panel-heading {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.math-ui .panel-danger > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #ebccd1;
+}
+
+.math-ui .panel-danger > .panel-heading .badge {
+  color: #f2dede;
+  background-color: #a94442;
+}
+
+.math-ui .panel-danger > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #ebccd1;
+}
+
+.math-ui .well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.math-ui .well-lg {
+  padding: 24px;
+  border-radius: 6px;
+}
+
+.math-ui .well-sm {
+  padding: 9px;
+  border-radius: 3px;
+}
+
+.math-ui .close {
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+
+.math-ui .close:hover,
+.math-ui .close:focus {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.math-ui button.close {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+.math-ui-modal-open {
+  overflow: hidden;
+}
+
+.math-ui .modal {
+  display: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+
+.math-ui .modal.fade .modal-dialog {
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  -o-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+.math-ui .modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+.math-ui-modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.math-ui .modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px 0;
+  max-width: 100vw;
+}
+
+.math-ui .modal-content {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #999999;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  outline: 0;
+}
+
+.math-ui .modal-backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #000000;
+}
+
+.math-ui .modal-backdrop.fade {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.math-ui .modal-backdrop.in {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.math-ui .modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  min-height: 16.42857143px;
+}
+
+.math-ui .modal-header .close {
+  margin-top: -2px;
+}
+
+.math-ui .modal-title {
+  margin: 0;
+  line-height: 1.42857143;
+}
+
+.math-ui .modal-body {
+  position: relative;
+  padding: 15px;
+}
+
+.math-ui .modal-footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+
+.math-ui .modal-footer .btn + .btn {
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+
+.math-ui .modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+
+.math-ui .modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+
+.math-ui .modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+@media (min-width: 768px) {
+  .math-ui .modal-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+
+  .math-ui .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .math-ui .modal-sm {
+    width: 300px;
+  }
+}
+
+@media (min-width: 992px) {
+  .math-ui .modal-lg {
+    width: 900px;
+  }
+}
+
+.math-ui .clearfix:before,
+.math-ui .clearfix:after,
+.math-ui .form-horizontal .form-group:before,
+.math-ui .form-horizontal .form-group:after,
+.math-ui .btn-toolbar:before,
+.math-ui .btn-toolbar:after,
+.math-ui .btn-group-vertical > .btn-group:before,
+.math-ui .btn-group-vertical > .btn-group:after,
+.math-ui .nav:before,
+.math-ui .nav:after,
+.math-ui .panel-body:before,
+.math-ui .panel-body:after,
+.math-ui .modal-footer:before,
+.math-ui .modal-footer:after {
+  content: " ";
+  display: table;
+}
+
+.math-ui .clearfix:after,
+.math-ui .form-horizontal .form-group:after,
+.math-ui .btn-toolbar:after,
+.math-ui .btn-group-vertical > .btn-group:after,
+.math-ui .nav:after,
+.math-ui .panel-body:after,
+.math-ui .modal-footer:after {
+  clear: both;
+}
+
+.math-ui .center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.math-ui .pull-right {
+  float: right !important;
+}
+
+.math-ui .pull-left {
+  float: left !important;
+}
+
+.math-ui .hide {
+  display: none !important;
+}
+
+.math-ui .show {
+  display: block !important;
+}
+
+.math-ui .invisible {
+  visibility: hidden;
+}
+
+.math-ui .text-hide {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.math-ui .hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.math-ui .affix {
+  position: fixed;
+}
+
+.math-ui @-ms-viewport {
+  width: device-width;
+}
+
+.math-ui .visible-xs,
+.math-ui .visible-sm,
+.math-ui .visible-md,
+.math-ui .visible-lg {
+  display: none !important;
+}
+
+.math-ui .visible-xs-block,
+.math-ui .visible-xs-inline,
+.math-ui .visible-xs-inline-block,
+.math-ui .visible-sm-block,
+.math-ui .visible-sm-inline,
+.math-ui .visible-sm-inline-block,
+.math-ui .visible-md-block,
+.math-ui .visible-md-inline,
+.math-ui .visible-md-inline-block,
+.math-ui .visible-lg-block,
+.math-ui .visible-lg-inline,
+.math-ui .visible-lg-inline-block {
+  display: none !important;
+}
+
+@media (max-width: 767px) {
+  .math-ui .visible-xs {
+    display: block !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .math-ui .visible-xs-block {
+    display: block !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .math-ui .visible-xs-inline {
+    display: inline !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .math-ui .visible-xs-inline-block {
+    display: inline-block !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .math-ui .visible-sm {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .math-ui .visible-sm-block {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .math-ui .visible-sm-inline {
+    display: inline !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .math-ui .visible-sm-inline-block {
+    display: inline-block !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .math-ui .visible-md {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .math-ui .visible-md-block {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .math-ui .visible-md-inline {
+    display: inline !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .math-ui .visible-md-inline-block {
+    display: inline-block !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .math-ui .visible-lg {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .math-ui .visible-lg-block {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .math-ui .visible-lg-inline {
+    display: inline !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .math-ui .visible-lg-inline-block {
+    display: inline-block !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .math-ui .hidden-xs {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .math-ui .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .math-ui .hidden-md {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .math-ui .hidden-lg {
+    display: none !important;
+  }
+}
+
+.math-ui .visible-print {
+  display: none !important;
+}
+
+@media print {
+  .math-ui .visible-print {
+    display: block !important;
+  }
+}
+
+.math-ui .visible-print-block {
+  display: none !important;
+}
+
+@media print {
+  .math-ui .visible-print-block {
+    display: block !important;
+  }
+}
+
+.math-ui .visible-print-inline {
+  display: none !important;
+}
+
+@media print {
+  .math-ui .visible-print-inline {
+    display: inline !important;
+  }
+}
+
+.math-ui .visible-print-inline-block {
+  display: none !important;
+}
+
+@media print {
+  .math-ui .visible-print-inline-block {
+    display: inline-block !important;
+  }
+}
+
+@media print {
+  .math-ui .hidden-print {
+    display: none !important;
+  }
+}
+
+math-item, .math-item {
+  position: relative;
+  border: 3px solid transparent;
+  padding: 1px;
+  margin: -4px;
+  /* -(border-width + padding) */
+  outline: none;
+  cursor: pointer; }
+  math-item:hover, math-item.highlight, .math-item:hover, .math-item.highlight {
+    border: 3px solid #9fcbe5; }
+  math-item:focus, .math-item:focus {
+    border: 3px solid #4f9fcf; }
+
+.math-ui-zoom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 200%;
+  z-index: 1; }
+
+.math-ui-dashboard .btn-group-vertical {
+  width: 100%; }
+
+.math-ui .modal-body > .nav-pills {
+  padding-bottom: 15px; }
+
+.math-ui .modal-body > textarea.form-control {
+  height: 20em;
+  cursor: text;
+  background-color: transparent; }
+
+.math-ui-eqn-menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 1;
+  margin-top: 3px; }
+
+.math-ui-eqn-menu > .well {
+  padding: 5px;
+  margin: 0;
+  border-radius: 3px;
+  display: inline-block;
+  background-color: #fff; }
+  .math-ui-eqn-menu > .well .nav > li {
+    float: none;
+    text-align: left; }
+    .math-ui-eqn-menu > .well .nav > li > a, .math-ui-eqn-menu > .well .nav > li > .title {
+      padding: 5px 10px;
+      display: block;
+      white-space: nowrap; }
+
+@media (min-width: 600px) {
+  .math-ui-eqn-menu > .well .nav {
+    white-space: nowrap; }
+    .math-ui-eqn-menu > .well .nav > li {
+      display: inline-block; }
+      .math-ui-eqn-menu > .well .nav > li > a, .math-ui-eqn-menu > .well .nav > li > .title {
+        display: inline-block; } }

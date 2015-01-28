@@ -1367,3 +1367,59 @@ var FlorianMath;
     FlorianMath.registerHandler('eqnstore', new EqnStoreHandler());
 })(FlorianMath || (FlorianMath = {}));
 //# sourceMappingURL=math-item.js.map
+/// <reference path="../libs/math-item/math-item.d.ts" />
+/// <reference path="jquery.d.ts" />
+var FlorianMath;
+(function (FlorianMath) {
+    'use strict';
+    var dom = FlorianMath._utils.dom;
+    FlorianMath.jQueryLib;
+    FlorianMath.lookAndFeel = FlorianMath._utils.makePromiseWithResolve();
+    // a validator is needed for IE8
+    function dynamicLoad(elem, validator, failMessage) {
+        var head = document.querySelector('head'), done = false;
+        elem.async = true;
+        return new FlorianMath.Promise(function (resolve, reject) {
+            elem.onload = elem.onreadystatechange = function () {
+                if (!done && (!elem.readyState || elem.readyState === "loaded" || elem.readyState === "complete")) {
+                    done = true;
+                    validator() ? resolve() : reject(failMessage);
+                }
+            };
+            elem.onerror = function () {
+                if (!done) {
+                    done = true;
+                    reject(failMessage);
+                }
+            };
+            head.appendChild(elem);
+        });
+    }
+    function jQueryPresent() {
+        return 'jQuery' in window && jQuery.fn.on;
+    }
+    function loadjQuery() {
+        var IEpre9 = navigator.userAgent.match(/MSIE [6-8]/i), version = IEpre9 ? '1.11.2' : '2.1.3', script = document.createElement('script');
+        script.src = 'https://code.jquery.com/jquery-' + version + '.min.js';
+        return dynamicLoad(script, jQueryPresent, 'jQuery').then(function () {
+            FlorianMath.jQueryLib = jQuery.noConflict(true);
+        });
+    }
+    function loadLnFjs() {
+        var script = document.createElement('script');
+        script.src = '../dist/math-ui-twbs.js';
+        return dynamicLoad(script, function () { return FlorianMath.lookAndFeel.isResolved; }, 'look-and-feel');
+    }
+    dom.ready().then(function () {
+        FlorianMath.Promise.resolve().then(function () {
+            if (!jQueryPresent())
+                return loadjQuery();
+            FlorianMath.jQueryLib = jQuery;
+        }).then(function () {
+            return loadLnFjs();
+        }).then(undefined, function (msg) {
+            // don't use catch because IE8 won't parse it
+            console.log('Look and Feel load failed: ' + msg);
+        });
+    });
+})(FlorianMath || (FlorianMath = {}));
