@@ -1,5 +1,5 @@
-﻿/// <reference path="../libs/math-item/math-item.d.ts" />
-/// <reference path="jquery.d.ts" />
+﻿/// <reference path="jquery.d.ts" />
+/// <reference path="../libs/math-item/math-item-element.d.ts" />
 /// <reference path="../tmp/loader.d.ts" />
 
 interface JQuery {

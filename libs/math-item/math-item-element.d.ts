@@ -1,11 +1,19 @@
+interface Window {
+    Promise: FlorianMath.PromiseStatic;
+}
+declare var Uint8ClampedArray: any;
+declare var process: any;
 declare module FlorianMath {
-    class Promise<T> {
-        constructor(callback: (resolve: (val?: T) => void, reject?: (reason: any) => void) => void);
-        then(resolved: (val?: T) => void, rejected?: (reason: any) => void): Promise<any>;
-        static resolve<T>(val?: T): Promise<T>;
-        static reject(reason?: any): Promise<void>;
-        static all(promises: Promise<any>[]): Promise<any[]>;
+    interface PromiseStatic {
+        new <T>(callback: (resolve: (val?: T) => void, reject?: (reason: any) => void) => void): IPromise<T>;
+        resolve<T>(val?: T): IPromise<T>;
+        reject(reason?: any): IPromise<void>;
+        all(promises: IPromise<any>[]): IPromise<any[]>;
     }
+    interface IPromise<T> {
+        then(resolved: (val?: T) => void, rejected?: (reason: any) => void): IPromise<any>;
+    }
+    var Promise: PromiseStatic;
 }
 declare module FlorianMath {
     interface Iterator<T, TResult> {
@@ -26,7 +34,7 @@ declare module FlorianMath {
     interface Dictionary<T> extends Collection<T> {
         [index: string]: T;
     }
-    interface PromiseWithResolve<T> extends Promise<T> {
+    interface PromiseWithResolve<T> extends IPromise<T> {
         resolve(val?: T): void;
         isResolved: boolean;
     }
@@ -53,7 +61,7 @@ declare module FlorianMath {
     interface IUtils {
         dom: {
             addEventListenerFn(el: EventTarget, type: string, callback: (event?: Event) => void): void;
-            ready(): Promise<void>;
+            ready(): IPromise<void>;
             async(fn: () => void): void;
             getNodeChildren(n: Node, filter?: (n: Node) => boolean): Node[];
             getElementChildren(n: Node): Element[];
@@ -78,9 +86,9 @@ declare module FlorianMath {
         markup: string;
     }
     interface HTMLMathItemElement extends HTMLElement {
-        rendered(): Promise<void>;
-        getMarkup?(): Promise<MarkupData[]>;
-        clonePresentation?(dest: HTMLElement): Promise<void>;
+        rendered(): IPromise<void>;
+        getMarkup?(): IPromise<MarkupData[]>;
+        clonePresentation?(dest: HTMLElement): IPromise<void>;
     }
     class Handler {
         ready(el: HTMLMathItemElement): void;
