@@ -2781,7 +2781,8 @@ math-item, .math-item {
   margin: -4px;
   /* -(border-width + padding) */
   outline: none;
-  cursor: pointer; }
+  cursor: pointer;
+  white-space: nowrap; }
   math-item:hover, math-item.highlight, .math-item:hover, .math-item.highlight {
     border: 3px solid #9fcbe5; }
   math-item:focus, .math-item:focus {
@@ -2833,3 +2834,5 @@ math-item, .math-item {
       display: inline-block; }
       .math-ui-eqn-menu > .well .nav > li > a, .math-ui-eqn-menu > .well .nav > li > .title {
         display: inline-block; } }
+
+/*# sourceMappingURL=bs-extra.css.map */

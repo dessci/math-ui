@@ -346,8 +346,8 @@ if (typeof jQuery === 'undefined') {
 }(jQuery);
 })(FlorianMath.jQueryLib);
 
-/// <reference path="../libs/math-item/math-item.d.ts" />
 /// <reference path="jquery.d.ts" />
+/// <reference path="../libs/math-item/math-item-element.d.ts" />
 /// <reference path="../tmp/loader.d.ts" />
 var FlorianMath;
 (function (FlorianMath) {
@@ -359,8 +359,8 @@ var FlorianMath;
     // Zoom
     function zoomAction(mathItem) {
         var inner = $('<div class="panel-body" />'), popup = $('<div class="math-ui math-ui-zoom" />').append($('<div class="panel panel-default" />').append(inner));
-        mathItem.clonePresentation(inner[0]);
         $(mathItem).append(popup);
+        mathItem.clonePresentation(inner[0]);
         $(document).on('mousedown keydown', function (ev) {
             ev.stopPropagation();
             popup.remove();

@@ -1,5 +1,6 @@
 var FlorianMath;
 (function (FlorianMath) {
+    'use strict';
     FlorianMath.Promise = (function (local) {
         return ("Promise" in local && "resolve" in local.Promise && "reject" in local.Promise && "all" in local.Promise && "race" in local.Promise && (function () {
             var resolve;
@@ -8,7 +9,7 @@ var FlorianMath;
             });
             return typeof resolve === 'function';
         }));
-    })(window) ? window.Promise : (function (window, undefined) {
+    })(window) ? window.Promise : (function (window) {
         "use strict";
         function $$utils$$objectOrFunction(x) {
             return typeof x === 'function' || (typeof x === 'object' && x !== null);
@@ -134,7 +135,7 @@ var FlorianMath;
                 return $$$internal$$GET_THEN_ERROR;
             }
         }
-        function $$$internal$$tryThen(then, value, fulfillmentHandler, rejectionHandler) {
+        function $$$internal$$tryThen(then, value, fulfillmentHandler, rejectionHandler, msg) {
             try {
                 then.call(value, fulfillmentHandler, rejectionHandler);
             }
@@ -481,7 +482,7 @@ var FlorianMath;
         /**
           Promise objects represent the eventual result of an asynchronous operation. The
           primary way of interacting with a promise is through its `then` method, which
-          registers callbacks to receive either a promise�s eventual value or the reason
+          registers callbacks to receive either a promise?s eventual value or the reason
           why the promise cannot be fulfilled.
     
           Terminology
@@ -807,7 +808,7 @@ var FlorianMath;
                     var callback = arguments[state - 1];
                     $$asap$$default(function () {
                         $$$internal$$invokeCallback(state, child, callback, result);
-                    });
+                    }, undefined);
                 }
                 else {
                     $$$internal$$subscribe(parent, child, onFulfillment, onRejection);
@@ -848,7 +849,7 @@ var FlorianMath;
         return $$es6$promise$promise$$default;
     })(window);
 })(FlorianMath || (FlorianMath = {}));
-
+/// <reference path="promise.ts" />
 var FlorianMath;
 (function (FlorianMath) {
     'use strict';
@@ -1014,6 +1015,7 @@ var FlorianMath;
     };
 })(FlorianMath || (FlorianMath = {}));
 /// <reference path="common-utils.ts" />
+/// <reference path="dom-utils.ts" />
 var FlorianMath;
 (function (FlorianMath) {
     'use strict';
@@ -1067,11 +1069,13 @@ var FlorianMath;
         })()
     };
 })(FlorianMath || (FlorianMath = {}));
+/// <reference path="promise.ts" />
 /// <reference path="common-utils.ts" />
 /// <reference path="dom-utils.ts" />
 /// <reference path="xml-utils.ts" />
 var FlorianMath;
 (function (FlorianMath) {
+    'use strict';
     var _ = FlorianMath._utils.common, dom = FlorianMath._utils.dom;
     var Handler = (function () {
         function Handler() {
@@ -1179,6 +1183,7 @@ var FlorianMath;
         });
     }
 })(FlorianMath || (FlorianMath = {}));
+/// <reference path="promise.ts" />
 /// <reference path="common-utils.ts" />
 /// <reference path="dom-utils.ts" />
 /// <reference path="xml-utils.ts" />
@@ -1267,7 +1272,7 @@ var FlorianMath;
             dest.appendChild(script);
         }
         return new FlorianMath.Promise(function (resolve) {
-            MathJax.Hub.Queue(['Typeset', MathJax.Hub, dest], resolve);
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, script], resolve);
         });
     }
     function mathjaxMarkup(el, original, internal) {
@@ -1310,9 +1315,9 @@ var FlorianMath;
         };
         MathJaxHandler.prototype.ready = function (el) {
             var _this = this;
-            MathJax.Hub.Queue(['Typeset', MathJax.Hub, el], function () {
-                el.rendered().resolve();
-            });
+            /*MathJax.Hub.Queue(['Typeset', MathJax.Hub, el], () => {
+                (<PromiseWithResolve<void>> el.rendered()).resolve();
+            });*/
             el.clonePresentation = function (dest) { return mathjaxClone(el, dest); };
             el.getMarkup = function () { return _this.getMarkup(el); };
         };
@@ -1366,9 +1371,9 @@ var FlorianMath;
     })(FlorianMath.Handler);
     FlorianMath.registerHandler('eqnstore', new EqnStoreHandler());
 })(FlorianMath || (FlorianMath = {}));
-//# sourceMappingURL=math-item.js.map
-/// <reference path="../libs/math-item/math-item.d.ts" />
+
 /// <reference path="jquery.d.ts" />
+/// <reference path="../libs/math-item/math-item-element.d.ts" />
 var FlorianMath;
 (function (FlorianMath) {
     'use strict';
