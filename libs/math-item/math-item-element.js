@@ -1272,7 +1272,7 @@ var FlorianMath;
             dest.appendChild(script);
         }
         return new FlorianMath.Promise(function (resolve) {
-            MathJax.Hub.Queue(['Typeset', MathJax.Hub, dest], resolve);
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, script], resolve);
         });
     }
     function mathjaxMarkup(el, original, internal) {
@@ -1315,9 +1315,11 @@ var FlorianMath;
         };
         MathJaxHandler.prototype.ready = function (el) {
             var _this = this;
-            MathJax.Hub.Queue(['Typeset', MathJax.Hub, el], function () {
-                el.rendered().resolve();
-            });
+            if (MathJax.Hub.config.skipStartupTypeset) {
+                MathJax.Hub.Queue(['Typeset', MathJax.Hub, el], function () {
+                    el.rendered().resolve();
+                });
+            }
             el.clonePresentation = function (dest) { return mathjaxClone(el, dest); };
             el.getMarkup = function () { return _this.getMarkup(el); };
         };

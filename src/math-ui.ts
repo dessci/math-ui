@@ -26,8 +26,8 @@ module FlorianMath {
         var inner = $('<div class="panel-body" />'),
             popup = $('<div class="math-ui math-ui-zoom" />')
                 .append($('<div class="panel panel-default" />').append(inner));
-        mathItem.clonePresentation(inner[0]);
         $(mathItem).append(popup);
+        mathItem.clonePresentation(inner[0]);
         $(document).on('mousedown keydown', (ev) => {
             ev.stopPropagation();
             popup.remove();
