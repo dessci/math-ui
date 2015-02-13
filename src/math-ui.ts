@@ -11,6 +11,10 @@ module FlorianMath {
 
     var _ = _utils.common, $ = jQueryLib;
 
+    export interface HTMLMathItemElement {
+        selected?: boolean;
+    }
+
     interface MenuItem {
         label: string;
         action: () => void;
@@ -99,6 +103,31 @@ module FlorianMath {
 
     // Equation menu
 
+    function showEquationMenu(mathItem: HTMLMathItemElement) {
+        var options = $('<div class="list-group" />'),
+            content = $('<div class="modal-content" />')
+                .append($('<div class="modal-header" />')
+                    .append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'))
+                    .append($('<h4 class="modal-title" />').append(getName(mathItem)))
+                )
+                .append($('<div class="modal-body" />').append(options)),
+            modal = $('<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" />')
+                .append($('<div class="modal-dialog modal-sm" />').append(content)),
+            wrapper = $('<div class="math-ui" />').append(modal);
+
+        options.append($('<a href="#" class="list-group-item">Share...</a>'));
+        options.append($('<a href="#" class="list-group-item">Open with...</a>'));
+        options.append($('<a href="#" class="list-group-item">Copy to clipboard</a>'));
+        options.append($('<a href="#" class="list-group-item">Convert to code...</a>'));
+        options.append($('<a href="#" class="list-group-item">Speak</a>'));
+        options.append($('<a href="#" class="list-group-item">Help</a>'));
+
+        $(document.body).append(wrapper);
+        modal.on('hidden.bs.modal',() => {
+            wrapper.remove();
+        }).modal();
+    }
+
     function makeMenuItems(mathItem: HTMLMathItemElement): MenuItem[] {
         var result: MenuItem[] = [];
         if (mathItem.clonePresentation)
@@ -115,56 +144,59 @@ module FlorianMath {
     }
 
     function gotFocus(mathItem: HTMLMathItemElement) {
-        var el = $(mathItem),
-            menuItems = makeMenuItems(mathItem),
-            items = $('<ul class="nav nav-pills" />'),
-            menu = $('<div class="math-ui math-ui-eqn-menu" />').append($('<div class="well" />').append(items)),
-            selected = -1;
-        function setSelected(sel) {
-            sel = (sel + menuItems.length) % menuItems.length;
-            if (sel === selected) return;
-            selected = sel;
-            var lis = menu.find('li');
-            lis.removeClass('active');
-            $(lis[sel+1]).addClass('active');
-        }
-        function triggerSelected() {
-            el.blur();
-            _utils.dom.async(() => {
-                menuItems[selected].action();
-            });
-        }
-        items.append($('<li />').append($('<span class="title" />').append(getName(mathItem))));
-        _.each(menuItems, (menuItem: MenuItem) => {
-            items.append($('<li role="presentation" />').append(
-                $('<a tabindex="-1" href="#" />').append(menuItem.label)));
-        });
-        menu.on('mousedown', (ev: JQueryMouseEventObject) => {
-            if (ev.which !== 1) return;
-            menu.find('a').each((k, elem) => {
-                if (elem === ev.target) {
-                    stopEvent(ev);
-                    setSelected(k);
-                    triggerSelected();
-                }
-            });
-        });
-        el.on('keydown', (ev: JQueryKeyEventObject) => {
-            if (ev.which === 39 || ev.which === 40)
-                setSelected(selected + 1);
-            else if (ev.which === 37 || ev.which === 38)
-                setSelected(selected - 1);
-            else if (ev.which === 13)
-                triggerSelected();
-            else if (ev.which === 27)
-                el.blur();
-            else
-                return;
+        var el = $(mathItem), okItem,
+            items = $('<div class="well" />'),
+            menu = $('<div class="math-ui math-ui-eqn-menu" />').append(items);
+        function doZoom(ev: BaseJQueryEventObject) {
             stopEvent(ev);
+            el.blur();
+            zoomAction(mathItem);
+        }
+        function toggleSelection(ev: BaseJQueryEventObject) {
+            stopEvent(ev);
+            mathItem.selected = !mathItem.selected;
+            okItem.toggleClass('glyphicon-star', mathItem.selected);
+            okItem.toggleClass('glyphicon-star-empty', !mathItem.selected);
+        }
+        function showEqnMenu(ev: BaseJQueryEventObject) {
+            stopEvent(ev);
+            el.blur();
+            showEquationMenu(mathItem);            
+        }
+        items.append($('<span class="title" />').append(getName(mathItem)));
+        items.append($('<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>'));
+        items.append($('<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>'));
+        okItem = $('<span class="glyphicon" aria-hidden="true"></span>');
+        okItem.addClass(mathItem.selected === true ? 'glyphicon-star' : 'glyphicon-star-empty');
+        items.append(okItem);
+        el.on('keydown', (ev: JQueryKeyEventObject) => {
+            console.log(ev.which);
+            if (ev.which === 13) {
+                showEqnMenu(ev);
+            } else if (ev.which === 27) {
+                stopEvent(ev);
+                el.blur();
+            } else if (ev.which === 32) {
+                toggleSelection(ev);
+            } else if (ev.which === 90) {
+                doZoom(ev);
+            }
         }).on('blur',() => {
             menu.remove();
         }).append(menu);
-        setSelected(0);
+        menu.on('click', (ev: JQueryMouseEventObject) => {
+            if (ev.which !== 1) return;
+            items.children().each((k, elem) => {
+                if (elem === ev.target) {
+                    if (k === 1)
+                        showEqnMenu(ev);
+                    if (k === 2)
+                        doZoom(ev);
+                    else if (k === 3)
+                        toggleSelection(ev);
+                }
+            });
+        });
     }
 
     // Main class

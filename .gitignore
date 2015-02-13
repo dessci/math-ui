@@ -5,3 +5,4 @@ dist
 tmp
 .ntvs_analysis.dat
 gh-pages
+.DS_Store
