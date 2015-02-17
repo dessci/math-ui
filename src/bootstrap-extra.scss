@@ -31,36 +31,34 @@ math-item, .math-item {
     width: 100%;
 }
 
-.math-ui .modal-body > .nav-pills {
-    padding-bottom: 15px;
-}
-.math-ui .modal-body > textarea.form-control {
-    height: 20em;
-    cursor: text;
-    background-color: transparent;
-}
-
 .math-ui-eqn-menu {
     position: absolute;
     left: 0;
     top: 100%;
     z-index: 1;
     margin-top: 3px;
+
+    & > .well {
+        padding: 5px;
+        margin: 0;
+        border-radius: 3px;
+        display: inline-block;
+        background-color: #fff;
+
+        & > * {
+            padding: 0 0.2em;
+            display: inline-block;
+            white-space: nowrap;
+        }
+    }
 }
 
-.math-ui-eqn-menu > .well {
-    padding: 5px;
-    margin: 0;
-    border-radius: 3px;
-    display: inline-block;
-    background-color: #fff;
-
-    & > * {
-        padding: 0 0.2em;
-        display: inline-block;
-        white-space: nowrap;
+.math-ui-eqn-commands {
+    .list-group-item > span {
+        float: right;
     }
-    & > .selected {
-        color: #5cb85c;
+
+    .list-group {
+        margin-bottom: 0;
     }
 }

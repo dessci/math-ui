@@ -101,7 +101,45 @@ module FlorianMath {
         }).modal();
     }
 
-    // Equation menu
+    // Commands menu
+
+    interface ICommandItem {
+        label: string;
+        submenu?: ICommandItem[];
+        action?: () => void;
+        link?: string;
+    }
+
+    function noOp() {}
+
+    function getCommandItems(mathItem: HTMLMathItemElement): ICommandItem[] {
+        return [
+            { label: 'Copy to clipboard', action: noOp },
+            { label: 'Copy permalink', action: noOp },
+            { label: 'Convert to code', submenu: [
+                { label: 'C', action: noOp },
+                { label: 'JavaScript', action: noOp },
+                { label: 'Python', action: noOp }
+            ] },
+            { label: 'Open with', submenu: [
+                { label: 'Mathematica', action: noOp },
+                { label: 'Maple', action: noOp },
+                { label: 'WolframAlpha', link: 'http://www.wolframalpha.com/input/?i=sin%5Bx%5D*sin%5By%5D' }
+            ] },
+            { label: 'Share', submenu: [
+                { label: 'Twitter', action: noOp },
+                { label: 'Email', action: noOp }
+            ] },
+            { label: 'Search', submenu: [
+                { label: 'Google', action: noOp },
+                { label: 'Tangent', action: noOp }
+            ] },
+            { label: 'Speak', action: noOp },
+        ];
+    }
+
+    function setCommands(mathItem: HTMLMathItemElement, options: JQuery, commands: ICommandItem[]) {
+    }
 
     function showEquationMenu(mathItem: HTMLMathItemElement) {
         var options = $('<div class="list-group" />'),
@@ -113,20 +151,43 @@ module FlorianMath {
                 .append($('<div class="modal-body" />').append(options)),
             modal = $('<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" />')
                 .append($('<div class="modal-dialog modal-sm" />').append(content)),
-            wrapper = $('<div class="math-ui" />').append(modal);
+            wrapper = $('<div class="math-ui math-ui-eqn-commands" />').append(modal),
+            commands = getCommandItems(mathItem);
 
-        options.append($('<a href="#" class="list-group-item">Share...</a>'));
-        options.append($('<a href="#" class="list-group-item">Open with...</a>'));
-        options.append($('<a href="#" class="list-group-item">Copy to clipboard</a>'));
-        options.append($('<a href="#" class="list-group-item">Convert to code...</a>'));
-        options.append($('<a href="#" class="list-group-item">Speak</a>'));
-        options.append($('<a href="#" class="list-group-item">Help</a>'));
+        function update() {
+            options.children().remove();
+            _.each(commands, (item: ICommandItem) => {
+                var a = $('<a href="#" class="list-group-item" />');
+                if (item.submenu)
+                    a.append($('<span class="glyphicon glyphicon-triangle-right"></span>'));
+                else if (item.link)
+                    (<HTMLAnchorElement> a[0]).href = item.link;
+                a.append(item.label);
+                options.append(a);
+                if (!item.link) {
+                    a.on('click', (ev: JQueryMouseEventObject) => {
+                        stopEvent(ev);
+                        if (item.submenu) {
+                            commands = item.submenu;
+                            update();
+                        } else {
+                            modal.modal('hide');
+                            item.action();
+                        }
+                    });
+                }
+            });
+        }
+
+        update();
 
         $(document.body).append(wrapper);
         modal.on('hidden.bs.modal',() => {
             wrapper.remove();
         }).modal();
     }
+
+    // Equation menu
 
     function makeMenuItems(mathItem: HTMLMathItemElement): MenuItem[] {
         var result: MenuItem[] = [];
@@ -170,7 +231,6 @@ module FlorianMath {
         okItem.addClass(mathItem.selected === true ? 'glyphicon-star' : 'glyphicon-star-empty');
         items.append(okItem);
         el.on('keydown', (ev: JQueryKeyEventObject) => {
-            console.log(ev.which);
             if (ev.which === 13) {
                 showEqnMenu(ev);
             } else if (ev.which === 27) {
@@ -188,7 +248,7 @@ module FlorianMath {
             if (ev.which !== 1) return;
             items.children().each((k, elem) => {
                 if (elem === ev.target) {
-                    if (k === 1)
+                    if (k <= 1)
                         showEqnMenu(ev);
                     if (k === 2)
                         doZoom(ev);
