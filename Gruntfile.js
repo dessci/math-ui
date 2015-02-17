@@ -3,7 +3,8 @@ module.exports = function(grunt) {
     grunt.initConfig({
         clean: {
             tmp: ['tmp'],
-            dist: ['dist']
+            dist: ['dist'],
+            gh_pages: ['gh-pages']
         },
         concat: {
             bs_css: {
@@ -131,6 +132,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['clean', 'mkdir', 'exec', 'sass', 'typescript', 'copy', 'concat']);
     grunt.registerTask('serve', ['connect', 'watch']);
-    grunt.registerTask('gh-pages', ['copy:gh_pages']);
+    grunt.registerTask('gh-pages', ['clean:gh_pages', 'copy:gh_pages']);
 
 };
