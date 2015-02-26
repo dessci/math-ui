@@ -1,7 +1,11 @@
 ﻿$item-focus-border: #4f9fcf;
 $item-hover-border: lighten($item-focus-border, 20%);
 
-math-item, .math-item {
+.math-ui a:focus {
+    outline: none;
+}
+
+math-item {
     position: relative;
     border: 3px solid transparent;
     padding: 1px;
@@ -11,20 +15,27 @@ math-item, .math-item {
     white-space: nowrap;
 
     &:hover, &.highlight {
-        border: 3px solid $item-hover-border;
+        border-color: $item-hover-border;
     }
-
     &:focus {
-        border: 3px solid $item-focus-border;
+        border-color: $item-focus-border;
     }
 }
 
 .math-ui-zoom {
     position: absolute;
-    top: 0;
-    left: 0;
+    margin: 0.5em 0 0 0.5em;
     font-size: 200%;
     z-index: 1;
+
+    & > .panel {
+        margin: 0.1em;
+    }
+    math-item {
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
 }
 
 .math-ui-dashboard .btn-group-vertical {
@@ -45,7 +56,7 @@ math-item, .math-item {
         display: inline-block;
         background-color: #fff;
 
-        & > * {
+        & > span {
             padding: 0 0.2em;
             display: inline-block;
             white-space: nowrap;

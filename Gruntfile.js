@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     grunt.initConfig({
         clean: {
@@ -10,12 +10,8 @@ module.exports = function(grunt) {
                 src: ['tmp/bs-base2.css', 'tmp/bs-extra.css'],
                 dest: 'dist/math-ui-twbs.css'
             },
-            math_item: {
-                src: ['libs/math-item/math-item-element.js', 'tmp/loader.js'],
-                dest: 'dist/math-item-twbs.js'
-            },
             math_ui: {
-                src: ['tmp/bootstrap.js', 'tmp/math-ui.js'],
+                src: ['tmp/math-ui.js', 'tmp/bootstrap.js'],
                 dest: 'dist/math-ui-twbs.js'
             }
         },
@@ -33,11 +29,16 @@ module.exports = function(grunt) {
                 dest: 'tmp/bootstrap.js',
                 options: {
                     process: function (content) {
-                        return '(function (jQuery) {\n' + content.replace(/modal-open/g, 'math-ui-modal-open') +
-                            '})(FlorianMath.jQueryLib);\n';
+                        return 'FlorianMath.requireLibs().then(function (jQuery) {\n' +
+                            content.replace(/modal-open/g, 'math-ui-modal-open') +
+                            'console.log("Loaded Bootstrap modal");  });\n';
                     }
                 }
             },
+            /*math_item: {
+                src: 'libs/math-item/math-item.js',
+                dest: 'dist/math-item.js'
+            },*/
             bs_css: {
                 src: 'tmp/bs-base1.css',
                 dest: 'tmp/bs-base2.css',
@@ -49,13 +50,13 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            gh_pages: {
+            /*gh_pages: {
                 files: [
                     { expand: true, src: ['dist/**'], dest: 'gh-pages/' },
                     { expand: true, src: ['examples/**'], dest: 'gh-pages/' },
                     { expand: true, src: ['media/**'], dest: 'gh-pages/' }
                 ]
-            }
+            }*/
         },
         exec: {
             bs_css: 'node convert.js libs/bootstrap/bootstrap.css > tmp/bs-base1.css'
@@ -75,14 +76,6 @@ module.exports = function(grunt) {
             }
         },
         typescript: {
-            math_item: {
-                src: ['src/loader.ts'],
-                dest: 'tmp/loader.js',
-                options: {
-                    target: 'es3',
-                    declaration: true
-                }
-            },
             math_ui: {
                 src: ['src/math-ui.ts'],
                 dest: 'tmp/math-ui.js',
@@ -93,16 +86,8 @@ module.exports = function(grunt) {
         },
         watch: {
             math_ui: {
-                files: ['src/math-ui.ts'],
+                files: ['src/requirelibs.ts', 'src/math-ui.ts'],
                 tasks: ['typescript:math_ui', 'concat:math_ui']
-            },
-            math_item: {
-                files: ['src/loader.ts'],
-                tasks: ['typescript:math_item', 'concat:math_item']
-            },
-            math_item_element: {
-                files: ['libs/math-item/math-item-element.js'],
-                tasks: ['concat:math_item']
             },
             bs_js: {
                 files: ['libs/bootstrap/bootstrap.js'],
