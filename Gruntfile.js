@@ -35,10 +35,6 @@ module.exports = function (grunt) {
                     }
                 }
             },
-            /*math_item: {
-                src: 'libs/math-item/math-item.js',
-                dest: 'dist/math-item.js'
-            },*/
             bs_css: {
                 src: 'tmp/bs-base1.css',
                 dest: 'tmp/bs-base2.css',

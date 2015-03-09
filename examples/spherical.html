@@ -8,29 +8,40 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <link rel="stylesheet" href="../dist/math-ui-twbs.css">
-    <script src="../dist/CustomElements.js"></script>
-    <script src="../dist/math-item-twbs.js"></script>
+
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
-            skipStartupTypeset: false,
-            showMathMenu: false
+            skipStartupTypeset: true,
+            showMathMenu: false,
+            menuSettings: {CHTMLpreview: false}
         });
     </script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML"></script>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML"></script>
+
+    <!-- math-item -->
+    <script src="../bower_components/math-item/math-item.js"></script>
+    <script src="../bower_components/math-item/mathjax-mml.js"></script>
+
     <!--<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>-->
+
+    <script async defer src="../dist/math-ui-twbs.js"></script>
+
     <style>
-        p > math-item, math-item[display="inline"], span.math-item {
+        p > math-item, math-item[display="inline"] {
             display: inline;
         }
-        div > math-item, math-item[display="block"], div.math-item {
+        div > math-item, math-item[display="block"] {
             display: block;
             text-align: center;
+            margin: 0.5em 0;
         }
+
         #container {
             width: 50em;
             max-width: 100%;
             margin: 0 auto;
         }
+
         .list-unstyled {
             list-style-type: none;
             padding: 0;
@@ -39,22 +50,17 @@
 </head>
 <body>
     <div id="container">
-
         <div class="pure-g">
-
             <div class="pure-u-1">
                 <h1>Spherical CR Manifolds with Amenable Holonomy</h1>
             </div>
-
             <div class="pure-u-2-3">
-
                 <h2>Introduction</h2>
-
                 <h3>Complex Hyperbolic Space</h3>
-
                 <p>
                     Consider the Hermitian inner product on
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msup>
                                     <mi>&#8450;</mi>
@@ -63,8 +69,10 @@
                                     </mrow>
                                 </msup>
                             </mrow>
-                        </math></math-item>
-                    given by<math-item handler="mml" handler="mml" display="block"><math display="block">
+                        </math></math-source>
+                    </math-item>
+                    given by<math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mrow>
                                 <mrow>
                                     <mo>&#9001;</mo>
@@ -118,8 +126,10 @@
                                     <mo>]</mo>
                                 </mrow><mi>v</mi><mo>,</mo>
                             </mrow>
-                        </math></math-item> where u,
-                    <math-item handler="mml" handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> where <em>u</em>,
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>v</mi><mo>&#8712;</mo><msup>
                                     <mi>&#8450;</mi>
@@ -128,10 +138,12 @@
                                     </mrow>
                                 </msup>
                             </mrow>
-                        </math></math-item>
+                        </math></math-source>
+                    </math-item>
                     and <em>u</em>* denotes the conjugate transpose of <em>u</em>. The group
                     of linear transformations preserving this quadratic form is
-                    <math-item handler="mml" handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mtext>U</mtext><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mo>{</mo><mi>A</mi><mo>&#8712;</mo><mtext>Gl</mtext><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>&#8450;</mi><mo stretchy="false">)</mo><mo>:</mo><msup>
                                     <mi>A</mi>
@@ -151,8 +163,10 @@
                                 </msub>
                                 <mo>}</mo>
                             </mrow>
-                        </math></math-item>. In particular, U(n, 1) stabilizes the set
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item>. In particular, U(n, 1) stabilizes the set
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>V</mi>
@@ -172,20 +186,24 @@
                                     <mo>&#9002;</mo>
                                 </mrow><mo>&lt;</mo><mn>0</mn><mo>}</mo>
                             </mrow>
-                        </math></math-item>.
+                        </math></math-source>
+                    </math-item>.
                 </p>
                 <p>
                     Let
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msup>
                                     <mi>&#8473;</mi>
                                     <mi>n</mi>
                                 </msup>
                             </mrow>
-                        </math></math-item> denote complex projective
+                        </math></math-source>
+                    </math-item> denote complex projective
                     n-space, the space of complex lines through the origin in
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msup>
                                     <mi>&#8450;</mi>
@@ -194,9 +212,11 @@
                                     </mrow>
                                 </msup>
                             </mrow>
-                        </math></math-item>. The
+                        </math></math-source>
+                    </math-item>. The
                     action of U(n, 1) on
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msup>
                                     <mi>&#8450;</mi>
@@ -205,17 +225,21 @@
                                     </mrow>
                                 </msup>
                             </mrow>
-                        </math></math-item>
+                        </math></math-source>
+                    </math-item>
                     induces an action on
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msup>
                                     <mi>&#8473;</mi>
                                     <mi>n</mi>
                                 </msup>
                             </mrow>
-                        </math></math-item>. If
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item>. If
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>A</mi><mo>&#8712;</mo><mi>U</mi><mrow>
                                     <mo>(</mo>
@@ -225,23 +249,29 @@
                                     <mo>)</mo>
                                 </mrow>
                             </mrow>
-                        </math></math-item> then
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> then
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>&#950;</mi><mi>A</mi>
                             </mrow>
-                        </math></math-item> induces the same transformation
+                        </math></math-source>
+                    </math-item> induces the same transformation
                     of
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msup>
                                     <mi>&#8473;</mi>
                                     <mi>n</mi>
                                 </msup>
                             </mrow>
-                        </math></math-item> for any unit complex number &#950;.
+                        </math></math-source>
+                    </math-item> for any unit complex number &#950;.
                     Thus the induced group of projective transformations is
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>P</mi><mi>U</mi><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mrow>
                                     <mrow>
@@ -254,8 +284,10 @@
                                     </mrow>
                                 </mrow>
                             </mrow>
-                        </math></math-item>. We identify
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item>. We identify
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>&#8473;</mi><mo stretchy="false">(</mo><msub>
                                     <mi>V</mi>
@@ -266,9 +298,11 @@
                                     <mi>n</mi>
                                 </msup>
                             </mrow>
-                        </math></math-item> with complex hyperbolic
+                        </math></math-source>
+                    </math-item> with complex hyperbolic
                     n-space, which we denote
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msubsup>
                                     <mi>&#8461;</mi>
@@ -276,9 +310,11 @@
                                     <mi>n</mi>
                                 </msubsup>
                             </mrow>
-                        </math></math-item>. The group of holomorphic
+                        </math></math-source>
+                    </math-item>. The group of holomorphic
                     automorphisms of
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msubsup>
                                     <mi>&#8461;</mi>
@@ -286,18 +322,24 @@
                                     <mi>n</mi>
                                 </msubsup>
                             </mrow>
-                        </math></math-item> is
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> is
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mtext>PU</mtext><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item>. One easily checks that
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item>. One easily checks that
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mtext>PU</mtext><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item> acts transitively on
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> acts transitively on
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msubsup>
                                     <mi>&#8461;</mi>
@@ -305,11 +347,13 @@
                                     <mi>n</mi>
                                 </msubsup>
                             </mrow>
-                        </math></math-item>.
+                        </math></math-source>
+                    </math-item>.
                 </p>
                 <p>
                     Suppose
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>v</mi><mo>&#8712;</mo><msubsup>
                                     <mi>&#8461;</mi>
@@ -317,9 +361,11 @@
                                     <mi>n</mi>
                                 </msubsup>
                             </mrow>
-                        </math></math-item>. In homogeneous coordinates, we
+                        </math></math-source>
+                    </math-item>. In homogeneous coordinates, we
                     may write
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>v</mi><mo>=</mo><mo stretchy="false">[</mo><msub>
                                     <mi>v</mi>
@@ -339,8 +385,10 @@
                                 </msub>
                                 <mo stretchy="false">]</mo>
                             </mrow>
-                        </math></math-item>. Note
-                    <math-item handler="mml" display="block"><math display="block">
+                        </math></math-source>
+                    </math-item>. Note
+                    <math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mrow>
                                 <mrow><mo>&#9001;</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo>&#9002;</mo></mrow><mo>&lt;</mo><mn>0</mn><mo>&#8658;</mo><mfrac>
                                     <mrow>
@@ -452,8 +500,10 @@
                                 </mfrac>
                                 <mo>&lt;</mo><mn>1</mn><mo>.</mo>
                             </mrow>
-                        </math></math-item> Thus
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> Thus
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msubsup>
                                     <mi>&#8461;</mi>
@@ -461,17 +511,21 @@
                                     <mi>n</mi>
                                 </msubsup>
                             </mrow>
-                        </math></math-item> is homeomorphic to the open
+                        </math></math-source>
+                    </math-item> is homeomorphic to the open
                     unit ball in
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msup>
                                     <mi>&#8450;</mi>
                                     <mi>n</mi>
                                 </msup>
                             </mrow>
-                        </math></math-item>. The boundary of
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item>. The boundary of
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msubsup>
                                     <mi>&#8461;</mi>
@@ -479,22 +533,28 @@
                                     <mi>n</mi>
                                 </msubsup>
                             </mrow>
-                        </math></math-item> is the unit sphere in
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> is the unit sphere in
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msup>
                                     <mi>&#8450;</mi>
                                     <mi>n</mi>
                                 </msup>
                             </mrow>
-                        </math></math-item> , which has real dimension
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> , which has real dimension
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mn>2</mn><mi>n</mi><mo>&#8722;</mo><mn>1</mn>
                             </mrow>
-                        </math></math-item>. From the
+                        </math></math-source>
+                    </math-item>. From the
                     projective point of view, the boundary is
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>&#8473;</mi><mrow>
                                     <mo>(</mo>
@@ -507,8 +567,10 @@
                                     <mo>)</mo>
                                 </mrow>
                             </mrow>
-                        </math></math-item> where
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> where
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>V</mi>
@@ -528,16 +590,20 @@
                                     <mo>&#9002;</mo>
                                 </mrow><mo>=</mo><mn>0</mn><mo>}</mo>
                             </mrow>
-                        </math></math-item>.
+                        </math></math-source>
+                    </math-item>.
                 </p>
                 <p>
                     Consider the action of
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>PU</mi><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item> on the boundary of
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> on the boundary of
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msubsup>
                                     <mi>&#8461;</mi>
@@ -545,13 +611,17 @@
                                     <mi>n</mi>
                                 </msubsup>
                             </mrow>
-                        </math></math-item>. The Lie algebra of
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item>. The Lie algebra of
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>PU</mi><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item> is
-                    <math-item handler="mml" display="block"><math display="block">
+                        </math></math-source>
+                    </math-item> is
+                    <math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mrow>
                                 <mi mathvariant="fraktur">s</mi><mi mathvariant="fraktur">u</mi><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mo>{</mo><mi>A</mi><mo>&#8712;</mo><mi mathvariant="fraktur">g</mi><mi mathvariant="fraktur">l</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>:</mo><msup>
                                     <mi>A</mi>
@@ -571,8 +641,10 @@
                                 </msub>
                                 <mi>A</mi><mo>=</mo><mn>0</mn><mo>,</mo><mtext>&nbsp;and&nbsp;</mtext><mtext>tr</mtext><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn><mo>}</mo><mo>.</mo>
                             </mrow>
-                        </math></math-item> The hyperbolic one-parameter subgroup
-                    <math-item handler="mml" display="block"><math display="block">
+                        </math></math-source>
+                    </math-item> The hyperbolic one-parameter subgroup
+                    <math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mrow>
                                 <msub>
                                     <mi>h</mi>
@@ -633,8 +705,10 @@
                                     <mo>]</mo>
                                 </mrow>
                             </mrow>
-                        </math></math-item> generated by
-                    <math-item handler="mml" display="block"><math display="block">
+                        </math></math-source>
+                    </math-item> generated by
+                    <math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mrow>
                                 <mi>&#951;</mi><mo>=</mo><mrow>
                                     <mo>[</mo>
@@ -683,13 +757,17 @@
                                     <mo>]</mo>
                                 </mrow>
                             </mrow>
-                        </math></math-item> is a Cartan subgroup of
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> is a Cartan subgroup of
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mtext>PU</mtext><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item>. It gives a root space decomposition
-                    <math-item handler="mml" display="block"><math display="block">
+                        </math></math-source>
+                    </math-item>. It gives a root space decomposition
+                    <math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mrow>
                                 <mi mathvariant="fraktur">s</mi><mi mathvariant="fraktur">u</mi><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><munderover>
                                     <mstyle displaystyle="true" mathsize="140%"><mo>&#8853;</mo></mstyle>
@@ -703,8 +781,10 @@
                                     <mi>&#955;</mi>
                                 </msub>
                             </mrow>
-                        </math></math-item> where
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> where
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi mathvariant="fraktur">g</mi>
@@ -712,11 +792,13 @@
                                 </msub>
                                 <mo>=</mo><mi>ker</mi><mo stretchy="false">(</mo><mi>ad</mi><mtext>&#8201;</mtext><mi>&#951;</mi><mo>&#8722;</mo><mi>k</mi><mi>I</mi><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item>.
+                        </math></math-source>
+                    </math-item>.
                 </p>
                 <p>
                     Now let
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>p</mi>
@@ -732,21 +814,27 @@
                                     <mi>n</mi>
                                 </msubsup>
                             </mrow>
-                        </math></math-item>. The stabilizer of
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item>. The stabilizer of
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>p</mi>
                                     <mi>&#8734;</mi>
                                 </msub>
                             </mrow>
-                        </math></math-item> in
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> in
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mtext>PU</mtext><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item> is
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> is
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>G</mi>
@@ -758,8 +846,10 @@
                                 </msub>
                                 <mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item> where
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> where
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi mathvariant="fraktur">g</mi>
@@ -779,9 +869,11 @@
                                     </mrow>
                                 </msub>
                             </mrow>
-                        </math></math-item>. The Lie
+                        </math></math-source>
+                    </math-item>. The Lie
                     algebra of the Heisenberg group is
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi mathvariant="fraktur">n</mi>
@@ -800,16 +892,20 @@
                                     </mrow>
                                 </msub>
                             </mrow>
-                        </math></math-item> ; thus
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> ; thus
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>G</mi>
                                     <mo>&#8722;</mo>
                                 </msub>
                             </mrow>
-                        </math></math-item> contains a subgroup
-                    <math-item handler="mml" display="block"><math display="block">
+                        </math></math-source>
+                    </math-item> contains a subgroup
+                    <math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mrow>
                                 <msub>
                                     <mi>N</mi>
@@ -821,18 +917,22 @@
                                 </msub>
                                 <mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item> isomorphic to the
+                        </math></math-source>
+                    </math-item> isomorphic to the
                     Heisenberg group. We can describe
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>N</mi>
                                     <mo>&#8722;</mo>
                                 </msub>
                             </mrow>
-                        </math></math-item> concretely by computing the
+                        </math></math-source>
+                    </math-item> concretely by computing the
                     exponential map
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>exp</mi><mo>:</mo><msub>
                                     <mi mathvariant="fraktur">n</mi>
@@ -843,11 +943,13 @@
                                     <mo>&#8722;</mo>
                                 </msub>
                             </mrow>
-                        </math></math-item>.
+                        </math></math-source>
+                    </math-item>.
                 </p>
                 <p>
                     From a calculation in [BS], one obtains
-                    <math-item handler="mml" display="block"><math display="block">
+                    <math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mrow>
                                 <msub>
                                     <mi mathvariant="fraktur">n</mi>
@@ -932,8 +1034,10 @@
                                     <mo>}</mo>
                                 </mrow><mo>.</mo>
                             </mrow>
-                        </math></math-item> Observe,
-                    <math-item handler="mml" display="block"><math display="block">
+                        </math></math-source>
+                    </math-item> Observe,
+                    <math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mrow>
                                 <mrow>
                                     <mo>[</mo>
@@ -1113,30 +1217,38 @@
                                     <mo>]</mo>
                                 </mrow><mo>.</mo>
                             </mrow>
-                        </math></math-item> Denote the image
+                        </math></math-source>
+                    </math-item> Denote the image
                     transformation in
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>N</mi>
                                     <mo>&#8722;</mo>
                                 </msub>
                             </mrow>
-                        </math></math-item> by
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> by
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>H</mi><mo stretchy="false">(</mo><mi>&#950;</mi><mo>,</mo><mi>v</mi><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item>. A calculation shows
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item>. A calculation shows
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>N</mi>
                                     <mo>&#8722;</mo>
                                 </msub>
                             </mrow>
-                        </math></math-item> acts simply transitively on
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> acts simply transitively on
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mo>&#8706;</mo><msup>
                                     <mi>B</mi>
@@ -1151,9 +1263,11 @@
                                 </mover>
                                 <mo>,</mo><mo>&#8722;</mo><mn>1</mn><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item>
+                        </math></math-source>
+                    </math-item>
                     . Hence. we identify
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mo>&#8706;</mo><msup>
                                     <mi>B</mi>
@@ -1168,9 +1282,11 @@
                                 </mover>
                                 <mo>,</mo><mo>&#8722;</mo><mn>1</mn><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item>
+                        </math></math-source>
+                    </math-item>
                     with
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>N</mi>
@@ -1184,21 +1300,27 @@
                                 </msup>
                                 <mo>×</mo><mi>&#8477;</mi>
                             </mrow>
-                        </math></math-item> via
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> via
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>H</mi><mo stretchy="false">(</mo><mi>&#950;</mi><mo>,</mo><mi>v</mi><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item>. In these coordinates,
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item>. In these coordinates,
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>N</mi>
                                     <mo>&#8722;</mo>
                                 </msub>
                             </mrow>
-                        </math></math-item> acts on
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> acts on
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msup>
                                     <mi>&#8450;</mi>
@@ -1208,9 +1330,11 @@
                                 </msup>
                                 <mo>×</mo><mi>&#8477;</mi>
                             </mrow>
-                        </math></math-item> by translation according to the
+                        </math></math-source>
+                    </math-item> by translation according to the
                     formula
-                    <math-item handler="mml" display="block"><math display="block">
+                    <math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mrow>
                                 <mo stretchy="false">(</mo><mi>&#950;</mi><mo>,</mo><mi>n</mi><mo stretchy="false">)</mo><msub>
                                     <mo>+</mo>
@@ -1222,9 +1346,11 @@
                                 </msup>
                                 <mo stretchy="false">)</mo><mo>.</mo>
                             </mrow>
-                        </math></math-item> We may also
+                        </math></math-source>
+                    </math-item> We may also
                     concisely express the action of exp(g0) on
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mo>&#8706;</mo><msup>
                                     <mi>B</mi>
@@ -1239,9 +1365,11 @@
                                 </mover>
                                 <mo>,</mo><mo>&#8722;</mo><mn>1</mn><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item>
+                        </math></math-source>
+                    </math-item>
                     in these coordinates. The action of
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>exp</mi><mo stretchy="false">(</mo><msub>
                                     <mi mathvariant="fraktur">g</mi>
@@ -1249,22 +1377,28 @@
                                 </msub>
                                 <mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item> is equivalent to actions
+                        </math></math-source>
+                    </math-item> is equivalent to actions
                     of
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msup>
                                     <mi>&#8477;</mi>
                                     <mo>+</mo>
                                 </msup>
                             </mrow>
-                        </math></math-item> and
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> and
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>U</mi><mo stretchy="false">(</mo><mi>n</mi><mo>&#8722;</mo><mn>1</mn><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item> given by
-                    <math-item handler="mml" display="block"><math display="block">
+                        </math></math-source>
+                    </math-item> given by
+                    <math-item display="block">
+                        <math-source type="application/mathml+xml"><math display="block">
                             <mtable>
                                 <mtr>
                                     <mtd>
@@ -1281,11 +1415,13 @@
                                     </mtd>
                                 </mtr>
                             </mtable>
-                        </math></math-item> respectively.
+                        </math></math-source>
+                    </math-item> respectively.
                 </p>
                 <p>
                     Hence
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>G</mi>
@@ -1301,9 +1437,11 @@
                                 </msup>
                                 <mo stretchy="false">)</mo><mo>.</mo>
                             </mrow>
-                        </math></math-item> Note the analogy
+                        </math></math-source>
+                    </math-item> Note the analogy
                     with the Euclidean similarity group
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi mathvariant="normal">Sim</mi><mo stretchy="false">(</mo><msup>
                                     <mi>&#8477;</mi>
@@ -1323,23 +1461,29 @@
                                 </msup>
                                 <mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item>. For this reason, we refer
+                        </math></math-source>
+                    </math-item>. For this reason, we refer
                     to
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <msub>
                                     <mi>G</mi>
                                     <mo>&#8722;</mo>
                                 </msub>
                             </mrow>
-                        </math></math-item> as the Heisenberg similarity
+                        </math></math-source>
+                    </math-item> as the Heisenberg similarity
                     group, and denote it
-                    <math-item handler="mml" display="inline"><math>
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>Sim</mi><mo stretchy="false">(</mo><mi mathvariant="script">H</mi><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item>. We also refer to
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item>. We also refer to
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi mathvariant="script">H</mi><mo>&#8773;</mo><msup>
                                     <mi>&#8450;</mi>
@@ -1347,12 +1491,15 @@
                                 </msup>
                                 <mo>×</mo><mi>&#8477;</mi>
                             </mrow>
-                        </math></math-item> with automorphism group
-                    <math-item handler="mml" display="inline"><math>
+                        </math></math-source>
+                    </math-item> with automorphism group
+                    <math-item display="inline">
+                        <math-source type="application/mathml+xml"><math>
                             <mrow>
                                 <mi>Sim</mi><mo stretchy="false">(</mo><mi mathvariant="script">H</mi><mo stretchy="false">)</mo>
                             </mrow>
-                        </math></math-item> as Heisenberg Space.
+                        </math></math-source>
+                    </math-item> as Heisenberg Space.
                 </p>
             </div>
             <div class="pure-u-1-24">
@@ -1360,7 +1507,6 @@
             <div class="pure-u-7-24">
                 <h4>About</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
                 <h4>Resources</h4>
                 <ul class="list-unstyled">
                     <li><i class="fa fa-list fa-fw"></i> <a href="#">All posts</a></li>
@@ -1373,14 +1519,14 @@
     </div>
     <script>
         (function () {
-            FlorianMath.lookAndFeel.then(function (lnf) {
+            /*FlorianMath.lookAndFeel.then(function (lnf) {
                 var $ = FlorianMath.jQueryLib;
                 $('#math-ui-dashboard-trigger').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
                     lnf.showDashboard();
                 });
-            });
+            });*/
         })();
     </script>
 </body>

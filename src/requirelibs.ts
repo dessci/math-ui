@@ -1,5 +1,5 @@
 /// <reference path="jquery.d.ts" />
-/// <reference path="../libs/math-item/math-item.d.ts" />
+/// <reference path="../bower_components/math-item/math-item.d.ts" />
 
 module FlorianMath {
     'use strict';
