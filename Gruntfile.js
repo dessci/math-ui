@@ -3,7 +3,8 @@ module.exports = function (grunt) {
     grunt.initConfig({
         clean: {
             tmp: ['tmp'],
-            dist: ['dist']
+            dist: ['dist'],
+            gh_pages: ['gh-pages']
         },
         concat: {
             bs_css: {
@@ -46,13 +47,23 @@ module.exports = function (grunt) {
                     }
                 }
             },
-            /*gh_pages: {
+            gh_pages: {
                 files: [
-                    { expand: true, src: ['dist/**'], dest: 'gh-pages/' },
-                    { expand: true, src: ['examples/**'], dest: 'gh-pages/' },
-                    { expand: true, src: ['media/**'], dest: 'gh-pages/' }
+                    {
+                        expand: true,
+                        src: [
+                            'bower_components/math-item/*.js',
+                            'bower_components/math-item/*.js.map',
+                            'bower_components/webcomponentsjs/webcomponents.js',
+                            'fonts/**',
+                            'examples/**',
+                            'dist/**',
+                            'media/**'
+                        ],
+                        dest: 'gh-pages/'
+                    }
                 ]
-            }*/
+            }
         },
         exec: {
             bs_css: 'node convert.js libs/bootstrap/bootstrap.css > tmp/bs-base1.css'
@@ -112,6 +123,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['clean', 'mkdir', 'exec', 'sass', 'typescript', 'copy', 'concat']);
     grunt.registerTask('serve', ['connect', 'watch']);
-    grunt.registerTask('gh-pages', ['copy:gh_pages']);
+    grunt.registerTask('gh-pages', ['clean:gh_pages', 'copy:gh_pages']);
 
 };

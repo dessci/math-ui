@@ -228,7 +228,6 @@ module FlorianMath {
 
         BootstrapLookAndFeel.prototype.add = function (mathItem: IHTMLMathItemElement) {
             $(mathItem).attr('tabindex', 0).on('focus', (ev) => {
-                console.log('focus');
                 stopEvent(ev);
                 gotFocus(mathItem);
             });
