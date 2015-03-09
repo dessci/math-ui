@@ -1,0 +1,19 @@
+{
+  "name": "math-item-ui",
+  "version": "0.0.1",
+  "description": "A universal user interface for math items",
+  "keywords": ["math", "math-item", "mathml", "tex"],
+  "authors": [
+    "Design Science"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "devDependencies": {
+    "webcomponentsjs": "~0.5.5",
+    "math-item": "git@github.com:dessci/math-item.git#0.0.1"
+  }
+}
