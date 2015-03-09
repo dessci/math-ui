@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=4133676f2d0441365200)
- * Config saved to config.json and https://gist.github.com/4133676f2d0441365200
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=a6ecd0a83c9b51190e8c)
+ * Config saved to config.json and https://gist.github.com/a6ecd0a83c9b51190e8c
  */
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
@@ -65,6 +65,1057 @@
 
 .math-ui textarea {
   overflow: auto;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+.math-ui .glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.math-ui .glyphicon-asterisk:before {
+  content: "\2a";
+}
+
+.math-ui .glyphicon-plus:before {
+  content: "\2b";
+}
+
+.math-ui .glyphicon-euro:before,
+.math-ui .glyphicon-eur:before {
+  content: "\20ac";
+}
+
+.math-ui .glyphicon-minus:before {
+  content: "\2212";
+}
+
+.math-ui .glyphicon-cloud:before {
+  content: "\2601";
+}
+
+.math-ui .glyphicon-envelope:before {
+  content: "\2709";
+}
+
+.math-ui .glyphicon-pencil:before {
+  content: "\270f";
+}
+
+.math-ui .glyphicon-glass:before {
+  content: "\e001";
+}
+
+.math-ui .glyphicon-music:before {
+  content: "\e002";
+}
+
+.math-ui .glyphicon-search:before {
+  content: "\e003";
+}
+
+.math-ui .glyphicon-heart:before {
+  content: "\e005";
+}
+
+.math-ui .glyphicon-star:before {
+  content: "\e006";
+}
+
+.math-ui .glyphicon-star-empty:before {
+  content: "\e007";
+}
+
+.math-ui .glyphicon-user:before {
+  content: "\e008";
+}
+
+.math-ui .glyphicon-film:before {
+  content: "\e009";
+}
+
+.math-ui .glyphicon-th-large:before {
+  content: "\e010";
+}
+
+.math-ui .glyphicon-th:before {
+  content: "\e011";
+}
+
+.math-ui .glyphicon-th-list:before {
+  content: "\e012";
+}
+
+.math-ui .glyphicon-ok:before {
+  content: "\e013";
+}
+
+.math-ui .glyphicon-remove:before {
+  content: "\e014";
+}
+
+.math-ui .glyphicon-zoom-in:before {
+  content: "\e015";
+}
+
+.math-ui .glyphicon-zoom-out:before {
+  content: "\e016";
+}
+
+.math-ui .glyphicon-off:before {
+  content: "\e017";
+}
+
+.math-ui .glyphicon-signal:before {
+  content: "\e018";
+}
+
+.math-ui .glyphicon-cog:before {
+  content: "\e019";
+}
+
+.math-ui .glyphicon-trash:before {
+  content: "\e020";
+}
+
+.math-ui .glyphicon-home:before {
+  content: "\e021";
+}
+
+.math-ui .glyphicon-file:before {
+  content: "\e022";
+}
+
+.math-ui .glyphicon-time:before {
+  content: "\e023";
+}
+
+.math-ui .glyphicon-road:before {
+  content: "\e024";
+}
+
+.math-ui .glyphicon-download-alt:before {
+  content: "\e025";
+}
+
+.math-ui .glyphicon-download:before {
+  content: "\e026";
+}
+
+.math-ui .glyphicon-upload:before {
+  content: "\e027";
+}
+
+.math-ui .glyphicon-inbox:before {
+  content: "\e028";
+}
+
+.math-ui .glyphicon-play-circle:before {
+  content: "\e029";
+}
+
+.math-ui .glyphicon-repeat:before {
+  content: "\e030";
+}
+
+.math-ui .glyphicon-refresh:before {
+  content: "\e031";
+}
+
+.math-ui .glyphicon-list-alt:before {
+  content: "\e032";
+}
+
+.math-ui .glyphicon-lock:before {
+  content: "\e033";
+}
+
+.math-ui .glyphicon-flag:before {
+  content: "\e034";
+}
+
+.math-ui .glyphicon-headphones:before {
+  content: "\e035";
+}
+
+.math-ui .glyphicon-volume-off:before {
+  content: "\e036";
+}
+
+.math-ui .glyphicon-volume-down:before {
+  content: "\e037";
+}
+
+.math-ui .glyphicon-volume-up:before {
+  content: "\e038";
+}
+
+.math-ui .glyphicon-qrcode:before {
+  content: "\e039";
+}
+
+.math-ui .glyphicon-barcode:before {
+  content: "\e040";
+}
+
+.math-ui .glyphicon-tag:before {
+  content: "\e041";
+}
+
+.math-ui .glyphicon-tags:before {
+  content: "\e042";
+}
+
+.math-ui .glyphicon-book:before {
+  content: "\e043";
+}
+
+.math-ui .glyphicon-bookmark:before {
+  content: "\e044";
+}
+
+.math-ui .glyphicon-print:before {
+  content: "\e045";
+}
+
+.math-ui .glyphicon-camera:before {
+  content: "\e046";
+}
+
+.math-ui .glyphicon-font:before {
+  content: "\e047";
+}
+
+.math-ui .glyphicon-bold:before {
+  content: "\e048";
+}
+
+.math-ui .glyphicon-italic:before {
+  content: "\e049";
+}
+
+.math-ui .glyphicon-text-height:before {
+  content: "\e050";
+}
+
+.math-ui .glyphicon-text-width:before {
+  content: "\e051";
+}
+
+.math-ui .glyphicon-align-left:before {
+  content: "\e052";
+}
+
+.math-ui .glyphicon-align-center:before {
+  content: "\e053";
+}
+
+.math-ui .glyphicon-align-right:before {
+  content: "\e054";
+}
+
+.math-ui .glyphicon-align-justify:before {
+  content: "\e055";
+}
+
+.math-ui .glyphicon-list:before {
+  content: "\e056";
+}
+
+.math-ui .glyphicon-indent-left:before {
+  content: "\e057";
+}
+
+.math-ui .glyphicon-indent-right:before {
+  content: "\e058";
+}
+
+.math-ui .glyphicon-facetime-video:before {
+  content: "\e059";
+}
+
+.math-ui .glyphicon-picture:before {
+  content: "\e060";
+}
+
+.math-ui .glyphicon-map-marker:before {
+  content: "\e062";
+}
+
+.math-ui .glyphicon-adjust:before {
+  content: "\e063";
+}
+
+.math-ui .glyphicon-tint:before {
+  content: "\e064";
+}
+
+.math-ui .glyphicon-edit:before {
+  content: "\e065";
+}
+
+.math-ui .glyphicon-share:before {
+  content: "\e066";
+}
+
+.math-ui .glyphicon-check:before {
+  content: "\e067";
+}
+
+.math-ui .glyphicon-move:before {
+  content: "\e068";
+}
+
+.math-ui .glyphicon-step-backward:before {
+  content: "\e069";
+}
+
+.math-ui .glyphicon-fast-backward:before {
+  content: "\e070";
+}
+
+.math-ui .glyphicon-backward:before {
+  content: "\e071";
+}
+
+.math-ui .glyphicon-play:before {
+  content: "\e072";
+}
+
+.math-ui .glyphicon-pause:before {
+  content: "\e073";
+}
+
+.math-ui .glyphicon-stop:before {
+  content: "\e074";
+}
+
+.math-ui .glyphicon-forward:before {
+  content: "\e075";
+}
+
+.math-ui .glyphicon-fast-forward:before {
+  content: "\e076";
+}
+
+.math-ui .glyphicon-step-forward:before {
+  content: "\e077";
+}
+
+.math-ui .glyphicon-eject:before {
+  content: "\e078";
+}
+
+.math-ui .glyphicon-chevron-left:before {
+  content: "\e079";
+}
+
+.math-ui .glyphicon-chevron-right:before {
+  content: "\e080";
+}
+
+.math-ui .glyphicon-plus-sign:before {
+  content: "\e081";
+}
+
+.math-ui .glyphicon-minus-sign:before {
+  content: "\e082";
+}
+
+.math-ui .glyphicon-remove-sign:before {
+  content: "\e083";
+}
+
+.math-ui .glyphicon-ok-sign:before {
+  content: "\e084";
+}
+
+.math-ui .glyphicon-question-sign:before {
+  content: "\e085";
+}
+
+.math-ui .glyphicon-info-sign:before {
+  content: "\e086";
+}
+
+.math-ui .glyphicon-screenshot:before {
+  content: "\e087";
+}
+
+.math-ui .glyphicon-remove-circle:before {
+  content: "\e088";
+}
+
+.math-ui .glyphicon-ok-circle:before {
+  content: "\e089";
+}
+
+.math-ui .glyphicon-ban-circle:before {
+  content: "\e090";
+}
+
+.math-ui .glyphicon-arrow-left:before {
+  content: "\e091";
+}
+
+.math-ui .glyphicon-arrow-right:before {
+  content: "\e092";
+}
+
+.math-ui .glyphicon-arrow-up:before {
+  content: "\e093";
+}
+
+.math-ui .glyphicon-arrow-down:before {
+  content: "\e094";
+}
+
+.math-ui .glyphicon-share-alt:before {
+  content: "\e095";
+}
+
+.math-ui .glyphicon-resize-full:before {
+  content: "\e096";
+}
+
+.math-ui .glyphicon-resize-small:before {
+  content: "\e097";
+}
+
+.math-ui .glyphicon-exclamation-sign:before {
+  content: "\e101";
+}
+
+.math-ui .glyphicon-gift:before {
+  content: "\e102";
+}
+
+.math-ui .glyphicon-leaf:before {
+  content: "\e103";
+}
+
+.math-ui .glyphicon-fire:before {
+  content: "\e104";
+}
+
+.math-ui .glyphicon-eye-open:before {
+  content: "\e105";
+}
+
+.math-ui .glyphicon-eye-close:before {
+  content: "\e106";
+}
+
+.math-ui .glyphicon-warning-sign:before {
+  content: "\e107";
+}
+
+.math-ui .glyphicon-plane:before {
+  content: "\e108";
+}
+
+.math-ui .glyphicon-calendar:before {
+  content: "\e109";
+}
+
+.math-ui .glyphicon-random:before {
+  content: "\e110";
+}
+
+.math-ui .glyphicon-comment:before {
+  content: "\e111";
+}
+
+.math-ui .glyphicon-magnet:before {
+  content: "\e112";
+}
+
+.math-ui .glyphicon-chevron-up:before {
+  content: "\e113";
+}
+
+.math-ui .glyphicon-chevron-down:before {
+  content: "\e114";
+}
+
+.math-ui .glyphicon-retweet:before {
+  content: "\e115";
+}
+
+.math-ui .glyphicon-shopping-cart:before {
+  content: "\e116";
+}
+
+.math-ui .glyphicon-folder-close:before {
+  content: "\e117";
+}
+
+.math-ui .glyphicon-folder-open:before {
+  content: "\e118";
+}
+
+.math-ui .glyphicon-resize-vertical:before {
+  content: "\e119";
+}
+
+.math-ui .glyphicon-resize-horizontal:before {
+  content: "\e120";
+}
+
+.math-ui .glyphicon-hdd:before {
+  content: "\e121";
+}
+
+.math-ui .glyphicon-bullhorn:before {
+  content: "\e122";
+}
+
+.math-ui .glyphicon-bell:before {
+  content: "\e123";
+}
+
+.math-ui .glyphicon-certificate:before {
+  content: "\e124";
+}
+
+.math-ui .glyphicon-thumbs-up:before {
+  content: "\e125";
+}
+
+.math-ui .glyphicon-thumbs-down:before {
+  content: "\e126";
+}
+
+.math-ui .glyphicon-hand-right:before {
+  content: "\e127";
+}
+
+.math-ui .glyphicon-hand-left:before {
+  content: "\e128";
+}
+
+.math-ui .glyphicon-hand-up:before {
+  content: "\e129";
+}
+
+.math-ui .glyphicon-hand-down:before {
+  content: "\e130";
+}
+
+.math-ui .glyphicon-circle-arrow-right:before {
+  content: "\e131";
+}
+
+.math-ui .glyphicon-circle-arrow-left:before {
+  content: "\e132";
+}
+
+.math-ui .glyphicon-circle-arrow-up:before {
+  content: "\e133";
+}
+
+.math-ui .glyphicon-circle-arrow-down:before {
+  content: "\e134";
+}
+
+.math-ui .glyphicon-globe:before {
+  content: "\e135";
+}
+
+.math-ui .glyphicon-wrench:before {
+  content: "\e136";
+}
+
+.math-ui .glyphicon-tasks:before {
+  content: "\e137";
+}
+
+.math-ui .glyphicon-filter:before {
+  content: "\e138";
+}
+
+.math-ui .glyphicon-briefcase:before {
+  content: "\e139";
+}
+
+.math-ui .glyphicon-fullscreen:before {
+  content: "\e140";
+}
+
+.math-ui .glyphicon-dashboard:before {
+  content: "\e141";
+}
+
+.math-ui .glyphicon-paperclip:before {
+  content: "\e142";
+}
+
+.math-ui .glyphicon-heart-empty:before {
+  content: "\e143";
+}
+
+.math-ui .glyphicon-link:before {
+  content: "\e144";
+}
+
+.math-ui .glyphicon-phone:before {
+  content: "\e145";
+}
+
+.math-ui .glyphicon-pushpin:before {
+  content: "\e146";
+}
+
+.math-ui .glyphicon-usd:before {
+  content: "\e148";
+}
+
+.math-ui .glyphicon-gbp:before {
+  content: "\e149";
+}
+
+.math-ui .glyphicon-sort:before {
+  content: "\e150";
+}
+
+.math-ui .glyphicon-sort-by-alphabet:before {
+  content: "\e151";
+}
+
+.math-ui .glyphicon-sort-by-alphabet-alt:before {
+  content: "\e152";
+}
+
+.math-ui .glyphicon-sort-by-order:before {
+  content: "\e153";
+}
+
+.math-ui .glyphicon-sort-by-order-alt:before {
+  content: "\e154";
+}
+
+.math-ui .glyphicon-sort-by-attributes:before {
+  content: "\e155";
+}
+
+.math-ui .glyphicon-sort-by-attributes-alt:before {
+  content: "\e156";
+}
+
+.math-ui .glyphicon-unchecked:before {
+  content: "\e157";
+}
+
+.math-ui .glyphicon-expand:before {
+  content: "\e158";
+}
+
+.math-ui .glyphicon-collapse-down:before {
+  content: "\e159";
+}
+
+.math-ui .glyphicon-collapse-up:before {
+  content: "\e160";
+}
+
+.math-ui .glyphicon-log-in:before {
+  content: "\e161";
+}
+
+.math-ui .glyphicon-flash:before {
+  content: "\e162";
+}
+
+.math-ui .glyphicon-log-out:before {
+  content: "\e163";
+}
+
+.math-ui .glyphicon-new-window:before {
+  content: "\e164";
+}
+
+.math-ui .glyphicon-record:before {
+  content: "\e165";
+}
+
+.math-ui .glyphicon-save:before {
+  content: "\e166";
+}
+
+.math-ui .glyphicon-open:before {
+  content: "\e167";
+}
+
+.math-ui .glyphicon-saved:before {
+  content: "\e168";
+}
+
+.math-ui .glyphicon-import:before {
+  content: "\e169";
+}
+
+.math-ui .glyphicon-export:before {
+  content: "\e170";
+}
+
+.math-ui .glyphicon-send:before {
+  content: "\e171";
+}
+
+.math-ui .glyphicon-floppy-disk:before {
+  content: "\e172";
+}
+
+.math-ui .glyphicon-floppy-saved:before {
+  content: "\e173";
+}
+
+.math-ui .glyphicon-floppy-remove:before {
+  content: "\e174";
+}
+
+.math-ui .glyphicon-floppy-save:before {
+  content: "\e175";
+}
+
+.math-ui .glyphicon-floppy-open:before {
+  content: "\e176";
+}
+
+.math-ui .glyphicon-credit-card:before {
+  content: "\e177";
+}
+
+.math-ui .glyphicon-transfer:before {
+  content: "\e178";
+}
+
+.math-ui .glyphicon-cutlery:before {
+  content: "\e179";
+}
+
+.math-ui .glyphicon-header:before {
+  content: "\e180";
+}
+
+.math-ui .glyphicon-compressed:before {
+  content: "\e181";
+}
+
+.math-ui .glyphicon-earphone:before {
+  content: "\e182";
+}
+
+.math-ui .glyphicon-phone-alt:before {
+  content: "\e183";
+}
+
+.math-ui .glyphicon-tower:before {
+  content: "\e184";
+}
+
+.math-ui .glyphicon-stats:before {
+  content: "\e185";
+}
+
+.math-ui .glyphicon-sd-video:before {
+  content: "\e186";
+}
+
+.math-ui .glyphicon-hd-video:before {
+  content: "\e187";
+}
+
+.math-ui .glyphicon-subtitles:before {
+  content: "\e188";
+}
+
+.math-ui .glyphicon-sound-stereo:before {
+  content: "\e189";
+}
+
+.math-ui .glyphicon-sound-dolby:before {
+  content: "\e190";
+}
+
+.math-ui .glyphicon-sound-5-1:before {
+  content: "\e191";
+}
+
+.math-ui .glyphicon-sound-6-1:before {
+  content: "\e192";
+}
+
+.math-ui .glyphicon-sound-7-1:before {
+  content: "\e193";
+}
+
+.math-ui .glyphicon-copyright-mark:before {
+  content: "\e194";
+}
+
+.math-ui .glyphicon-registration-mark:before {
+  content: "\e195";
+}
+
+.math-ui .glyphicon-cloud-download:before {
+  content: "\e197";
+}
+
+.math-ui .glyphicon-cloud-upload:before {
+  content: "\e198";
+}
+
+.math-ui .glyphicon-tree-conifer:before {
+  content: "\e199";
+}
+
+.math-ui .glyphicon-tree-deciduous:before {
+  content: "\e200";
+}
+
+.math-ui .glyphicon-cd:before {
+  content: "\e201";
+}
+
+.math-ui .glyphicon-save-file:before {
+  content: "\e202";
+}
+
+.math-ui .glyphicon-open-file:before {
+  content: "\e203";
+}
+
+.math-ui .glyphicon-level-up:before {
+  content: "\e204";
+}
+
+.math-ui .glyphicon-copy:before {
+  content: "\e205";
+}
+
+.math-ui .glyphicon-paste:before {
+  content: "\e206";
+}
+
+.math-ui .glyphicon-alert:before {
+  content: "\e209";
+}
+
+.math-ui .glyphicon-equalizer:before {
+  content: "\e210";
+}
+
+.math-ui .glyphicon-king:before {
+  content: "\e211";
+}
+
+.math-ui .glyphicon-queen:before {
+  content: "\e212";
+}
+
+.math-ui .glyphicon-pawn:before {
+  content: "\e213";
+}
+
+.math-ui .glyphicon-bishop:before {
+  content: "\e214";
+}
+
+.math-ui .glyphicon-knight:before {
+  content: "\e215";
+}
+
+.math-ui .glyphicon-baby-formula:before {
+  content: "\e216";
+}
+
+.math-ui .glyphicon-tent:before {
+  content: "\26fa";
+}
+
+.math-ui .glyphicon-blackboard:before {
+  content: "\e218";
+}
+
+.math-ui .glyphicon-bed:before {
+  content: "\e219";
+}
+
+.math-ui .glyphicon-apple:before {
+  content: "\f8ff";
+}
+
+.math-ui .glyphicon-erase:before {
+  content: "\e221";
+}
+
+.math-ui .glyphicon-hourglass:before {
+  content: "\231b";
+}
+
+.math-ui .glyphicon-lamp:before {
+  content: "\e223";
+}
+
+.math-ui .glyphicon-duplicate:before {
+  content: "\e224";
+}
+
+.math-ui .glyphicon-piggy-bank:before {
+  content: "\e225";
+}
+
+.math-ui .glyphicon-scissors:before {
+  content: "\e226";
+}
+
+.math-ui .glyphicon-bitcoin:before {
+  content: "\e227";
+}
+
+.math-ui .glyphicon-yen:before {
+  content: "\00a5";
+}
+
+.math-ui .glyphicon-ruble:before {
+  content: "\20bd";
+}
+
+.math-ui .glyphicon-scale:before {
+  content: "\e230";
+}
+
+.math-ui .glyphicon-ice-lolly:before {
+  content: "\e231";
+}
+
+.math-ui .glyphicon-ice-lolly-tasted:before {
+  content: "\e232";
+}
+
+.math-ui .glyphicon-education:before {
+  content: "\e233";
+}
+
+.math-ui .glyphicon-option-horizontal:before {
+  content: "\e234";
+}
+
+.math-ui .glyphicon-option-vertical:before {
+  content: "\e235";
+}
+
+.math-ui .glyphicon-menu-hamburger:before {
+  content: "\e236";
+}
+
+.math-ui .glyphicon-modal-window:before {
+  content: "\e237";
+}
+
+.math-ui .glyphicon-oil:before {
+  content: "\e238";
+}
+
+.math-ui .glyphicon-grain:before {
+  content: "\e239";
+}
+
+.math-ui .glyphicon-sunglasses:before {
+  content: "\e240";
+}
+
+.math-ui .glyphicon-text-size:before {
+  content: "\e241";
+}
+
+.math-ui .glyphicon-text-color:before {
+  content: "\e242";
+}
+
+.math-ui .glyphicon-text-background:before {
+  content: "\e243";
+}
+
+.math-ui .glyphicon-object-align-top:before {
+  content: "\e244";
+}
+
+.math-ui .glyphicon-object-align-bottom:before {
+  content: "\e245";
+}
+
+.math-ui .glyphicon-object-align-horizontal:before {
+  content: "\e246";
+}
+
+.math-ui .glyphicon-object-align-left:before {
+  content: "\e247";
+}
+
+.math-ui .glyphicon-object-align-vertical:before {
+  content: "\e248";
+}
+
+.math-ui .glyphicon-object-align-right:before {
+  content: "\e249";
+}
+
+.math-ui .glyphicon-triangle-right:before {
+  content: "\e250";
+}
+
+.math-ui .glyphicon-triangle-left:before {
+  content: "\e251";
+}
+
+.math-ui .glyphicon-triangle-bottom:before {
+  content: "\e252";
+}
+
+.math-ui .glyphicon-triangle-top:before {
+  content: "\e253";
+}
+
+.math-ui .glyphicon-console:before {
+  content: "\e254";
+}
+
+.math-ui .glyphicon-superscript:before {
+  content: "\e255";
+}
+
+.math-ui .glyphicon-subscript:before {
+  content: "\e256";
+}
+
+.math-ui .glyphicon-menu-left:before {
+  content: "\e257";
+}
+
+.math-ui .glyphicon-menu-right:before {
+  content: "\e258";
+}
+
+.math-ui .glyphicon-menu-down:before {
+  content: "\e259";
+}
+
+.math-ui .glyphicon-menu-up:before {
+  content: "\e260";
 }
 
 .math-ui a,
@@ -2774,7 +3825,10 @@
   }
 }
 
-math-item, .math-item {
+.math-ui a:focus {
+  outline: none; }
+
+math-item {
   position: relative;
   border: 3px solid transparent;
   padding: 1px;
@@ -2783,28 +3837,25 @@ math-item, .math-item {
   outline: none;
   cursor: pointer;
   white-space: nowrap; }
-  math-item:hover, math-item.highlight, .math-item:hover, .math-item.highlight {
-    border: 3px solid #9fcbe5; }
-  math-item:focus, .math-item:focus {
-    border: 3px solid #4f9fcf; }
+  math-item:hover, math-item.highlight {
+    border-color: #9fcbe5; }
+  math-item:focus {
+    border-color: #4f9fcf; }
 
 .math-ui-zoom {
   position: absolute;
-  top: 0;
-  left: 0;
+  margin: 0.5em 0 0 0.5em;
   font-size: 200%;
   z-index: 1; }
+  .math-ui-zoom > .panel {
+    margin: 0.1em; }
+  .math-ui-zoom math-item {
+    border: none;
+    padding: 0;
+    margin: 0; }
 
 .math-ui-dashboard .btn-group-vertical {
   width: 100%; }
-
-.math-ui .modal-body > .nav-pills {
-  padding-bottom: 15px; }
-
-.math-ui .modal-body > textarea.form-control {
-  height: 20em;
-  cursor: text;
-  background-color: transparent; }
 
 .math-ui-eqn-menu {
   position: absolute;
@@ -2812,27 +3863,18 @@ math-item, .math-item {
   top: 100%;
   z-index: 1;
   margin-top: 3px; }
-
-.math-ui-eqn-menu > .well {
-  padding: 5px;
-  margin: 0;
-  border-radius: 3px;
-  display: inline-block;
-  background-color: #fff; }
-  .math-ui-eqn-menu > .well .nav > li {
-    float: none;
-    text-align: left; }
-    .math-ui-eqn-menu > .well .nav > li > a, .math-ui-eqn-menu > .well .nav > li > .title {
-      padding: 5px 10px;
-      display: block;
+  .math-ui-eqn-menu > .well {
+    padding: 5px;
+    margin: 0;
+    border-radius: 3px;
+    display: inline-block;
+    background-color: #fff; }
+    .math-ui-eqn-menu > .well > span {
+      padding: 0 0.2em;
+      display: inline-block;
       white-space: nowrap; }
 
-@media (min-width: 600px) {
-  .math-ui-eqn-menu > .well .nav {
-    white-space: nowrap; }
-    .math-ui-eqn-menu > .well .nav > li {
-      display: inline-block; }
-      .math-ui-eqn-menu > .well .nav > li > a, .math-ui-eqn-menu > .well .nav > li > .title {
-        display: inline-block; } }
-
-/*# sourceMappingURL=bs-extra.css.map */
+.math-ui-eqn-commands .list-group-item > span {
+  float: right; }
+.math-ui-eqn-commands .list-group {
+  margin-bottom: 0; }

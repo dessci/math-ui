@@ -4,33 +4,52 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Wrapping Different Math Renderers</title>
+    <title>Math UI</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <link rel="stylesheet" href="../dist/math-ui-twbs.css">
-    <script src="../dist/CustomElements.js"></script>
-    <script src="../dist/math-item-twbs.js"></script>
+
+    <!-- math-item -->
+    <script src="../bower_components/math-item/math-item.js"></script>
+
+    <!-- web components polyfill -->
+    <!--<script src="../bower_components/webcomponentsjs/webcomponents.js"></script>-->
+    <!--<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>-->
+
+    <!-- MathUI -->
+    <script async defer src="../dist/math-ui-twbs.js"></script>
+
+    <!-- MathJax -->
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
-            skipStartupTypeset: false,
-            showMathMenu: false
+        skipStartupTypeset: true,
+        showMathMenu: false,
+        menuSettings: {CHTMLpreview: false}
         });
     </script>
-    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <!--<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>-->
+    <script src="http://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="../bower_components/math-item/mathjax-tex.js"></script>
+    <script src="../bower_components/math-item/mathjax-mml.js"></script>
+    <!--<script src="../bower_components/math-item/native-mml.js"></script>-->
+    <script src="../bower_components/math-item/eqnstore-source.js"></script>
+
     <style>
-        p > math-item, math-item[display="inline"], span.math-item {
+        p > math-item, math-item[display="inline"] {
             display: inline;
         }
-        div > math-item, math-item[display="block"], div.math-item {
+
+        div > math-item, math-item[display="block"] {
             display: block;
             text-align: center;
         }
+
         #container {
             width: 50em;
             max-width: 100%;
             margin: 0 auto;
         }
+
         .list-unstyled {
             list-style-type: none;
             padding: 0;
@@ -43,93 +62,94 @@
         <div class="pure-g">
 
             <div class="pure-u-1">
-                <small id="progress">started</small>
-                <h1>Wrapping Different Math Renderers</h1>
+                <h1>Math UI</h1>
             </div>
 
-            <div class="pure-u-4-5">
+            <div class="pure-u-2-3">
 
                 <h3>Plain HTML</h3>
 
-                <p>A paragraph with <math-item>x<sup>2</sup></math-item> inline math.
-                And a <span class="math-item">y<sub>3</sub></span> span.</p>
+                <p>
+                    A paragraph with <math-item><math-source>x<sup>2</sup></math-source></math-item> inline math.
+                </p>
 
                 <math-item style="font-size: 200%;">
-                    x<sub>k</sub>
-                </math-item>
-
-                <h3>MathML</h3>
-
-                <p>A paragraph with <math-item><math><msup><mi>x</mi><mn>2</mn></msup></math></math-item> inline math.</p>
-
-                <math-item>
-                    <math display="block">
-                        <mfrac><mrow><mi>x</mi><mo>+<!--comment--></mo><mn>  1  + <malignmark></malignmark> 4 </mn></mrow><mi>y</mi></mfrac>
-                    </math>
+                    <math-source>x<sub>k</sub></math-source>
                 </math-item>
 
                 <h3>TeX + MathJax</h3>
 
-                <p>A paragraph with <math-item handler="tex">\(\sin(x)\)</math-item> inline math.
-                And a <span class="math-item" handler="tex">\(\cos(y)\)</span> span.</p>
+                <p>
+                    A paragraph with <math-item><math-source type="application/x-tex">\sin(x)</math-source></math-item> inline math.
+                </p>
 
-                <math-item handler="tex">
-                    \[J_\alpha(x) = \sum\limits_{m=0}^\infty \frac{(-1)^m}{m! \, \Gamma(m + \alpha + 1)}{\bigl({\frac{x}{2}}\bigr)}^{2 m + \alpha}\]
+                <math-item>
+                    <math-source type="application/x-tex">
+                        J_\alpha(x) = \sum\limits_{m=0}^\infty \frac{(-1)^m}{m! \, \Gamma(m + \alpha + 1)}{\bigl({\frac{x}{2}}\bigr)}^{2 m + \alpha}
+                    </math-source>
                 </math-item>
 
                 <h3>MathML + MathJax</h3>
 
-                <p>A paragraph with <math-item handler="mml"><math><msup><mi>x</mi><mn>2</mn></msup></math></math-item> inline math</p>
+                <p>
+                    A paragraph with <math-item>
+                        <math-source type="application/mathml+xml" id="source1">
+                            <math><msup><mi>x</mi><mn>2</mn></msup></math>
+                        </math-source>
+                    </math-item> inline math.
+                </p>
 
-                <math-item handler="mml">
-                    <math display="block">
-                        <mstyle displaystyle="true">
-                            <mi>f</mi>
-                            <mrow>
-                                <mo>(</mo>
-                                <mi>a</mi>
-                                <mo>)</mo>
-                            </mrow>
-                            <mo>=</mo>
-                            <mfrac>
-                                <mn>1</mn>
+                <math-item>
+                    <math-source type="application/mathml+xml">
+                        <math display="block">
+                            <mstyle displaystyle="true">
+                                <mi>f</mi>
                                 <mrow>
-                                    <mn>2</mn>
-                                    <mi>π<!-- π --></mi>
-                                    <mi>i</mi>
-                                </mrow>
-                            </mfrac>
-                            <msub>
-                                <mo>∮</mo>
-                                <mrow>
-                                    <mi>γ</mi>
-                                </mrow>
-                            </msub>
-                            <mfrac>
-                                <mrow>
-                                    <mi>f</mi>
                                     <mo>(</mo>
-                                    <mi>z</mi>
+                                    <mi>a</mi>
                                     <mo>)</mo>
                                 </mrow>
-                                <mrow>
-                                    <mi>z</mi>
-                                    <mo>−</mo>
-                                    <mi>a</mi>
-                                </mrow>
-                            </mfrac>
-                            <mi>d</mi>
-                            <mi>z</mi>
-                        </mstyle>
-                    </math>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mn>1</mn>
+                                    <mrow>
+                                        <mn>2</mn>
+                                        <mi>π<!-- π --></mi>
+                                        <mi>i</mi>
+                                    </mrow>
+                                </mfrac>
+                                <msub>
+                                    <mo>∮</mo>
+                                    <mrow>
+                                        <mi>γ</mi>
+                                    </mrow>
+                                </msub>
+                                <mfrac>
+                                    <mrow>
+                                        <mi>F</mi>
+                                        <mo>(</mo>
+                                        <mi>z</mi>
+                                        <mo>)</mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mi>z</mi>
+                                        <mo>−</mo>
+                                        <mi>a</mi>
+                                    </mrow>
+                                </mfrac>
+                                <mi>d</mi>
+                                <mi>z</mi>
+                            </mstyle>
+                        </math>
+                    </math-source>
                 </math-item>
 
-                <h3>Images</h3>
+                <h3>EqnStore</h3>
 
                 <p>
-                    A paragraph with <math-item handler="eqnstore">
-                        <img src="../media/img-eqn-inline.png" style="width: 4.77em; vertical-align: -0.12em;">
-                        <script type="application/mathml+xml">
+                    A paragraph with <math-item>
+                        <math-source type="image/png" src="../media/img-eqn-inline.png" width="4.77em" valign="-0.12em"></math-source>
+                        <math-source type="application/mathml+xml" usage="norender">
                             <math>
                                 <mrow>
                                     <mi mathvariant="script">H</mi>
@@ -142,13 +162,13 @@
                                     <mi>ℝ</mi>
                                 </mrow>
                             </math>
-                        </script>
+                        </math-source>
                     </math-item> inline math
                 </p>
 
-                <math-item handler="eqnstore">
-                    <img src="../media/img-eqn-block.png" style="width: 22.98em; vertical-align: -2.27em;">
-                    <script type="application/mathml+xml">
+                <math-item>
+                    <math-source type="image/png" src="../media/img-eqn-block.png" width="22.98em" valign="-2.27em"></math-source>
+                    <math-source type="application/mathml+xml" usage="norender">
                         <math display="block">
                             <mrow>
                                 <mrow>
@@ -361,10 +381,11 @@
                                 <mo>.</mo>
                             </mrow>
                         </math>
-                    </script>
+                    </math-source>
                 </math-item>
             </div>
-            <div class="pure-u-1-5">
+            <div class="pure-u-1-24"></div>
+            <div class="pure-u-7-24">
                 <h4>About</h4>
                 <p>This is a blog about bla bla bla...</p>
 
@@ -378,28 +399,5 @@
             </div>
         </div>
     </div>
-    <script>
-        (function () {
-            FlorianMath._utils.dom.ready().then(function () {
-                var progress = document.querySelector('#progress'),
-                    items = document.querySelectorAll('.math-item');
-                progress.appendChild(document.createTextNode('> loaded'));
-                for (var k = 0; k < items.length; k++)
-                    FlorianMath.addMathItem(items[k]);
-                progress.appendChild(document.createTextNode('> wrapped'));
-                FlorianMath.Promise.all(FlorianMath._utils.common.map(FlorianMath.container, function (mathitem) {
-                    return mathitem.rendered();
-                })).then(progress.appendChild(document.createTextNode('> rendered')));
-            });
-            FlorianMath.lookAndFeel.then(function (lnf) {
-                var $ = FlorianMath.jQueryLib;
-                $('#math-ui-dashboard-trigger').on('click', function (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    lnf.showDashboard();
-                });
-            });
-        })();
-    </script>
 </body>
 </html>
