@@ -25,6 +25,11 @@ module FlorianMath {
         link?: string;
     }
 
+    export interface MathUI {
+        add(mathItem: IHTMLMathItemElement): void;
+        showDashboard(): void;
+    }
+
     function getName(mathItem: IHTMLMathItemElement) {
         return 'Equation ' + ((<IHTMLMathItemElementPrivate> mathItem)._private.id + 1);
     }
@@ -33,6 +38,8 @@ module FlorianMath {
         ev.preventDefault();
         ev.stopPropagation();
     }
+
+    export var mathUI: MathUI;
 
     requireLibs().then(($: JQueryStatic) => {
 
@@ -221,12 +228,14 @@ module FlorianMath {
 
         // Main class
 
-        function BootstrapLookAndFeel() {
+        function BootstrapLookAndFeel(jq: JQueryStatic) {
             this.container = [];
             this.highlighted = false;
+            this.$ = jq;
         }
 
         BootstrapLookAndFeel.prototype.add = function (mathItem: IHTMLMathItemElement) {
+            this.container.push(mathItem);
             $(mathItem).attr('tabindex', 0).on('focus', (ev) => {
                 stopEvent(ev);
                 gotFocus(mathItem);
@@ -242,10 +251,10 @@ module FlorianMath {
 
         BootstrapLookAndFeel.prototype.showDashboard = function () {
             var body = $('<div class="modal-body" />')
-                    .append($('<div class="btn-group-vertical" />')
-                        .append($('<button type="button" class="btn btn-primary form-control">Highlight All Equations</button>'))
-                        .append($('<button type="button" class="btn btn-primary form-control">About</button>'))
-                        .append($('<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>'))
+                    .append($('<div class="list-group" />')
+                        .append($('<a href="#" class="list-group-item">Highlight All Equations</a>'))
+                        .append($('<a href="#" class="list-group-item">About</a>'))
+                        .append($('<a href="#" class="list-group-item" data-dismiss="modal">Close</a>'))
                 ),
                 modal = $('<div class="modal math-ui-dashboard" tabindex="-1" role="dialog" aria-hidden="true" />')
                     .append($('<div class="modal-dialog modal-sm" />').append($('<div class="modal-content" />')
@@ -258,7 +267,7 @@ module FlorianMath {
                 wrapper = $('<div class="math-ui" />').append(modal);
 
             body.on('click', (ev) => {
-                body.find('button').each((k, elem) => {
+                body.find('a').each((k, elem) => {
                     if (k <= 1 && elem === ev.target) {
                         ev.preventDefault();
                         modal.modal('hide');
@@ -271,18 +280,19 @@ module FlorianMath {
                 });
             });
             $(document.body).append(wrapper);
-            modal.on('hidden.bs.modal',() => {
+            modal.on('hidden.bs.modal', () => {
                 wrapper.remove();
             }).modal();
         };
 
-        var lnf = new BootstrapLookAndFeel();
+        mathUI = new BootstrapLookAndFeel($);
 
         initialized().then(() => {
             console.log('Applying MathUI to math-items');
             each(document.querySelectorAll('math-item'), (mathItem: IHTMLMathItemElement) => {
-                lnf.add(mathItem);
+                mathUI.add(mathItem);
             });
+            dispatchCustomEvent(document, 'ready.math-ui');
         });
 
     });

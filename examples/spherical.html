@@ -1519,14 +1519,18 @@
     </div>
     <script>
         (function () {
-            /*FlorianMath.lookAndFeel.then(function (lnf) {
-                var $ = FlorianMath.jQueryLib;
+            function ready() {
+                var $ = FlorianMath.mathUI.$;
                 $('#math-ui-dashboard-trigger').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
-                    lnf.showDashboard();
+                    FlorianMath.mathUI.showDashboard();
                 });
-            });*/
+            }
+            if (FlorianMath.mathUI)
+                ready();
+            else
+                FlorianMath.addCustomEventListener(document, 'ready.math-ui', ready);
         })();
     </script>
 </body>
