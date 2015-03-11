@@ -3839,7 +3839,7 @@ math-item {
   white-space: nowrap; }
   math-item:hover, math-item.highlight {
     border-color: #9fcbe5; }
-  math-item:focus {
+  math-item.focus {
     border-color: #4f9fcf; }
 
 .math-ui-zoom {
@@ -3873,6 +3873,11 @@ math-item {
       padding: 0 0.2em;
       display: inline-block;
       white-space: nowrap; }
+  .math-ui-eqn-menu > textarea {
+    position: fixed;
+    width: 20em;
+    left: -21em;
+    top: 0; }
 
 .math-ui-eqn-commands .list-group-item > span {
   float: right; }

@@ -1,8 +1,8 @@
 /// <reference path="../dist/math-item.d.ts" />
 (function (global, doc) {
     if (global.HTMLMathItemElement) {
-        var origRender = global.HTMLMathItemElement.render;
-        global.HTMLMathItemElement.render = function () {
+        var origRender = global.HTMLMathItemElement.prototype.render;
+        global.HTMLMathItemElement.prototype.render = function () {
             var sources = this.getSources({ render: true, type: 'image/png' });
             if (sources.length) {
                 var output = FlorianMath.mathItemInsertContent(this), img = doc.createElement('img'), styles = [];

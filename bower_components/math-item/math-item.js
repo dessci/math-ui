@@ -16,6 +16,7 @@ var FlorianMath;
                 return k;
         return -1;
     }
+    FlorianMath.indexOf = indexOf;
     // exported functions
     function each(list, fn) {
         for (var k = 0; k < list.length; k++) {
@@ -185,11 +186,7 @@ var FlorianMath;
 /// <reference path="utils.ts" />
 var FlorianMath;
 (function (FlorianMath) {
-    FlorianMath.MATH_ITEM_TAG = 'math-item';
-    FlorianMath.MATH_SOURCE_TAG = 'math-source';
-    FlorianMath.MIME_TYPE_HTML = 'text/html';
-    FlorianMath.MIME_TYPE_TEX = 'application/x-tex';
-    FlorianMath.MIME_TYPE_MATHML = 'application/mathml+xml';
+    FlorianMath.MATH_ITEM_TAG = 'math-item', FlorianMath.MATH_SOURCE_TAG = 'math-source', FlorianMath.MIME_TYPE_PLAIN = 'text/plain', FlorianMath.MIME_TYPE_HTML = 'text/html', FlorianMath.MIME_TYPE_TEX = 'application/x-tex', FlorianMath.MIME_TYPE_MATHML = 'application/mathml+xml';
     var global = window, doc = document, counter = 0;
     function iterateChildren(n, fn) {
         var c = n.firstChild, next;
@@ -204,21 +201,6 @@ var FlorianMath;
             if (c.nodeType === 1 && c.tagName.toLowerCase() === FlorianMath.MATH_SOURCE_TAG)
                 fn(c);
         });
-    }
-    function mathItemClean() {
-        var _this = this;
-        var shadow = this.shadowRoot;
-        iterateChildren(this, function (c) {
-            if (c.nodeType === 1 && c.tagName.toLowerCase() === FlorianMath.MATH_SOURCE_TAG)
-                c.style.display = 'none';
-            else
-                _this.removeChild(c);
-        });
-        if (shadow) {
-            iterateChildren(shadow, function (c) {
-                shadow.removeChild(c);
-            });
-        }
     }
     function mathItemRenderDone(mathItem) {
     }
@@ -264,11 +246,29 @@ var FlorianMath;
             });
         }
     }
-    function renderProxy() {
-        global.HTMLMathItemElement.render.call(this);
-    }
     function sourceEncoding(src) {
         return src.getAttribute('type') || FlorianMath.MIME_TYPE_HTML;
+    }
+    function render() {
+        var toShow = this.getSources({ render: true, type: FlorianMath.MIME_TYPE_HTML });
+        if (toShow.length)
+            mathItemShowSources(this, toShow);
+    }
+    ;
+    function clean() {
+        var _this = this;
+        var shadow = this.shadowRoot;
+        iterateChildren(this, function (c) {
+            if (c.nodeType === 1 && c.tagName.toLowerCase() === FlorianMath.MATH_SOURCE_TAG)
+                c.style.display = 'none';
+            else
+                _this.removeChild(c);
+        });
+        if (shadow) {
+            iterateChildren(shadow, function (c) {
+                shadow.removeChild(c);
+            });
+        }
     }
     /*
      * render  markup  usage
@@ -304,33 +304,11 @@ var FlorianMath;
             id: counter++
         };
     }
-    function manualItemCreate(mathItem, deep) {
-        mathItem.render = renderProxy;
-        mathItem.clean = mathItemClean;
-        mathItem.getSources = getSources;
-        baseItemCreate.call(mathItem);
-        if (deep) {
-            iterateSourceElements(this, function (source) {
-                manualSourceCreate(source);
-            });
-        }
-    }
     function baseItemAttach() {
         mathItemEnqueueRender(this);
     }
-    function manualItemAttach(mathItem, deep) {
-        baseItemAttach.call(mathItem);
-        if (deep) {
-            iterateSourceElements(this, function (source) {
-                manualSourceAttach(source);
-            });
-        }
-    }
     function baseSourceCreate() {
         this.style.display = 'none';
-    }
-    function manualSourceCreate(mathSource) {
-        baseSourceCreate.call(mathSource);
     }
     function baseSourceAttach() {
         var usage = this.getAttribute('usage') || '';
@@ -339,9 +317,6 @@ var FlorianMath;
             if (parent && parent.tagName.toLowerCase() === FlorianMath.MATH_ITEM_TAG)
                 mathItemEnqueueRender(parent);
         }
-    }
-    function manualSourceAttach(mathSource) {
-        baseSourceAttach.call(mathSource);
     }
     var initializedResolver;
     FlorianMath.initialized = (function () {
@@ -354,8 +329,8 @@ var FlorianMath;
         var MathItemPrototype = Object.create(HTMLElement.prototype, {
             createdCallback: { enumerable: true, value: baseItemCreate },
             attachedCallback: { enumerable: true, value: baseItemAttach },
-            render: { enumerable: true, value: renderProxy, writable: true },
-            clean: { enumerable: true, value: mathItemClean, writable: true },
+            render: { enumerable: true, value: render, writable: true },
+            clean: { enumerable: true, value: clean, writable: true },
             getSources: { enumerable: true, value: getSources, writable: true }
         });
         var MathSourcePrototype = Object.create(HTMLElement.prototype, {
@@ -369,28 +344,64 @@ var FlorianMath;
         initializedResolver();
     }
     else {
-        doc.createElement(FlorianMath.MATH_ITEM_TAG);
-        doc.createElement(FlorianMath.MATH_SOURCE_TAG);
-        global.HTMLMathItemElement = {
-            manualCreate: manualItemCreate,
-            manualAttach: manualItemAttach
-        };
-        global.HTMLMathSourceElement = {
-            manualCreate: manualSourceCreate,
-            manualAttach: manualSourceAttach
-        };
-        FlorianMath.domReady().then(function () {
-            FlorianMath.each(doc.querySelectorAll(FlorianMath.MATH_ITEM_TAG), function (mathItem) {
-                manualItemCreate(mathItem, true);
-                manualItemAttach(mathItem, true);
+        (function () {
+            function renderProxy() {
+                global.HTMLMathItemElement.prototype.render.call(this);
+            }
+            function cleanProxy() {
+                global.HTMLMathItemElement.prototype.clean.call(this);
+            }
+            function getSourcesProxy(options) {
+                return global.HTMLMathItemElement.prototype.getSources.call(this, options);
+            }
+            function manualItemCreate(mathItem, deep) {
+                mathItem.render = renderProxy;
+                mathItem.clean = cleanProxy;
+                mathItem.getSources = getSourcesProxy;
+                baseItemCreate.call(mathItem);
+                if (deep) {
+                    iterateSourceElements(this, function (source) {
+                        manualSourceCreate(source);
+                    });
+                }
+            }
+            function manualItemAttach(mathItem, deep) {
+                baseItemAttach.call(mathItem);
+                if (deep) {
+                    iterateSourceElements(this, function (source) {
+                        manualSourceAttach(source);
+                    });
+                }
+            }
+            function manualSourceCreate(mathSource) {
+                baseSourceCreate.call(mathSource);
+            }
+            function manualSourceAttach(mathSource) {
+                baseSourceAttach.call(mathSource);
+            }
+            doc.createElement(FlorianMath.MATH_ITEM_TAG);
+            doc.createElement(FlorianMath.MATH_SOURCE_TAG);
+            global.HTMLMathItemElement = function () {
+                throw Error('Use document.createElement instead');
+            };
+            global.HTMLMathItemElement.manualCreate = manualItemCreate;
+            global.HTMLMathItemElement.manualAttach = manualItemAttach;
+            global.HTMLMathItemElement.prototype.render = render;
+            global.HTMLMathItemElement.prototype.clean = clean;
+            global.HTMLMathItemElement.prototype.getSources = getSources;
+            global.HTMLMathSourceElement = function () {
+                throw Error('Use document.createElement instead');
+            };
+            global.HTMLMathSourceElement.manualCreate = manualSourceCreate;
+            global.HTMLMathSourceElement.manualAttach = manualSourceAttach;
+            FlorianMath.domReady().then(function () {
+                FlorianMath.each(doc.querySelectorAll(FlorianMath.MATH_ITEM_TAG), function (mathItem) {
+                    manualItemCreate(mathItem, true);
+                    manualItemAttach(mathItem, true);
+                });
+                initializedResolver();
             });
-            initializedResolver();
-        });
+        })();
     }
-    global.HTMLMathItemElement.render = function () {
-        var toShow = this.getSources({ render: true, type: FlorianMath.MIME_TYPE_HTML });
-        if (toShow.length)
-            mathItemShowSources(this, toShow);
-    };
 })(FlorianMath || (FlorianMath = {}));
 //# sourceMappingURL=math-item.js.map

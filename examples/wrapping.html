@@ -399,5 +399,21 @@
             </div>
         </div>
     </div>
+    <script>
+        (function () {
+            function ready() {
+                var mathUI = FlorianMath.mathUI;
+                mathUI.$('#math-ui-dashboard-trigger').on('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    mathUI.showDashboard();
+                });
+            }
+            if (FlorianMath.mathUI)
+                ready();
+            else
+                FlorianMath.addCustomEventListener(document, 'created.math-ui', ready);
+        })();
+    </script>
 </body>
 </html>

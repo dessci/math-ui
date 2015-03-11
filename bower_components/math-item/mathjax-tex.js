@@ -77,8 +77,8 @@ var FlorianMath;
     var global = window;
     var doc = document;
     if (global.HTMLMathItemElement) {
-        var origRender = global.HTMLMathItemElement.render;
-        global.HTMLMathItemElement.render = function () {
+        var origRender = global.HTMLMathItemElement.prototype.render;
+        global.HTMLMathItemElement.prototype.render = function () {
             var mathItem = this, sources = mathItem.getSources({ render: true, type: FlorianMath.MIME_TYPE_TEX });
             if (sources.length) {
                 var script = doc.createElement('script'), displayStyle = FlorianMath.getElementStyle(this, 'display'), output = FlorianMath.mathItemInsertContent(this);

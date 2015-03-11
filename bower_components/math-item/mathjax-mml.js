@@ -82,8 +82,8 @@ var FlorianMath;
         return mml.replace(/<([a-zA-Z0-9_-]+)\s*(| [^>]+)>/g, beginTagConvert).replace(/<\s*\/\s*([a-zA-Z0-9_-]+)\s*>/g, endTagConvert);
     }
     if (global.HTMLMathItemElement) {
-        var origRender = global.HTMLMathItemElement.render;
-        global.HTMLMathItemElement.render = function () {
+        var origRender = global.HTMLMathItemElement.prototype.render;
+        global.HTMLMathItemElement.prototype.render = function () {
             var mathItem = this, sources = mathItem.getSources({ render: true, type: FlorianMath.MIME_TYPE_MATHML });
             if (sources.length) {
                 var script = doc.createElement('script'), output = FlorianMath.mathItemInsertContent(this);
