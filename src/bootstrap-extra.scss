@@ -17,7 +17,7 @@ math-item {
     &:hover, &.highlight {
         border-color: $item-hover-border;
     }
-    &:focus {
+    &.focus {
         border-color: $item-focus-border;
     }
 }
@@ -61,6 +61,13 @@ math-item {
             display: inline-block;
             white-space: nowrap;
         }
+    }
+
+    & > textarea {
+        position: fixed;
+        width: 20em;
+        left: -21em;
+        top: 0;
     }
 }
 

@@ -18,7 +18,7 @@ module FlorianMath {
     }
 
     function fail() {
-        console.log('Unable to load jQuery');
+        //console.log('Unable to load jQuery');
     }
 
     domReady().then(() => {
@@ -35,7 +35,7 @@ module FlorianMath {
                     done = true;
                     //jQueryPresent() ? requireLibsResolve(<JQueryStatic> jQuery.noConflict(true)) : fail();
                     if (jQueryPresent()) {
-                        console.log('jQuery loaded');
+                        //console.log('jQuery loaded');
                         requireLibsResolve(<JQueryStatic> jQuery.noConflict(true));
                     } else
                         fail();

@@ -32,7 +32,8 @@ module.exports = function (grunt) {
                     process: function (content) {
                         return 'FlorianMath.requireLibs().then(function (jQuery) {\n' +
                             content.replace(/modal-open/g, 'math-ui-modal-open') +
-                            'console.log("Loaded Bootstrap modal");  });\n';
+                            '});\n';
+                        // 'console.log("Loaded Bootstrap modal");  });\n';
                     }
                 }
             },

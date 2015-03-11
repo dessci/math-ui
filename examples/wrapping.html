@@ -402,17 +402,17 @@
     <script>
         (function () {
             function ready() {
-                var $ = FlorianMath.mathUI.$;
-                $('#math-ui-dashboard-trigger').on('click', function (event) {
+                var mathUI = FlorianMath.mathUI;
+                mathUI.$('#math-ui-dashboard-trigger').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
-                    FlorianMath.mathUI.showDashboard();
+                    mathUI.showDashboard();
                 });
             }
             if (FlorianMath.mathUI)
                 ready();
             else
-                FlorianMath.addCustomEventListener(document, 'ready.math-ui', ready);
+                FlorianMath.addCustomEventListener(document, 'created.math-ui', ready);
         })();
     </script>
 </body>

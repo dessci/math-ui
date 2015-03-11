@@ -10,8 +10,16 @@ interface IHTMLMathItemElement {
     selected?: boolean;
 }
 
+interface MouseEvent {
+    dataTransfer: DataTransfer;
+}
+
 module FlorianMath {
     'use strict';
+
+    interface ClipboardEvent extends Event {
+        clipboardData: DataTransfer;
+    }
 
     interface MenuItem {
         label: string;
@@ -30,8 +38,45 @@ module FlorianMath {
         showDashboard(): void;
     }
 
+    var log: (message: any, arg1?: any, arg2?: any) => void = () => {};
+    if ('console' in window && console.log)
+        log = (message: any, arg1?: any, arg2?: any) => {
+            if (arg2 !== undefined) console.log(message, arg1, arg2);
+            else if (arg1 !== undefined) console.log(message, arg1);
+            else console.log(message);
+        };
+
     function getName(mathItem: IHTMLMathItemElement) {
         return 'Equation ' + ((<IHTMLMathItemElementPrivate> mathItem)._private.id + 1);
+    }
+
+    var MARKUP_PREFERENCE = [MIME_TYPE_MATHML, MIME_TYPE_TEX, MIME_TYPE_HTML];
+
+    function getSourceType(source: IHTMLMathSourceElement) {
+        return source.getAttribute('type') || MIME_TYPE_HTML;
+    }
+
+    function getSourceMarkup(source: IHTMLMathSourceElement) {
+        var value = source.firstChild && !source.firstChild.nextSibling && source.firstChild.nodeType === 3 ? source.firstChild.nodeValue : source.innerHTML;
+        return trim(value);
+    }
+
+    function getDefaultMarkup(mathItem: IHTMLMathItemElement) {
+        var k, type, sources;
+        for (k = 0; k < MARKUP_PREFERENCE.length; k++) {
+            type = MARKUP_PREFERENCE[k];
+            sources = mathItem.getSources({ markup: true, type: type });
+            if (sources.length)
+                return getSourceMarkup(sources[0]);
+        }
+        return null;
+    }
+
+    function setDataTransfer(data: DataTransfer, mathItem: IHTMLMathItemElement) {
+        var sources = mathItem.getSources({ markup: true });
+        each(sources, (source: IHTMLMathSourceElement) => {
+            data.setData(getSourceType(source), getSourceMarkup(source));
+        });
     }
 
     function stopEvent(ev: BaseJQueryEventObject) {
@@ -154,12 +199,19 @@ module FlorianMath {
 
         // Equation menu
 
+        function keyModifiers(ev: JQueryKeyEventObject) {
+            return (ev.shiftKey ? 1 : 0) | (ev.ctrlKey ? 2 : 0) | (ev.altKey ? 4 : 0) | (ev.metaKey ? 8 : 0);
+        }
+
         function gotFocus(mathItem: IHTMLMathItemElement) {
-            var $mathItem = $(mathItem), okItem, contentElement,
+            var $mathItem = $(mathItem), okItem, contentElement, copyItem,
                 items = $('<div class="well" />'),
                 menu = $('<div class="math-ui math-ui-eqn-menu" />').append(items);
-            function doZoom() {
+            function blur() {
                 $mathItem.blur();
+            }
+            function doZoom() {
+                blur();
                 zoomAction(mathItem);
             }
             function toggleSelection() {
@@ -168,9 +220,16 @@ module FlorianMath {
                 okItem.toggleClass('glyphicon-star-empty', !mathItem.selected);
             }
             function showEqnMenu() {
-                $mathItem.blur();
+                blur();
                 showEquationMenu(mathItem);
             }
+            function removeCopyItem() {
+                copyItem.remove();
+                copyItem = undefined;
+                $mathItem.focus();
+            }
+            if ($mathItem.hasClass('focus'))  // focus returning from copyItem?
+                return;
             items.append($('<span class="title" />').append(getName(mathItem)));
             items.append($('<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>'));
             items.append($('<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>'));
@@ -182,45 +241,46 @@ module FlorianMath {
                 contentElement = $('<content select=".math-ui-eqn-menu" />');
                 $(mathItem.shadowRoot).append(contentElement);
             }
-            $mathItem.on('keydown', (ev: JQueryKeyEventObject) => {
-                switch (ev.which) {
-                    case 13:
+            $mathItem.addClass('focus').on('keydown', (ev: JQueryKeyEventObject) => {
+                var mods = keyModifiers(ev);
+                if (!copyItem && ((ev.which === 17 && mods === 2) || (ev.which === 91 && mods === 8))) {
+                    copyItem = $('<textarea />').val(getDefaultMarkup(mathItem) || getName(mathItem))
+                        .on('keyup', (ev: JQueryKeyEventObject) => {
+                            if (ev.which === 17 || ev.which === 91)
+                                removeCopyItem();
+                        });
+                    menu.append(copyItem);
+                    copyItem.focus().select();
+                } else if (mods === 0) {
+                    var k = indexOf([13, 27, 32, 90], ev.which);
+                    if (k >= 0) {
                         stopEvent(ev);
-                        showEqnMenu();
-                        break;
-                    case 27:
-                        stopEvent(ev);
-                        $mathItem.blur();
-                        break;
-                    case 32:
-                        toggleSelection();
-                        break;
-                    case 90:
-                        stopEvent(ev);
-                        doZoom();
-                        break;
+                        [showEqnMenu, blur, toggleSelection, doZoom][k]();
+                    }
                 }
+            }).on('copy', (ev: BaseJQueryEventObject) => {
+                log('copy', ev);
+                if ((<ClipboardEvent> ev.originalEvent).clipboardData) {
+                    log('decorating copy');
+                    setDataTransfer((<ClipboardEvent> ev.originalEvent).clipboardData, mathItem);
+                }
+                async(() => {
+                    removeCopyItem();
+                    blur();
+                });
             }).on('blur', () => {
-                $mathItem.off('keydown');
-                menu.remove();
-                if (contentElement) contentElement.remove();
+                if (!copyItem) {
+                    $mathItem.off('keydown copy blur').removeClass('focus');
+                    menu.remove();
+                    if (contentElement) contentElement.remove();
+                }
             });
             menu.on('mousedown', (ev: JQueryMouseEventObject) => {
                 if (ev.which !== 1) return;
                 stopEvent(ev);
                 items.children().each((k, elem) => {
                     if (elem === ev.target) {
-                        switch (k) {
-                            default:
-                                showEqnMenu();
-                                break;
-                            case 2:
-                                doZoom();
-                                break;
-                            case 3:
-                                toggleSelection();
-                                break;
-                        }
+                        [showEqnMenu, showEqnMenu, doZoom, toggleSelection][k]();
                     }
                 });
             });
@@ -235,10 +295,21 @@ module FlorianMath {
         }
 
         BootstrapLookAndFeel.prototype.add = function (mathItem: IHTMLMathItemElement) {
+            var $mathItem = $(mathItem);
             this.container.push(mathItem);
-            $(mathItem).attr('tabindex', 0).on('focus', (ev) => {
+            $mathItem.attr('tabindex', 0).attr('draggable', 'true').on('focus', (ev) => {
                 stopEvent(ev);
                 gotFocus(mathItem);
+            }).on('dragstart', (ev) => {
+                if ((<MouseEvent> ev.originalEvent).dataTransfer) {
+                    var dt = (<MouseEvent> ev.originalEvent).dataTransfer,
+                        defaultMarkup = getDefaultMarkup(mathItem);
+                    if (defaultMarkup)
+                        dt.setData(MIME_TYPE_PLAIN, defaultMarkup);
+                    setDataTransfer(dt, mathItem);
+                }
+            }).on('dragend', () => {
+                $mathItem.blur();
             });
         };
 
@@ -286,13 +357,13 @@ module FlorianMath {
         };
 
         mathUI = new BootstrapLookAndFeel($);
+        dispatchCustomEvent(document, 'created.math-ui');
 
         initialized().then(() => {
-            console.log('Applying MathUI to math-items');
+            log('Applying MathUI to math-items');
             each(document.querySelectorAll('math-item'), (mathItem: IHTMLMathItemElement) => {
                 mathUI.add(mathItem);
             });
-            dispatchCustomEvent(document, 'ready.math-ui');
         });
 
     });
