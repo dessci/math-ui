@@ -50,28 +50,6 @@ module FlorianMath {
         return 'Equation ' + ((<IHTMLMathItemElementPrivate> mathItem)._private.id + 1);
     }
 
-    var MARKUP_PREFERENCE = [MIME_TYPE_MATHML, MIME_TYPE_TEX, MIME_TYPE_HTML];
-
-    function getSourceType(source: IHTMLMathSourceElement) {
-        return source.getAttribute('type') || MIME_TYPE_HTML;
-    }
-
-    function getSourceMarkup(source: IHTMLMathSourceElement) {
-        var value = source.firstChild && !source.firstChild.nextSibling && source.firstChild.nodeType === 3 ? source.firstChild.nodeValue : source.innerHTML;
-        return trim(value);
-    }
-
-    function getDefaultMarkup(mathItem: IHTMLMathItemElement) {
-        var k, type, sources;
-        for (k = 0; k < MARKUP_PREFERENCE.length; k++) {
-            type = MARKUP_PREFERENCE[k];
-            sources = mathItem.getSources({ markup: true, type: type });
-            if (sources.length)
-                return getSourceMarkup(sources[0]);
-        }
-        return null;
-    }
-
     function setDataTransfer(data: DataTransfer, mathItem: IHTMLMathItemElement) {
         var sources = mathItem.getSources({ markup: true });
         each(sources, (source: IHTMLMathSourceElement) => {
@@ -244,7 +222,8 @@ module FlorianMath {
             $mathItem.addClass('focus').on('keydown', (ev: JQueryKeyEventObject) => {
                 var mods = keyModifiers(ev);
                 if (!copyItem && ((ev.which === 17 && mods === 2) || (ev.which === 91 && mods === 8))) {
-                    copyItem = $('<textarea />').val(getDefaultMarkup(mathItem) || getName(mathItem))
+                    var mainMarkup = mathItem.getMainMarkup();
+                    copyItem = $('<textarea />').val(mainMarkup ? mainMarkup.markup : getName(mathItem))
                         .on('keyup', (ev: JQueryKeyEventObject) => {
                             if (ev.which === 17 || ev.which === 91)
                                 removeCopyItem();
@@ -303,16 +282,16 @@ module FlorianMath {
             }).on('dragstart', (ev) => {
                 if ((<MouseEvent> ev.originalEvent).dataTransfer) {
                     var dt = (<MouseEvent> ev.originalEvent).dataTransfer,
-                        defaultMarkup = getDefaultMarkup(mathItem);
+                        mainMarkup = mathItem.getMainMarkup();
                     try {
-                        if (defaultMarkup)
-                            dt.setData(MIME_TYPE_PLAIN, defaultMarkup);
+                        if (mainMarkup)
+                            dt.setData(MIME_TYPE_PLAIN, mainMarkup.markup);
                         setDataTransfer(dt, mathItem);
                     }
                     catch (e) {
                         // IE only accepts type 'text' http://stackoverflow.com/a/18051912/212069
-                        if (defaultMarkup)
-                            dt.setData('text', defaultMarkup);
+                        if (mainMarkup)
+                            dt.setData('text', mainMarkup.markup);
                     }
                 }
             }).on('dragend', () => {
