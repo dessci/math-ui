@@ -304,9 +304,16 @@ module FlorianMath {
                 if ((<MouseEvent> ev.originalEvent).dataTransfer) {
                     var dt = (<MouseEvent> ev.originalEvent).dataTransfer,
                         defaultMarkup = getDefaultMarkup(mathItem);
-                    if (defaultMarkup)
-                        dt.setData(MIME_TYPE_PLAIN, defaultMarkup);
-                    setDataTransfer(dt, mathItem);
+                    try {
+                        if (defaultMarkup)
+                            dt.setData(MIME_TYPE_PLAIN, defaultMarkup);
+                        setDataTransfer(dt, mathItem);
+                    }
+                    catch (e) {
+                        // IE only accepts type 'text' http://stackoverflow.com/a/18051912/212069
+                        if (defaultMarkup)
+                            dt.setData('text', defaultMarkup);
+                    }
                 }
             }).on('dragend', () => {
                 $mathItem.blur();
