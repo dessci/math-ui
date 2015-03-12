@@ -6,7 +6,7 @@ interface JQuery {
     modal(options?: any): void;
 }
 
-interface IHTMLMathItemElement {
+interface HTMLMathItemElement {
     selected?: boolean;
 }
 
@@ -34,7 +34,7 @@ module FlorianMath {
     }
 
     export interface MathUI {
-        add(mathItem: IHTMLMathItemElement): void;
+        add(mathItem: HTMLMathItemElement): void;
         showDashboard(): void;
     }
 
@@ -46,13 +46,13 @@ module FlorianMath {
             else console.log(message);
         };
 
-    function getName(mathItem: IHTMLMathItemElement) {
-        return 'Equation ' + ((<IHTMLMathItemElementPrivate> mathItem)._private.id + 1);
+    function getName(mathItem: HTMLMathItemElement) {
+        return 'Equation ' + ((<HTMLMathItemElementPrivate> mathItem)._private.id + 1);
     }
 
-    function setDataTransfer(data: DataTransfer, mathItem: IHTMLMathItemElement) {
+    function setDataTransfer(data: DataTransfer, mathItem: HTMLMathItemElement) {
         var sources = mathItem.getSources({ markup: true });
-        each(sources, (source: IHTMLMathSourceElement) => {
+        each(sources, (source: HTMLMathSourceElement) => {
             data.setData(getSourceType(source), getSourceMarkup(source));
         });
     }
@@ -68,11 +68,11 @@ module FlorianMath {
 
         // Zoom
 
-        function zoomAction(mathItem: IHTMLMathItemElement) {
+        function zoomAction(mathItem: HTMLMathItemElement) {
             var inner = $('<div class="panel-body" />'),
                 popup = $('<div class="math-ui math-ui-zoom" />')
                     .append($('<div class="panel panel-default" />').append(inner)),
-                mathItemClone = <IHTMLMathItemElement> mathItem.cloneNode(true);
+                mathItemClone = <HTMLMathItemElement> mathItem.cloneNode(true);
             HTMLMathItemElement.manualCreate(mathItemClone, true);
             mathItemClone.clean();
             inner.append(mathItemClone);
@@ -121,9 +121,9 @@ module FlorianMath {
             return null;
         }
 
-        function menuItemGetMarkup(mathItem: IHTMLMathItemElement) {
+        function menuItemGetMarkup(mathItem: HTMLMathItemElement) {
             var submenu = [], sources = mathItem.getSources({ markup: true });
-            each(sources, (source: IHTMLMathSourceElement) => {
+            each(sources, (source: HTMLMathSourceElement) => {
                 var type = getSourceType(source), label,
                     markup = getSourceMarkup(source);
                 if (markup) {
@@ -141,7 +141,7 @@ module FlorianMath {
             return submenu.length ? { label: 'Get markup', submenu: submenu } : { label: 'Get markup' };
         }
 
-        function getCommandItems(mathItem: IHTMLMathItemElement): ICommandItem[] {
+        function getCommandItems(mathItem: HTMLMathItemElement): ICommandItem[] {
             var items = [];
             items.push(menuItemGetMarkup(mathItem));
             items.push({ label: 'Get permalink', action: noOp });
@@ -175,7 +175,7 @@ module FlorianMath {
             return items;
         }
 
-        function showEquationMenu(mathItem: IHTMLMathItemElement) {
+        function showEquationMenu(mathItem: HTMLMathItemElement) {
             var options = $('<div class="list-group" />'),
                 content = $('<div class="modal-content" />')
                     .append($('<div class="modal-header" />')
@@ -235,7 +235,7 @@ module FlorianMath {
             return (ev.shiftKey ? 1 : 0) | (ev.ctrlKey ? 2 : 0) | (ev.altKey ? 4 : 0) | (ev.metaKey ? 8 : 0);
         }
 
-        function gotFocus(mathItem: IHTMLMathItemElement) {
+        function gotFocus(mathItem: HTMLMathItemElement) {
             var $mathItem = $(mathItem), okItem, contentElement, copyItem,
                 items = $('<div class="well" />'),
                 menu = $('<div class="math-ui math-ui-eqn-menu" />').append(items);
@@ -327,7 +327,7 @@ module FlorianMath {
             this.$ = jq;
         }
 
-        BootstrapLookAndFeel.prototype.add = function (mathItem: IHTMLMathItemElement) {
+        BootstrapLookAndFeel.prototype.add = function (mathItem: HTMLMathItemElement) {
             var $mathItem = $(mathItem);
             this.container.push(mathItem);
             $mathItem.attr('tabindex', 0).attr('draggable', 'true').on('focus', (ev) => {
@@ -355,7 +355,7 @@ module FlorianMath {
 
         BootstrapLookAndFeel.prototype.highlightAll = function () {
             var on = this.highlighted = !this.highlighted;
-            each(this.container, (mathItem: IHTMLMathItemElement) => {
+            each(this.container, (mathItem: HTMLMathItemElement) => {
                 $(mathItem).toggleClass('highlight', on);
             });
         };
@@ -401,7 +401,7 @@ module FlorianMath {
 
         initialized().then(() => {
             log('Applying MathUI to math-items');
-            each(document.querySelectorAll('math-item'), (mathItem: IHTMLMathItemElement) => {
+            each(document.querySelectorAll('math-item'), (mathItem: HTMLMathItemElement) => {
                 mathUI.add(mathItem);
             });
         });
