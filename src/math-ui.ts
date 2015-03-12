@@ -97,13 +97,36 @@ module FlorianMath {
                     .append($('<div class="modal-footer" />')
                         .append($('<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>'))),
                 modal = $('<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" />')
-                    .append($('<div class="modal-dialog modal-sm" />').append(content)),
+                    .append($('<div class="modal-dialog" />').append(content)),
                 wrapper = $('<div class="math-ui" />').append(modal);
 
             $(document.body).append(wrapper);
 
             modal.on('shown.bs.modal', () => {
                 textarea.focus().select();
+            }).on('hidden.bs.modal', () => {
+                wrapper.remove();
+            }).modal();
+        }
+
+        function showCopySingleLineDialog(title: string, text: string) {
+            var input = $('<input type="url" class="form-control">'),
+                content = $('<div class="modal-content" />')
+                    .append($('<div class="modal-header" />')
+                        .append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'))
+                        .append($('<h4 class="modal-title" />').append(title))
+                    ).append($('<div class="modal-body" />').append(input))
+                    .append($('<div class="modal-footer" />')
+                        .append($('<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>'))),
+                modal = $('<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" />')
+                    .append($('<div class="modal-dialog" />').append(content)),
+                wrapper = $('<div class="math-ui" />').append(modal);
+
+            input.val(text);
+            $(document.body).append(wrapper);
+
+            modal.on('shown.bs.modal', () => {
+                input.focus().select();
             }).on('hidden.bs.modal', () => {
                 wrapper.remove();
             }).modal();
@@ -141,10 +164,26 @@ module FlorianMath {
             return submenu.length ? { label: 'Get markup', submenu: submenu } : { label: 'Get markup' };
         }
 
+        function menuItemGetPermalink(mathItem: HTMLMathItemElement) {
+            var url = location.href;
+            if ($(mathItem).attr('id')) {
+                var pos = url.indexOf('#');
+                if (pos >= 0)
+                    url = url.substr(0, pos);
+                url += '#' + $(mathItem).attr('id');
+            }
+            return {
+                label: 'Get permalink',
+                action: () => {
+                    showCopySingleLineDialog('Permalink for ' + getName(mathItem), url);
+                }
+            };
+        }
+
         function getCommandItems(mathItem: HTMLMathItemElement): ICommandItem[] {
             var items = [];
             items.push(menuItemGetMarkup(mathItem));
-            items.push({ label: 'Get permalink', action: noOp });
+            items.push(menuItemGetPermalink(mathItem));
             items.push({
                     label: 'Convert to code', submenu: [
                         { label: 'C', action: noOp },
@@ -330,6 +369,8 @@ module FlorianMath {
         BootstrapLookAndFeel.prototype.add = function (mathItem: HTMLMathItemElement) {
             var $mathItem = $(mathItem);
             this.container.push(mathItem);
+            if (!$mathItem.attr('id'))
+                $mathItem.attr('id', 'math-item-' + this.container.length);
             $mathItem.attr('tabindex', 0).attr('draggable', 'true').on('focus', (ev) => {
                 stopEvent(ev);
                 gotFocus(mathItem);
@@ -404,6 +445,14 @@ module FlorianMath {
             each(document.querySelectorAll('math-item'), (mathItem: HTMLMathItemElement) => {
                 mathUI.add(mathItem);
             });
+            if (location.hash) {
+                // TODO: Wait until renderers are done
+                var item = document.querySelector(MATH_ITEM_TAG + location.hash);
+                if (item) {
+                    (<any> item).scrollIntoView();
+                    (<HTMLElement> item).focus();
+                }
+            }
         });
 
     });
