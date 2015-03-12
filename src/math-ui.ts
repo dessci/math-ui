@@ -445,15 +445,26 @@ module FlorianMath {
             each(document.querySelectorAll('math-item'), (mathItem: HTMLMathItemElement) => {
                 mathUI.add(mathItem);
             });
+        });
+
+        function pagerendered() {
+            log('page rendered');
             if (location.hash) {
-                // TODO: Wait until renderers are done
                 var item = document.querySelector(MATH_ITEM_TAG + location.hash);
                 if (item) {
                     (<any> item).scrollIntoView();
                     (<HTMLElement> item).focus();
                 }
             }
-        });
+        }
+
+        if (rendering())
+            addCustomEventListener(document, ALL_RENDERED_EVENT, function onpagerendered() {
+                removeCustomEventListener(document, ALL_RENDERED_EVENT, onpagerendered);
+                pagerendered();
+            });
+        else
+            pagerendered();
 
     });
 
