@@ -87,40 +87,92 @@ module FlorianMath {
 
         // Commands menu
 
+        function showCopyMultilineDialog(title: string, text: string) {
+            var textarea = $('<textarea class="form-control" rows="5" />').append(document.createTextNode(text)),
+                content = $('<div class="modal-content" />')
+                    .append($('<div class="modal-header" />')
+                        .append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'))
+                        .append($('<h4 class="modal-title" />').append(title))
+                    ).append($('<div class="modal-body" />').append(textarea))
+                    .append($('<div class="modal-footer" />')
+                        .append($('<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>'))),
+                modal = $('<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" />')
+                    .append($('<div class="modal-dialog modal-sm" />').append(content)),
+                wrapper = $('<div class="math-ui" />').append(modal);
+
+            $(document.body).append(wrapper);
+
+            modal.on('shown.bs.modal', () => {
+                textarea.focus().select();
+            }).on('hidden.bs.modal', () => {
+                wrapper.remove();
+            }).modal();
+        }
+
         function noOp() { }
 
+        function mimeTypeToLabel(mimeType: string) {
+            switch (mimeType) {
+                case MIME_TYPE_PLAIN: return 'Text';
+                case MIME_TYPE_HTML: return 'HTML';
+                case MIME_TYPE_MATHML: return 'MathML';
+                case MIME_TYPE_TEX: return '(La)TeX';
+            }
+            return null;
+        }
+
+        function menuItemGetMarkup(mathItem: IHTMLMathItemElement) {
+            var submenu = [], sources = mathItem.getSources({ markup: true });
+            each(sources, (source: IHTMLMathSourceElement) => {
+                var type = getSourceType(source), label,
+                    markup = getSourceMarkup(source);
+                if (markup) {
+                    label = mimeTypeToLabel(type) || type;
+                    if ($(source).attr('name'))
+                        label += ' (' + $(source).attr('name') + ')';
+                    submenu.push({
+                        label: label,
+                        action: () => {
+                            showCopyMultilineDialog(label + ' for ' + getName(mathItem), markup);
+                        }
+                    });
+                }
+            });
+            return submenu.length ? { label: 'Get markup', submenu: submenu } : { label: 'Get markup' };
+        }
+
         function getCommandItems(mathItem: IHTMLMathItemElement): ICommandItem[] {
-            return [
-                { label: 'Copy to clipboard', action: noOp },
-                { label: 'Copy permalink', action: noOp },
-                {
+            var items = [];
+            items.push(menuItemGetMarkup(mathItem));
+            items.push({ label: 'Get permalink', action: noOp });
+            items.push({
                     label: 'Convert to code', submenu: [
                         { label: 'C', action: noOp },
                         { label: 'JavaScript', action: noOp },
                         { label: 'Python', action: noOp }
                     ]
-                },
-                {
+                });
+            items.push({
                     label: 'Open with', submenu: [
                         { label: 'Mathematica', action: noOp },
                         { label: 'Maple', action: noOp },
                         { label: 'WolframAlpha', link: 'http://www.wolframalpha.com/input/?i=sin%5Bx%5D*sin%5By%5D' }
                     ]
-                },
-                {
+                });
+            items.push({
                     label: 'Share', submenu: [
                         { label: 'Twitter', action: noOp },
                         { label: 'Email', action: noOp }
                     ]
-                },
-                {
+                });
+            items.push({
                     label: 'Search', submenu: [
                         { label: 'Google', action: noOp },
                         { label: 'Tangent', action: noOp }
                     ]
-                },
-                { label: 'Speak', action: noOp }
-            ];
+                });
+            items.push({ label: 'Speak', action: noOp });
+            return items;
         }
 
         function showEquationMenu(mathItem: IHTMLMathItemElement) {
@@ -148,6 +200,8 @@ module FlorianMath {
                         a.append($('<span class="glyphicon glyphicon-triangle-right"></span>'));
                     else if (item.link)
                         (<HTMLAnchorElement> a[0]).href = item.link;
+                    else if (!item.action)
+                        a.addClass('disabled');
                     a.append(item.label);
                     options.append(a);
                     if (!item.link) {
