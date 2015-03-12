@@ -65,28 +65,10 @@ var FlorianMath;
     function getName(mathItem) {
         return 'Equation ' + (mathItem._private.id + 1);
     }
-    var MARKUP_PREFERENCE = [FlorianMath.MIME_TYPE_MATHML, FlorianMath.MIME_TYPE_TEX, FlorianMath.MIME_TYPE_HTML];
-    function getSourceType(source) {
-        return source.getAttribute('type') || FlorianMath.MIME_TYPE_HTML;
-    }
-    function getSourceMarkup(source) {
-        var value = source.firstChild && !source.firstChild.nextSibling && source.firstChild.nodeType === 3 ? source.firstChild.nodeValue : source.innerHTML;
-        return FlorianMath.trim(value);
-    }
-    function getDefaultMarkup(mathItem) {
-        var k, type, sources;
-        for (k = 0; k < MARKUP_PREFERENCE.length; k++) {
-            type = MARKUP_PREFERENCE[k];
-            sources = mathItem.getSources({ markup: true, type: type });
-            if (sources.length)
-                return getSourceMarkup(sources[0]);
-        }
-        return null;
-    }
     function setDataTransfer(data, mathItem) {
         var sources = mathItem.getSources({ markup: true });
         FlorianMath.each(sources, function (source) {
-            data.setData(getSourceType(source), getSourceMarkup(source));
+            data.setData(FlorianMath.getSourceType(source), FlorianMath.getSourceMarkup(source));
         });
     }
     function stopEvent(ev) {
@@ -111,44 +93,105 @@ var FlorianMath;
             HTMLMathItemElement.manualAttach(mathItemClone, true);
         }
         // Commands menu
+        function showCopyMultilineDialog(title, text) {
+            var textarea = $('<textarea class="form-control" rows="5" />').append(document.createTextNode(text)), content = $('<div class="modal-content" />').append($('<div class="modal-header" />').append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>')).append($('<h4 class="modal-title" />').append(title))).append($('<div class="modal-body" />').append(textarea)).append($('<div class="modal-footer" />').append($('<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>'))), modal = $('<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" />').append($('<div class="modal-dialog" />').append(content)), wrapper = $('<div class="math-ui" />').append(modal);
+            $(document.body).append(wrapper);
+            modal.on('shown.bs.modal', function () {
+                textarea.focus().select();
+            }).on('hidden.bs.modal', function () {
+                wrapper.remove();
+            }).modal();
+        }
+        function showCopySingleLineDialog(title, text) {
+            var input = $('<input type="url" class="form-control">'), content = $('<div class="modal-content" />').append($('<div class="modal-header" />').append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>')).append($('<h4 class="modal-title" />').append(title))).append($('<div class="modal-body" />').append(input)).append($('<div class="modal-footer" />').append($('<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>'))), modal = $('<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" />').append($('<div class="modal-dialog" />').append(content)), wrapper = $('<div class="math-ui" />').append(modal);
+            input.val(text);
+            $(document.body).append(wrapper);
+            modal.on('shown.bs.modal', function () {
+                input.focus().select();
+            }).on('hidden.bs.modal', function () {
+                wrapper.remove();
+            }).modal();
+        }
         function noOp() {
         }
+        function mimeTypeToLabel(mimeType) {
+            switch (mimeType) {
+                case FlorianMath.MIME_TYPE_PLAIN: return 'Text';
+                case FlorianMath.MIME_TYPE_HTML: return 'HTML';
+                case FlorianMath.MIME_TYPE_MATHML: return 'MathML';
+                case FlorianMath.MIME_TYPE_TEX: return '(La)TeX';
+            }
+            return null;
+        }
+        function menuItemGetMarkup(mathItem) {
+            var submenu = [], sources = mathItem.getSources({ markup: true });
+            FlorianMath.each(sources, function (source) {
+                var type = FlorianMath.getSourceType(source), label, markup = FlorianMath.getSourceMarkup(source);
+                if (markup) {
+                    label = mimeTypeToLabel(type) || type;
+                    if ($(source).attr('name'))
+                        label += ' (' + $(source).attr('name') + ')';
+                    submenu.push({
+                        label: label,
+                        action: function () {
+                            showCopyMultilineDialog(label + ' for ' + getName(mathItem), markup);
+                        }
+                    });
+                }
+            });
+            return submenu.length ? { label: 'Get markup', submenu: submenu } : { label: 'Get markup' };
+        }
+        function menuItemGetPermalink(mathItem) {
+            var url = location.href;
+            if ($(mathItem).attr('id')) {
+                var pos = url.indexOf('#');
+                if (pos >= 0)
+                    url = url.substr(0, pos);
+                url += '#' + $(mathItem).attr('id');
+            }
+            return {
+                label: 'Get permalink',
+                action: function () {
+                    showCopySingleLineDialog('Permalink for ' + getName(mathItem), url);
+                }
+            };
+        }
         function getCommandItems(mathItem) {
-            return [
-                { label: 'Copy to clipboard', action: noOp },
-                { label: 'Copy permalink', action: noOp },
-                {
-                    label: 'Convert to code',
-                    submenu: [
-                        { label: 'C', action: noOp },
-                        { label: 'JavaScript', action: noOp },
-                        { label: 'Python', action: noOp }
-                    ]
-                },
-                {
-                    label: 'Open with',
-                    submenu: [
-                        { label: 'Mathematica', action: noOp },
-                        { label: 'Maple', action: noOp },
-                        { label: 'WolframAlpha', link: 'http://www.wolframalpha.com/input/?i=sin%5Bx%5D*sin%5By%5D' }
-                    ]
-                },
-                {
-                    label: 'Share',
-                    submenu: [
-                        { label: 'Twitter', action: noOp },
-                        { label: 'Email', action: noOp }
-                    ]
-                },
-                {
-                    label: 'Search',
-                    submenu: [
-                        { label: 'Google', action: noOp },
-                        { label: 'Tangent', action: noOp }
-                    ]
-                },
-                { label: 'Speak', action: noOp }
-            ];
+            var items = [];
+            items.push(menuItemGetMarkup(mathItem));
+            items.push(menuItemGetPermalink(mathItem));
+            items.push({
+                label: 'Convert to code',
+                submenu: [
+                    { label: 'C', action: noOp },
+                    { label: 'JavaScript', action: noOp },
+                    { label: 'Python', action: noOp }
+                ]
+            });
+            items.push({
+                label: 'Open with',
+                submenu: [
+                    { label: 'Mathematica', action: noOp },
+                    { label: 'Maple', action: noOp },
+                    { label: 'WolframAlpha', link: 'http://www.wolframalpha.com/input/?i=sin%5Bx%5D*sin%5By%5D' }
+                ]
+            });
+            items.push({
+                label: 'Share',
+                submenu: [
+                    { label: 'Twitter', action: noOp },
+                    { label: 'Email', action: noOp }
+                ]
+            });
+            items.push({
+                label: 'Search',
+                submenu: [
+                    { label: 'Google', action: noOp },
+                    { label: 'Tangent', action: noOp }
+                ]
+            });
+            items.push({ label: 'Speak', action: noOp });
+            return items;
         }
         function showEquationMenu(mathItem) {
             var options = $('<div class="list-group" />'), content = $('<div class="modal-content" />').append($('<div class="modal-header" />').append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>')).append($('<h4 class="modal-title" />').append(getName(mathItem)))).append($('<div class="modal-body" />').append(options)), modal = $('<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" />').append($('<div class="modal-dialog modal-sm" />').append(content)), wrapper = $('<div class="math-ui math-ui-eqn-commands" />').append(modal), commands = getCommandItems(mathItem);
@@ -163,6 +206,8 @@ var FlorianMath;
                         a.append($('<span class="glyphicon glyphicon-triangle-right"></span>'));
                     else if (item.link)
                         a[0].href = item.link;
+                    else if (!item.action)
+                        a.addClass('disabled');
                     a.append(item.label);
                     options.append(a);
                     if (!item.link) {
@@ -230,7 +275,8 @@ var FlorianMath;
             $mathItem.addClass('focus').on('keydown', function (ev) {
                 var mods = keyModifiers(ev);
                 if (!copyItem && ((ev.which === 17 && mods === 2) || (ev.which === 91 && mods === 8))) {
-                    copyItem = $('<textarea />').val(getDefaultMarkup(mathItem) || getName(mathItem)).on('keyup', function (ev) {
+                    var mainMarkup = mathItem.getMainMarkup();
+                    copyItem = $('<textarea />').val(mainMarkup ? mainMarkup.markup : getName(mathItem)).on('keyup', function (ev) {
                         if (ev.which === 17 || ev.which === 91)
                             removeCopyItem();
                     });
@@ -282,15 +328,24 @@ var FlorianMath;
         BootstrapLookAndFeel.prototype.add = function (mathItem) {
             var $mathItem = $(mathItem);
             this.container.push(mathItem);
+            if (!$mathItem.attr('id'))
+                $mathItem.attr('id', 'math-item-' + this.container.length);
             $mathItem.attr('tabindex', 0).attr('draggable', 'true').on('focus', function (ev) {
                 stopEvent(ev);
                 gotFocus(mathItem);
             }).on('dragstart', function (ev) {
                 if (ev.originalEvent.dataTransfer) {
-                    var dt = ev.originalEvent.dataTransfer, defaultMarkup = getDefaultMarkup(mathItem);
-                    if (defaultMarkup)
-                        dt.setData(FlorianMath.MIME_TYPE_PLAIN, defaultMarkup);
-                    setDataTransfer(dt, mathItem);
+                    var dt = ev.originalEvent.dataTransfer, mainMarkup = mathItem.getMainMarkup();
+                    try {
+                        if (mainMarkup)
+                            dt.setData(FlorianMath.MIME_TYPE_PLAIN, mainMarkup.markup);
+                        setDataTransfer(dt, mathItem);
+                    }
+                    catch (e) {
+                        // IE only accepts type 'text' http://stackoverflow.com/a/18051912/212069
+                        if (mainMarkup)
+                            dt.setData('text', mainMarkup.markup);
+                    }
                 }
             }).on('dragend', function () {
                 $mathItem.blur();
@@ -314,7 +369,7 @@ var FlorianMath;
                             _this.highlightAll();
                         }
                         else {
-                            window.location.href = 'https://github.com/dessci/math-item-element';
+                            window.location.href = 'https://github.com/dessci/math-ui';
                         }
                     }
                 });
@@ -332,6 +387,23 @@ var FlorianMath;
                 FlorianMath.mathUI.add(mathItem);
             });
         });
+        function pagerendered() {
+            log('page rendered');
+            if (location.hash) {
+                var item = document.querySelector(FlorianMath.MATH_ITEM_TAG + location.hash);
+                if (item) {
+                    item.scrollIntoView();
+                    item.focus();
+                }
+            }
+        }
+        if (FlorianMath.rendering())
+            FlorianMath.addCustomEventListener(document, FlorianMath.ALL_RENDERED_EVENT, function onpagerendered() {
+                FlorianMath.removeCustomEventListener(document, FlorianMath.ALL_RENDERED_EVENT, onpagerendered);
+                pagerendered();
+            });
+        else
+            pagerendered();
     });
 })(FlorianMath || (FlorianMath = {}));
 

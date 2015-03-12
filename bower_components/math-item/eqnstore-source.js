@@ -14,9 +14,10 @@
                 if (styles.length)
                     img.setAttribute('style', styles.join(' '));
                 output.element.appendChild(img);
-                return output.done();
+                output.done();
             }
-            origRender.call(this);
+            else
+                origRender.call(this);
         };
     }
 })(window, document);
