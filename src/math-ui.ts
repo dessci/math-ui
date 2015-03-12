@@ -426,7 +426,7 @@ module FlorianMath {
                         if (k === 0) {
                             this.highlightAll();
                         } else {
-                            window.location.href = 'https://github.com/dessci/math-item-element'
+                            window.location.href = 'https://github.com/dessci/math-ui';
                         }
                     }
                 });
