@@ -186,6 +186,7 @@ var FlorianMath;
 /// <reference path="utils.ts" />
 var FlorianMath;
 (function (FlorianMath) {
+    'use strict';
     FlorianMath.MATH_ITEM_TAG = 'math-item', FlorianMath.MATH_SOURCE_TAG = 'math-source', FlorianMath.MIME_TYPE_PLAIN = 'text/plain', FlorianMath.MIME_TYPE_HTML = 'text/html', FlorianMath.MIME_TYPE_TEX = 'application/x-tex', FlorianMath.MIME_TYPE_MATHML = 'application/mathml+xml', FlorianMath.RENDERING_EVENT = 'rendering.math-item', FlorianMath.RENDERED_EVENT = 'rendered.math-item', FlorianMath.ALL_RENDERED_EVENT = 'allrendered.math-item';
     var MARKUP_PREFERENCE = [FlorianMath.MIME_TYPE_MATHML, FlorianMath.MIME_TYPE_TEX, FlorianMath.MIME_TYPE_HTML], global = window, doc = document, renderBalance = 0, counter = 0;
     (function (RenderState) {
@@ -408,7 +409,7 @@ var FlorianMath;
                 mathItem.getMainMarkup = getMainMarkupProxy;
                 baseItemCreate.call(mathItem);
                 if (deep) {
-                    iterateSourceElements(this, function (source) {
+                    iterateSourceElements(mathItem, function (source) {
                         manualSourceCreate(source);
                     });
                 }
@@ -416,7 +417,7 @@ var FlorianMath;
             function manualItemAttach(mathItem, deep) {
                 baseItemAttach.call(mathItem);
                 if (deep) {
-                    iterateSourceElements(this, function (source) {
+                    iterateSourceElements(mathItem, function (source) {
                         manualSourceAttach(source);
                     });
                 }
