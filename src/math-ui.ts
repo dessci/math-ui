@@ -21,6 +21,9 @@ interface MouseEvent {
 module FlorianMath {
     'use strict';
 
+    var global: Window = window,
+        doc: Document = document;
+
     interface ClipboardEvent extends Event {
         clipboardData: DataTransfer;
     }
@@ -34,7 +37,6 @@ module FlorianMath {
         label: string;
         submenu?: ICommandItem[];
         action?: () => void;
-        link?: string;
     }
 
     export interface MathUI {
@@ -43,7 +45,7 @@ module FlorianMath {
     }
 
     var log: (message: any, arg1?: any, arg2?: any) => void = () => {};
-    if ('console' in window && console.log)
+    if ('console' in global && console.log)
         log = (message: any, arg1?: any, arg2?: any) => {
             if (arg2 !== undefined) console.log(message, arg1, arg2);
             else if (arg1 !== undefined) console.log(message, arg1);
@@ -80,7 +82,7 @@ module FlorianMath {
             HTMLMathItemElement.manualCreate(mathItemClone, true);
             mathItemClone.clean();
             inner.append(mathItemClone);
-            $(document).on('mousedown keydown', (ev: BaseJQueryEventObject) => {
+            $(doc).on('mousedown keydown', (ev: BaseJQueryEventObject) => {
                 if (ev.type === 'mousedown' && ev.which !== 1) return;
                 ev.stopPropagation();
                 popup.remove();
@@ -92,7 +94,7 @@ module FlorianMath {
         // Commands menu
 
         function showCopyMultilineDialog(title: string, text: string) {
-            var textarea = $('<textarea class="form-control" rows="5" />').append(document.createTextNode(text)),
+            var textarea = $('<textarea class="form-control" rows="5" />').append(doc.createTextNode(text)),
                 content = $('<div class="modal-content" />')
                     .append($('<div class="modal-header" />')
                         .append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'))
@@ -104,7 +106,7 @@ module FlorianMath {
                     .append($('<div class="modal-dialog" />').append(content)),
                 wrapper = $('<div class="math-ui" />').append(modal);
 
-            $(document.body).append(wrapper);
+            $(doc.body).append(wrapper);
 
             modal.on('shown.bs.modal', () => {
                 textarea.focus().select();
@@ -127,7 +129,7 @@ module FlorianMath {
                 wrapper = $('<div class="math-ui" />').append(modal);
 
             input.val(text);
-            $(document.body).append(wrapper);
+            $(doc.body).append(wrapper);
 
             modal.on('shown.bs.modal', () => {
                 input.focus().select();
@@ -135,8 +137,6 @@ module FlorianMath {
                 wrapper.remove();
             }).modal();
         }
-
-        function noOp() { }
 
         function mimeTypeToLabel(mimeType: string) {
             switch (mimeType) {
@@ -168,7 +168,7 @@ module FlorianMath {
             return submenu.length ? { label: 'Get markup', submenu: submenu } : { label: 'Get markup' };
         }
 
-        function menuItemGetPermalink(mathItem: HTMLMathItemElement) {
+        function getPermalink(mathItem: HTMLMathItemElement) {
             var url = location.href;
             if ($(mathItem).attr('id')) {
                 var pos = url.indexOf('#');
@@ -176,11 +176,28 @@ module FlorianMath {
                     url = url.substr(0, pos);
                 url += '#' + $(mathItem).attr('id');
             }
+            return url;
+        }
+
+        function menuItemGetPermalink(mathItem: HTMLMathItemElement) {
             return {
                 label: 'Get permalink',
                 action: () => {
-                    showCopySingleLineDialog('Permalink for ' + getName(mathItem), url);
+                    showCopySingleLineDialog('Permalink for ' + getName(mathItem), getPermalink(mathItem));
                 }
+            };
+        }
+
+        function menuItemShare(mathItem: HTMLMathItemElement) {
+            function share(url: string) {
+                url += '?url=' + encodeURIComponent(getPermalink(mathItem));
+                global.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+            }
+            return {
+                label: 'Share', submenu: [
+                    { label: 'Twitter', action: () => { share('https://twitter.com/share'); } },
+                    { label: 'Google+', action: () => { share('https://plus.google.com/share'); } }
+                ]
             };
         }
 
@@ -190,31 +207,26 @@ module FlorianMath {
             items.push(menuItemGetPermalink(mathItem));
             items.push({
                     label: 'Convert to code', submenu: [
-                        { label: 'C', action: noOp },
-                        { label: 'JavaScript', action: noOp },
-                        { label: 'Python', action: noOp }
+                        { label: 'C', action: () => {} },
+                        { label: 'JavaScript', action: () => {} },
+                        { label: 'Python', action: () => {} }
                     ]
                 });
             items.push({
                     label: 'Open with', submenu: [
-                        { label: 'Mathematica', action: noOp },
-                        { label: 'Maple', action: noOp },
-                        { label: 'WolframAlpha', link: 'http://www.wolframalpha.com/input/?i=sin%5Bx%5D*sin%5By%5D' }
+                        { label: 'Mathematica', action: () => {} },
+                        { label: 'Maple', action: () => {} },
+                        { label: 'WolframAlpha', action: () => {} }
                     ]
                 });
-            items.push({
-                    label: 'Share', submenu: [
-                        { label: 'Twitter', action: noOp },
-                        { label: 'Email', action: noOp }
-                    ]
-                });
+            items.push(menuItemShare(mathItem));
             items.push({
                     label: 'Search', submenu: [
-                        { label: 'Google', action: noOp },
-                        { label: 'Tangent', action: noOp }
+                        { label: 'Google', action: () => {} },
+                        { label: 'Tangent', action: () => {} }
                     ]
                 });
-            items.push({ label: 'Speak', action: noOp });
+            items.push({ label: 'Speak', action: () => {} });
             return items;
         }
 
@@ -241,29 +253,25 @@ module FlorianMath {
                     var a = $('<a href="#" class="list-group-item" />');
                     if (item.submenu)
                         a.append($('<span class="glyphicon glyphicon-triangle-right"></span>'));
-                    else if (item.link)
-                        (<HTMLAnchorElement> a[0]).href = item.link;
                     else if (!item.action)
                         a.addClass('disabled');
                     a.append(item.label);
                     options.append(a);
-                    if (!item.link) {
-                        a.on('click',(ev: JQueryMouseEventObject) => {
-                            stopEvent(ev);
-                            if (item.submenu) {
-                                commands = item.submenu;
-                                update();
-                                focusFirst();
-                            } else {
-                                modal.modal('hide');
-                                item.action();
-                            }
-                        });
-                    }
+                    a.on('click',(ev: JQueryMouseEventObject) => {
+                        stopEvent(ev);
+                        if (item.submenu) {
+                            commands = item.submenu;
+                            update();
+                            focusFirst();
+                        } else {
+                            modal.modal('hide');
+                            item.action();
+                        }
+                    });
                 });
             }
 
-            $(document.body).append(wrapper);
+            $(doc.body).append(wrapper);
             update();
 
             modal.on('shown.bs.modal', focusFirst)
@@ -430,23 +438,23 @@ module FlorianMath {
                         if (k === 0) {
                             this.highlightAll();
                         } else {
-                            window.location.href = 'https://github.com/dessci/math-ui';
+                            global.location.href = 'https://github.com/dessci/math-ui';
                         }
                     }
                 });
             });
-            $(document.body).append(wrapper);
+            $(doc.body).append(wrapper);
             modal.on('hidden.bs.modal', () => {
                 wrapper.remove();
             }).modal();
         };
 
         mathUI = new BootstrapLookAndFeel($);
-        dispatchCustomEvent(document, 'created.math-ui');
+        dispatchCustomEvent(doc, 'created.math-ui');
 
         initialized().then(() => {
             log('Applying MathUI to math-items');
-            each(document.querySelectorAll('math-item'), (mathItem: HTMLMathItemElement) => {
+            each(doc.querySelectorAll('math-item'), (mathItem: HTMLMathItemElement) => {
                 mathUI.add(mathItem);
             });
         });
@@ -454,7 +462,7 @@ module FlorianMath {
         function pagerendered() {
             log('page rendered');
             if (location.hash) {
-                var item = <HTMLElement> document.querySelector(MATH_ITEM_TAG + location.hash);
+                var item = <HTMLElement> doc.querySelector(MATH_ITEM_TAG + location.hash);
                 if (item) {
                     item.scrollIntoView();
                     item.focus();
@@ -463,8 +471,8 @@ module FlorianMath {
         }
 
         if (rendering())
-            addCustomEventListener(document, ALL_RENDERED_EVENT, function onpagerendered() {
-                removeCustomEventListener(document, ALL_RENDERED_EVENT, onpagerendered);
+            addCustomEventListener(doc, ALL_RENDERED_EVENT, function onpagerendered() {
+                removeCustomEventListener(doc, ALL_RENDERED_EVENT, onpagerendered);
                 pagerendered();
             });
         else
