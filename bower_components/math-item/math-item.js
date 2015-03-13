@@ -187,13 +187,24 @@ var FlorianMath;
 var FlorianMath;
 (function (FlorianMath) {
     FlorianMath.MATH_ITEM_TAG = 'math-item', FlorianMath.MATH_SOURCE_TAG = 'math-source', FlorianMath.MIME_TYPE_PLAIN = 'text/plain', FlorianMath.MIME_TYPE_HTML = 'text/html', FlorianMath.MIME_TYPE_TEX = 'application/x-tex', FlorianMath.MIME_TYPE_MATHML = 'application/mathml+xml', FlorianMath.RENDERING_EVENT = 'rendering.math-item', FlorianMath.RENDERED_EVENT = 'rendered.math-item', FlorianMath.ALL_RENDERED_EVENT = 'allrendered.math-item';
-    var global = window, doc = document, counter = 0;
+    var MARKUP_PREFERENCE = [FlorianMath.MIME_TYPE_MATHML, FlorianMath.MIME_TYPE_TEX, FlorianMath.MIME_TYPE_HTML], global = window, doc = document, renderBalance = 0, counter = 0;
     (function (RenderState) {
         RenderState[RenderState["Idle"] = 0] = "Idle";
         RenderState[RenderState["Pending"] = 1] = "Pending";
         RenderState[RenderState["Rendering"] = 2] = "Rendering";
     })(FlorianMath.RenderState || (FlorianMath.RenderState = {}));
     var RenderState = FlorianMath.RenderState;
+    function rendering() {
+        return renderBalance != 0;
+    }
+    FlorianMath.rendering = rendering;
+    function renderBalanceUp() {
+        renderBalance++;
+    }
+    function renderBalanceDown() {
+        if (--renderBalance === 0)
+            FlorianMath.dispatchCustomEvent(document, FlorianMath.ALL_RENDERED_EVENT);
+    }
     function iterateChildren(n, fn) {
         var c = n.firstChild, next;
         while (c) {
@@ -211,6 +222,7 @@ var FlorianMath;
     function mathItemRenderDone(mathItem) {
         mathItem._private.renderState = 0 /* Idle */;
         FlorianMath.dispatchCustomEvent(mathItem, FlorianMath.RENDERED_EVENT, { bubbles: true });
+        renderBalanceDown();
     }
     function mathItemInsertContent(mathItem) {
         mathItem._private.renderState = 2 /* Rendering */;
@@ -245,6 +257,7 @@ var FlorianMath;
     function mathItemEnqueueRender(mathItem) {
         if (mathItem._private.renderState === 0 /* Idle */) {
             mathItem._private.renderState = 1 /* Pending */;
+            renderBalanceUp();
             FlorianMath.dispatchCustomEvent(mathItem, FlorianMath.RENDERING_EVENT, { bubbles: true });
             FlorianMath.async(function () {
                 if (mathItem._private.firstPass) {
@@ -317,7 +330,6 @@ var FlorianMath;
         });
         return result;
     }
-    var MARKUP_PREFERENCE = [FlorianMath.MIME_TYPE_MATHML, FlorianMath.MIME_TYPE_TEX, FlorianMath.MIME_TYPE_HTML];
     function getMainMarkup() {
         var k, type, sources;
         for (k = 0; k < MARKUP_PREFERENCE.length; k++) {
@@ -356,21 +368,6 @@ var FlorianMath;
         });
         return function () { return promise; };
     })();
-    FlorianMath.rendering = (function () {
-        var balance = 0;
-        function renderUp() {
-            balance++;
-        }
-        function renderDown() {
-            if (--balance === 0)
-                FlorianMath.dispatchCustomEvent(document, FlorianMath.ALL_RENDERED_EVENT);
-        }
-        renderUp();
-        FlorianMath.addCustomEventListener(document, FlorianMath.RENDERING_EVENT, renderUp);
-        FlorianMath.addCustomEventListener(document, FlorianMath.RENDERED_EVENT, renderDown);
-        FlorianMath.initialized().then(renderDown);
-        return function () { return balance !== 0; };
-    })();
     if (doc.registerElement) {
         var MathItemPrototype = Object.create(HTMLElement.prototype, {
             createdCallback: { enumerable: true, value: baseItemCreate },
@@ -401,14 +398,14 @@ var FlorianMath;
             function getSourcesProxy(options) {
                 return global.HTMLMathItemElement.prototype.getSources.call(this, options);
             }
-            function getMainMarkup() {
+            function getMainMarkupProxy() {
                 return global.HTMLMathItemElement.prototype.getMainMarkup.call(this);
             }
             function manualItemCreate(mathItem, deep) {
                 mathItem.render = renderProxy;
                 mathItem.clean = cleanProxy;
                 mathItem.getSources = getSourcesProxy;
-                mathItem.getMainMarkup = getMainMarkup;
+                mathItem.getMainMarkup = getMainMarkupProxy;
                 baseItemCreate.call(mathItem);
                 if (deep) {
                     iterateSourceElements(this, function (source) {
@@ -455,5 +452,7 @@ var FlorianMath;
             });
         })();
     }
+    renderBalanceUp();
+    FlorianMath.initialized().then(renderBalanceDown);
 })(FlorianMath || (FlorianMath = {}));
 //# sourceMappingURL=math-item.js.map
