@@ -6,6 +6,10 @@ interface JQuery {
     modal(options?: any): void;
 }
 
+interface HTMLElement {
+    scrollIntoView() : void;
+}
+
 interface HTMLMathItemElement {
     selected?: boolean;
 }
@@ -450,10 +454,10 @@ module FlorianMath {
         function pagerendered() {
             log('page rendered');
             if (location.hash) {
-                var item = document.querySelector(MATH_ITEM_TAG + location.hash);
+                var item = <HTMLElement> document.querySelector(MATH_ITEM_TAG + location.hash);
                 if (item) {
-                    (<any> item).scrollIntoView();
-                    (<HTMLElement> item).focus();
+                    item.scrollIntoView();
+                    item.focus();
                 }
             }
         }
