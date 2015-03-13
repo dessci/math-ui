@@ -201,6 +201,35 @@ module FlorianMath {
             };
         }
 
+        function showAudioDialog(mathItem: HTMLMathItemElement) {
+            var audio = $('<audio src="demo2-1a.mp3" controls style="width: 100%;"></audio>'),
+                content = $('<div class="modal-content" />')
+                    .append($('<div class="modal-header" />')
+                        .append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'))
+                        .append($('<h4 class="modal-title" />').append('Speak ' + getName(mathItem)))
+                    ).append($('<div class="modal-body" />').append(audio))
+                    .append($('<div class="modal-footer" />')
+                        .append($('<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>'))),
+                modal = $('<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" />')
+                    .append($('<div class="modal-dialog" />').append(content)),
+                wrapper = $('<div class="math-ui" />').append(modal);
+
+            $(doc.body).append(wrapper);
+
+            modal.on('shown.bs.modal', () => {
+                audio.focus();
+            }).on('hidden.bs.modal', () => {
+                wrapper.remove();
+            }).modal();
+        }
+
+        function menuItemSpeak(mathItem: HTMLMathItemElement) {
+            var item: ICommandItem = { label: 'Speak' };
+            if ('src' in document.createElement('audio'))
+                item.action = () => { showAudioDialog(mathItem); };
+            return item;
+        }
+
         function getCommandItems(mathItem: HTMLMathItemElement): ICommandItem[] {
             var items = [];
             items.push(menuItemGetMarkup(mathItem));
@@ -226,7 +255,7 @@ module FlorianMath {
                         { label: 'Tangent', action: () => {} }
                     ]
                 });
-            items.push({ label: 'Speak', action: () => {} });
+            items.push(menuItemSpeak(mathItem));
             return items;
         }
 
