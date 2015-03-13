@@ -230,17 +230,28 @@ module FlorianMath {
             return item;
         }
 
+        function menuItemToCode(mathItem: HTMLMathItemElement) {
+            var submenu = [];
+            function make(lang: string, code: string) {
+                return {
+                    label: lang,
+                    action: () => { showCopyMultilineDialog(getName(mathItem) + ' in ' + lang, code); }
+                };
+            }
+            submenu.push(make('C', 'for (i = 1; i <= n; i++){\n  sum = sum + i;\n}\n'));
+            submenu.push(make('Mathematica', 'Sum[i^2, {i, 1, n}]\n'));
+            submenu.push(make('Python', 'sum(range(1, n+1))\n'));
+            return {
+                label: 'Convert to code',
+                submenu: submenu
+            };
+        }
+
         function getCommandItems(mathItem: HTMLMathItemElement): ICommandItem[] {
             var items = [];
             items.push(menuItemGetMarkup(mathItem));
             items.push(menuItemGetPermalink(mathItem));
-            items.push({
-                    label: 'Convert to code', submenu: [
-                        { label: 'C', action: () => {} },
-                        { label: 'JavaScript', action: () => {} },
-                        { label: 'Python', action: () => {} }
-                    ]
-                });
+            items.push(menuItemToCode(mathItem));
             items.push({
                     label: 'Open with', submenu: [
                         { label: 'Mathematica', action: () => {} },
