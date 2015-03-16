@@ -247,6 +247,32 @@ module FlorianMath {
             };
         }
 
+        function menuItemSearch(mathItem: HTMLMathItemElement): ICommandItem {
+            var submenu = [], item: ICommandItem, markup,
+                texSources = mathItem.getSources({ markup: true, type: MIME_TYPE_TEX }),
+                mmlSources = mathItem.getSources({ markup: true, type: MIME_TYPE_MATHML }),
+                htmlSources = mathItem.getSources({ markup: true, type: MIME_TYPE_HTML });
+
+            item = { label: 'Google' };
+            if (texSources.length || mmlSources.length || htmlSources.length) {
+                markup = getSourceMarkup(texSources.length ? texSources[0] : mmlSources.length ? mmlSources[0] : htmlSources[0]);
+                item.action = () => { location.href = 'https://www.google.com/#q=' + encodeURIComponent(markup); }
+            }
+            submenu.push(item);
+
+            item = { label: 'Tangent' };
+            if (texSources.length) {
+                markup = getSourceMarkup(texSources[0]);
+                item.action = () => { location.href = 'http://saskatoon.cs.rit.edu/tangent/?query=' + encodeURIComponent(markup); }
+            }
+            submenu.push(item);
+
+            return {
+                label: 'Search',
+                submenu: submenu
+            };
+        }
+
         function getCommandItems(mathItem: HTMLMathItemElement): ICommandItem[] {
             var items = [];
             items.push(menuItemGetMarkup(mathItem));
@@ -260,12 +286,7 @@ module FlorianMath {
                     ]
                 });
             items.push(menuItemShare(mathItem));
-            items.push({
-                    label: 'Search', submenu: [
-                        { label: 'Google', action: () => {} },
-                        { label: 'Tangent', action: () => {} }
-                    ]
-                });
+            items.push(menuItemSearch(mathItem));
             items.push(menuItemSpeak(mathItem));
             return items;
         }
