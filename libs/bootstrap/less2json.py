@@ -2,12 +2,13 @@ import json
 import fileinput
 import re
 
-varpattern = re.compile(r'\s*(@.*)\s*:\s*(\S+);\s*')
+varpattern = re.compile(r'\s*(@.*)\s*:\s*(\S.*);\s*')
 
 vars = {}
 config = {
   "vars": vars,
   "css": [
+    "glyphicons.less",
     "type.less",
     "code.less",
     "forms.less",
