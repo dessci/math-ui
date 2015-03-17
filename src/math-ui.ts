@@ -238,39 +238,59 @@ module FlorianMath {
                     action: () => { showCopyMultilineDialog(getName(mathItem) + ' in ' + lang, code); }
                 };
             }
+
             submenu.push(make('C', 'for (i = 1; i <= n; i++){\n  sum = sum + i;\n}\n'));
             submenu.push(make('Mathematica', 'Sum[i^2, {i, 1, n}]\n'));
             submenu.push(make('Python', 'sum(range(1, n+1))\n'));
-            return {
-                label: 'Convert to code',
-                submenu: submenu
-            };
+
+            return { label: 'Convert to code', submenu: submenu };
+        }
+
+        function openNewWindow(url: string) {
+            global.open(url);
         }
 
         function menuItemSearch(mathItem: HTMLMathItemElement): ICommandItem {
             var submenu = [], item: ICommandItem, markup,
-                texSources = mathItem.getSources({ markup: true, type: MIME_TYPE_TEX }),
-                mmlSources = mathItem.getSources({ markup: true, type: MIME_TYPE_MATHML }),
-                htmlSources = mathItem.getSources({ markup: true, type: MIME_TYPE_HTML });
+                source = getSourceWithTypePreference(mathItem, [MIME_TYPE_TEX, MIME_TYPE_MATHML, MIME_TYPE_HTML]);
 
             item = { label: 'Google' };
-            if (texSources.length || mmlSources.length || htmlSources.length) {
-                markup = getSourceMarkup(texSources.length ? texSources[0] : mmlSources.length ? mmlSources[0] : htmlSources[0]);
-                item.action = () => { location.href = 'https://www.google.com/#q=' + encodeURIComponent(markup); }
+            if (source) {
+                markup = getSourceMarkup(source);
+                item.action = () => {
+                    openNewWindow('https://www.google.com/#q=' + encodeURIComponent(markup));
+                }
             }
             submenu.push(item);
 
             item = { label: 'Tangent' };
-            if (texSources.length) {
-                markup = getSourceMarkup(texSources[0]);
-                item.action = () => { location.href = 'http://saskatoon.cs.rit.edu/tangent/?query=' + encodeURIComponent(markup); }
+            if (source && getSourceType(source) === MIME_TYPE_TEX) {
+                markup = getSourceMarkup(source);
+                item.action = () => {
+                    openNewWindow('http://saskatoon.cs.rit.edu/tangent/?query=' + encodeURIComponent(markup));
+                }
             }
             submenu.push(item);
 
-            return {
-                label: 'Search',
-                submenu: submenu
-            };
+            return { label: 'Search', submenu: submenu };
+        }
+
+        function menuItemOpenWith(mathItem: HTMLMathItemElement): ICommandItem {
+            var submenu = [], item: ICommandItem, markup,
+                source = getSourceWithTypePreference(mathItem, [MIME_TYPE_TEX, MIME_TYPE_MATHML, MIME_TYPE_HTML]);
+            //submenu.push({ label: 'Mathematica', action: () => {} });
+            //submenu.push({ label: 'Maple', action: () => {} });
+
+            item = { label: 'WolframAlpha' };
+            if (source) {
+                markup = getSourceMarkup(source);
+                item.action = () => {
+                    openNewWindow('http://www.wolframalpha.com/input/?i=' + encodeURIComponent(markup));
+                }
+            }
+            submenu.push(item);
+
+            return { label: 'Open with...', submenu: submenu };
         }
 
         function getCommandItems(mathItem: HTMLMathItemElement): ICommandItem[] {
@@ -278,13 +298,7 @@ module FlorianMath {
             items.push(menuItemGetMarkup(mathItem));
             items.push(menuItemGetPermalink(mathItem));
             items.push(menuItemToCode(mathItem));
-            items.push({
-                    label: 'Open with', submenu: [
-                        { label: 'Mathematica', action: () => {} },
-                        { label: 'Maple', action: () => {} },
-                        { label: 'WolframAlpha', action: () => {} }
-                    ]
-                });
+            items.push(menuItemOpenWith(mathItem));
             items.push(menuItemShare(mathItem));
             items.push(menuItemSearch(mathItem));
             items.push(menuItemSpeak(mathItem));
