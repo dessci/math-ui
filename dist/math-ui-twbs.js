@@ -205,37 +205,53 @@ var FlorianMath;
             submenu.push(make('C', 'for (i = 1; i <= n; i++){\n  sum = sum + i;\n}\n'));
             submenu.push(make('Mathematica', 'Sum[i^2, {i, 1, n}]\n'));
             submenu.push(make('Python', 'sum(range(1, n+1))\n'));
-            return {
-                label: 'Convert to code',
-                submenu: submenu
-            };
+            return { label: 'Convert to code', submenu: submenu };
+        }
+        function openNewWindow(url) {
+            global.open(url);
+        }
+        function menuItemSearch(mathItem) {
+            var submenu = [], item, markup, source = FlorianMath.getSourceWithTypePreference(mathItem, [FlorianMath.MIME_TYPE_TEX, FlorianMath.MIME_TYPE_MATHML, FlorianMath.MIME_TYPE_HTML]);
+            item = { label: 'Google' };
+            if (source) {
+                markup = FlorianMath.getSourceMarkup(source);
+                item.action = function () {
+                    openNewWindow('https://www.google.com/#q=' + encodeURIComponent(markup));
+                };
+            }
+            submenu.push(item);
+            item = { label: 'Tangent' };
+            if (source && FlorianMath.getSourceType(source) === FlorianMath.MIME_TYPE_TEX) {
+                markup = FlorianMath.getSourceMarkup(source);
+                item.action = function () {
+                    openNewWindow('http://saskatoon.cs.rit.edu/tangent/?query=' + encodeURIComponent(markup));
+                };
+            }
+            submenu.push(item);
+            return { label: 'Search', submenu: submenu };
+        }
+        function menuItemOpenWith(mathItem) {
+            var submenu = [], item, markup, source = FlorianMath.getSourceWithTypePreference(mathItem, [FlorianMath.MIME_TYPE_TEX, FlorianMath.MIME_TYPE_MATHML, FlorianMath.MIME_TYPE_HTML]);
+            //submenu.push({ label: 'Mathematica', action: () => {} });
+            //submenu.push({ label: 'Maple', action: () => {} });
+            item = { label: 'WolframAlpha' };
+            if (source) {
+                markup = FlorianMath.getSourceMarkup(source);
+                item.action = function () {
+                    openNewWindow('http://www.wolframalpha.com/input/?i=' + encodeURIComponent(markup));
+                };
+            }
+            submenu.push(item);
+            return { label: 'Open with...', submenu: submenu };
         }
         function getCommandItems(mathItem) {
             var items = [];
             items.push(menuItemGetMarkup(mathItem));
             items.push(menuItemGetPermalink(mathItem));
             items.push(menuItemToCode(mathItem));
-            items.push({
-                label: 'Open with',
-                submenu: [
-                    { label: 'Mathematica', action: function () {
-                    } },
-                    { label: 'Maple', action: function () {
-                    } },
-                    { label: 'WolframAlpha', action: function () {
-                    } }
-                ]
-            });
+            items.push(menuItemOpenWith(mathItem));
             items.push(menuItemShare(mathItem));
-            items.push({
-                label: 'Search',
-                submenu: [
-                    { label: 'Google', action: function () {
-                    } },
-                    { label: 'Tangent', action: function () {
-                    } }
-                ]
-            });
+            items.push(menuItemSearch(mathItem));
             items.push(menuItemSpeak(mathItem));
             return items;
         }
@@ -451,14 +467,14 @@ var FlorianMath;
 
 FlorianMath.requireLibs().then(function (jQuery) {
 /*!
- * Bootstrap v3.3.2 (http://getbootstrap.com)
+ * Bootstrap v3.3.4 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=a6ecd0a83c9b51190e8c)
- * Config saved to config.json and https://gist.github.com/a6ecd0a83c9b51190e8c
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=74d368b4aae45799e9f9)
+ * Config saved to config.json and https://gist.github.com/74d368b4aae45799e9f9
  */
 if (typeof jQuery === 'undefined') {
   throw new Error('Bootstrap\'s JavaScript requires jQuery')
@@ -487,12 +503,15 @@ if (typeof jQuery === 'undefined') {
   // ======================
 
   var Modal = function (element, options) {
-    this.options        = options
-    this.$body          = $(document.body)
-    this.$element       = $(element)
-    this.$backdrop      =
-    this.isShown        = null
-    this.scrollbarWidth = 0
+    this.options             = options
+    this.$body               = $(document.body)
+    this.$element            = $(element)
+    this.$dialog             = this.$element.find('.modal-dialog')
+    this.$backdrop           = null
+    this.isShown             = null
+    this.originalBodyPad     = null
+    this.scrollbarWidth      = 0
+    this.ignoreBackdropClick = false
 
     if (this.options.remote) {
       this.$element
@@ -537,6 +556,12 @@ if (typeof jQuery === 'undefined') {
 
     this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
 
+    this.$dialog.on('mousedown.dismiss.bs.modal', function () {
+      that.$element.one('mouseup.dismiss.bs.modal', function (e) {
+        if ($(e.target).is(that.$element)) that.ignoreBackdropClick = true
+      })
+    })
+
     this.backdrop(function () {
       var transition = $.support.transition && that.$element.hasClass('fade')
 
@@ -548,7 +573,6 @@ if (typeof jQuery === 'undefined') {
         .show()
         .scrollTop(0)
 
-      if (that.options.backdrop) that.adjustBackdrop()
       that.adjustDialog()
 
       if (transition) {
@@ -564,7 +588,7 @@ if (typeof jQuery === 'undefined') {
       var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
 
       transition ?
-        that.$element.find('.modal-dialog') // wait for modal to slide in
+        that.$dialog // wait for modal to slide in
           .one('bsTransitionEnd', function () {
             that.$element.trigger('focus').trigger(e)
           })
@@ -593,6 +617,9 @@ if (typeof jQuery === 'undefined') {
       .removeClass('in')
       .attr('aria-hidden', true)
       .off('click.dismiss.bs.modal')
+      .off('mouseup.dismiss.bs.modal')
+
+    this.$dialog.off('mousedown.dismiss.bs.modal')
 
     $.support.transition && this.$element.hasClass('fade') ?
       this.$element
@@ -653,13 +680,18 @@ if (typeof jQuery === 'undefined') {
       var doAnimate = $.support.transition && animate
 
       this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
-        .prependTo(this.$element)
-        .on('click.dismiss.bs.modal', $.proxy(function (e) {
-          if (e.target !== e.currentTarget) return
-          this.options.backdrop == 'static'
-            ? this.$element[0].focus.call(this.$element[0])
-            : this.hide.call(this)
-        }, this))
+        .appendTo(this.$body)
+
+      this.$element.on('click.dismiss.bs.modal', $.proxy(function (e) {
+        if (this.ignoreBackdropClick) {
+          this.ignoreBackdropClick = false
+          return
+        }
+        if (e.target !== e.currentTarget) return
+        this.options.backdrop == 'static'
+          ? this.$element[0].focus()
+          : this.hide()
+      }, this))
 
       if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
 
@@ -694,14 +726,7 @@ if (typeof jQuery === 'undefined') {
   // these following methods are used to handle overflowing modals
 
   Modal.prototype.handleUpdate = function () {
-    if (this.options.backdrop) this.adjustBackdrop()
     this.adjustDialog()
-  }
-
-  Modal.prototype.adjustBackdrop = function () {
-    this.$backdrop
-      .css('height', 0)
-      .css('height', this.$element[0].scrollHeight)
   }
 
   Modal.prototype.adjustDialog = function () {
@@ -721,17 +746,23 @@ if (typeof jQuery === 'undefined') {
   }
 
   Modal.prototype.checkScrollbar = function () {
-    this.bodyIsOverflowing = document.body.scrollHeight > document.documentElement.clientHeight
+    var fullWindowWidth = window.innerWidth
+    if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
+      var documentElementRect = document.documentElement.getBoundingClientRect()
+      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left)
+    }
+    this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth
     this.scrollbarWidth = this.measureScrollbar()
   }
 
   Modal.prototype.setScrollbar = function () {
     var bodyPad = parseInt((this.$body.css('padding-right') || 0), 10)
+    this.originalBodyPad = document.body.style.paddingRight || ''
     if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth)
   }
 
   Modal.prototype.resetScrollbar = function () {
-    this.$body.css('padding-right', '')
+    this.$body.css('padding-right', this.originalBodyPad)
   }
 
   Modal.prototype.measureScrollbar = function () { // thx walsh

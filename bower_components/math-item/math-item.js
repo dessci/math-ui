@@ -331,15 +331,20 @@ var FlorianMath;
         });
         return result;
     }
-    function getMainMarkup() {
+    function getSourceWithTypePreference(mathItem, typePref) {
         var k, type, sources;
-        for (k = 0; k < MARKUP_PREFERENCE.length; k++) {
-            type = MARKUP_PREFERENCE[k];
-            sources = this.getSources({ type: type, markup: true });
+        for (k = 0; k < typePref.length; k++) {
+            type = typePref[k];
+            sources = mathItem.getSources({ type: type, markup: true });
             if (sources.length)
-                return { type: type, markup: getSourceMarkup(sources[0]) };
+                return sources[0];
         }
         return null;
+    }
+    FlorianMath.getSourceWithTypePreference = getSourceWithTypePreference;
+    function getMainMarkup() {
+        var source = getSourceWithTypePreference(this, MARKUP_PREFERENCE);
+        return source ? { type: getSourceType(source), markup: getSourceMarkup(source) } : null;
     }
     function baseItemCreate() {
         this._private = {

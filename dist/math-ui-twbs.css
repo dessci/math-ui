@@ -1,12 +1,12 @@
 /*!
- * Bootstrap v3.3.2 (http://getbootstrap.com)
+ * Bootstrap v3.3.4 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=a6ecd0a83c9b51190e8c)
- * Config saved to config.json and https://gist.github.com/a6ecd0a83c9b51190e8c
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=74d368b4aae45799e9f9)
+ * Config saved to config.json and https://gist.github.com/74d368b4aae45799e9f9
  */
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
@@ -1021,11 +1021,27 @@
   content: "\e227";
 }
 
+.math-ui .glyphicon-btc:before {
+  content: "\e227";
+}
+
+.math-ui .glyphicon-xbt:before {
+  content: "\e227";
+}
+
 .math-ui .glyphicon-yen:before {
   content: "\00a5";
 }
 
+.math-ui .glyphicon-jpy:before {
+  content: "\00a5";
+}
+
 .math-ui .glyphicon-ruble:before {
+  content: "\20bd";
+}
+
+.math-ui .glyphicon-rub:before {
   content: "\20bd";
 }
 
@@ -1197,7 +1213,7 @@
 
 .math-ui {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
   background-color: #ffffff;
@@ -1277,6 +1293,10 @@
   clip: auto;
 }
 
+.math-ui [role="button"] {
+  cursor: pointer;
+}
+
 .math-ui h4,
 .math-ui .h1,
 .math-ui .h2,
@@ -1305,8 +1325,8 @@
 .math-ui .h1,
 .math-ui .h2,
 .math-ui .h3 {
-  margin-top: 22px;
-  margin-bottom: 11px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .math-ui .h1 .small,
@@ -1319,8 +1339,8 @@
 .math-ui .h4,
 .math-ui .h5,
 .math-ui .h6 {
-  margin-top: 11px;
-  margin-bottom: 11px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .math-ui h4 .small,
@@ -1331,45 +1351,45 @@
 }
 
 .math-ui .h1 {
-  font-size: 41px;
+  font-size: 36px;
 }
 
 .math-ui .h2 {
-  font-size: 34px;
+  font-size: 30px;
 }
 
 .math-ui .h3 {
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .math-ui h4,
 .math-ui .h4 {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .math-ui .h5 {
-  font-size: 16px;
-}
-
-.math-ui .h6 {
   font-size: 14px;
 }
 
+.math-ui .h6 {
+  font-size: 12px;
+}
+
 .math-ui .lead {
-  margin-bottom: 22px;
-  font-size: 18px;
+  margin-bottom: 20px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 1.4;
 }
 
 @media (min-width: 768px) {
   .math-ui .lead {
-    font-size: 24px;
+    font-size: 21px;
   }
 }
 
 .math-ui .small {
-  font-size: 87%;
+  font-size: 85%;
 }
 
 .math-ui .mark {
@@ -1495,14 +1515,14 @@
 }
 
 .math-ui .page-header {
-  padding-bottom: 10px;
-  margin: 44px 0 22px;
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
   border-bottom: 1px solid #eeeeee;
 }
 
 .math-ui ul {
   margin-top: 0;
-  margin-bottom: 11px;
+  margin-bottom: 10px;
 }
 
 .math-ui ul ul {
@@ -1589,9 +1609,9 @@
 .math-ui .form-control {
   display: block;
   width: 100%;
-  height: 36px;
+  height: 34px;
   padding: 6px 12px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.42857143;
   color: #555555;
   background-color: #ffffff;
@@ -1627,9 +1647,12 @@
 
 .math-ui .form-control[disabled],
 .math-ui .form-control[readonly] {
-  cursor: not-allowed;
   background-color: #eeeeee;
   opacity: 1;
+}
+
+.math-ui .form-control[disabled] {
+  cursor: not-allowed;
 }
 
 .math-ui textarea.form-control {
@@ -1645,7 +1668,7 @@
   .math-ui input[type="time"],
   .math-ui input[type="datetime-local"],
   .math-ui input[type="month"] {
-    line-height: 36px;
+    line-height: 34px;
   }
 
   .math-ui input[type="date"].input-sm,
@@ -1656,7 +1679,7 @@
   .math-ui .input-group-sm input[type="time"],
   .math-ui .input-group-sm input[type="datetime-local"],
   .math-ui .input-group-sm input[type="month"] {
-    line-height: 33px;
+    line-height: 30px;
   }
 
   .math-ui input[type="date"].input-lg,
@@ -1667,7 +1690,7 @@
   .math-ui .input-group-lg input[type="time"],
   .math-ui .input-group-lg input[type="datetime-local"],
   .math-ui .input-group-lg input[type="month"] {
-    line-height: 49px;
+    line-height: 46px;
   }
 }
 
@@ -1699,6 +1722,7 @@
 
 .math-ui .radio-inline,
 .math-ui .checkbox-inline {
+  position: relative;
   display: inline-block;
   padding-left: 20px;
   margin-bottom: 0;
@@ -1729,6 +1753,7 @@
   padding-top: 7px;
   padding-bottom: 7px;
   margin-bottom: 0;
+  min-height: 34px;
 }
 
 .math-ui .form-control-static.input-lg,
@@ -1738,9 +1763,9 @@
 }
 
 .math-ui .input-sm {
-  height: 33px;
+  height: 30px;
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
@@ -1750,9 +1775,9 @@
 }
 
 .math-ui .form-group-sm .form-control {
-  height: 33px;
+  height: 30px;
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
@@ -1762,16 +1787,17 @@
 }
 
 .math-ui .form-group-sm .form-control-static {
-  height: 33px;
+  height: 30px;
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5;
+  min-height: 32px;
 }
 
 .math-ui .input-lg {
-  height: 49px;
+  height: 46px;
   padding: 10px 16px;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.3333333;
   border-radius: 6px;
 }
@@ -1781,9 +1807,9 @@
 }
 
 .math-ui .form-group-lg .form-control {
-  height: 49px;
+  height: 46px;
   padding: 10px 16px;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.3333333;
   border-radius: 6px;
 }
@@ -1793,10 +1819,11 @@
 }
 
 .math-ui .form-group-lg .form-control-static {
-  height: 49px;
+  height: 46px;
   padding: 10px 16px;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.3333333;
+  min-height: 38px;
 }
 
 .math-ui .has-feedback {
@@ -1804,7 +1831,7 @@
 }
 
 .math-ui .has-feedback .form-control {
-  padding-right: 45px;
+  padding-right: 42.5px;
 }
 
 .math-ui .form-control-feedback {
@@ -1813,23 +1840,23 @@
   right: 0;
   z-index: 2;
   display: block;
-  width: 36px;
-  height: 36px;
-  line-height: 36px;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
   text-align: center;
   pointer-events: none;
 }
 
 .math-ui .input-lg + .form-control-feedback {
-  width: 49px;
-  height: 49px;
-  line-height: 49px;
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
 }
 
 .math-ui .input-sm + .form-control-feedback {
-  width: 33px;
-  height: 33px;
-  line-height: 33px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
 }
 
 .math-ui .has-success .help-block,
@@ -1999,7 +2026,7 @@
 
 .math-ui .form-horizontal .radio,
 .math-ui .form-horizontal .checkbox {
-  min-height: 29px;
+  min-height: 27px;
 }
 
 .math-ui .form-horizontal .form-group {
@@ -2044,7 +2071,7 @@
   border: 1px solid transparent;
   white-space: nowrap;
   padding: 6px 12px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.42857143;
   border-radius: 4px;
   -webkit-user-select: none;
@@ -2391,7 +2418,7 @@
 .math-ui .btn-lg,
 .math-ui .btn-group-lg > .btn {
   padding: 10px 16px;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.3333333;
   border-radius: 6px;
 }
@@ -2399,7 +2426,7 @@
 .math-ui .btn-sm,
 .math-ui .btn-group-sm > .btn {
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
@@ -2407,7 +2434,7 @@
 .math-ui .btn-xs,
 .math-ui .btn-group-xs > .btn {
   padding: 1px 5px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
@@ -2655,9 +2682,9 @@
 .math-ui .input-group-lg > .form-control,
 .math-ui .input-group-lg > .input-group-addon,
 .math-ui .input-group-lg > .input-group-btn > .btn {
-  height: 49px;
+  height: 46px;
   padding: 10px 16px;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.3333333;
   border-radius: 6px;
 }
@@ -2671,9 +2698,9 @@
 .math-ui .input-group-sm > .form-control,
 .math-ui .input-group-sm > .input-group-addon,
 .math-ui .input-group-sm > .input-group-btn > .btn {
-  height: 33px;
+  height: 30px;
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
@@ -2705,7 +2732,7 @@
 
 .math-ui .input-group-addon {
   padding: 6px 12px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: normal;
   line-height: 1;
   color: #555555;
@@ -2717,13 +2744,13 @@
 
 .math-ui .input-group-addon.input-sm {
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 3px;
 }
 
 .math-ui .input-group-addon.input-lg {
   padding: 10px 16px;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 6px;
 }
 
@@ -2836,7 +2863,7 @@
 
 .math-ui .nav .nav-divider {
   height: 1px;
-  margin: 10px 0;
+  margin: 9px 0;
   overflow: hidden;
   background-color: #e5e5e5;
 }
@@ -3012,12 +3039,10 @@
 
 .math-ui .tab-content > .tab-pane {
   display: none;
-  visibility: hidden;
 }
 
 .math-ui .tab-content > .active {
   display: block;
-  visibility: visible;
 }
 
 .math-ui .nav-tabs .dropdown-menu {
@@ -3229,7 +3254,7 @@
 }
 
 .math-ui .panel {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
   background-color: #ffffff;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -3255,7 +3280,7 @@
 .math-ui .panel-title {
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 18px;
+  font-size: 16px;
   color: inherit;
 }
 
@@ -3342,7 +3367,7 @@
 }
 
 .math-ui .panel-group {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 .math-ui .panel-group .panel {
@@ -3532,7 +3557,7 @@
 
 .math-ui .close {
   float: right;
-  font-size: 24px;
+  font-size: 21px;
   font-weight: bold;
   line-height: 1;
   color: #000000;
@@ -3570,7 +3595,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1040;
+  z-index: 1050;
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
@@ -3618,10 +3643,12 @@
 }
 
 .math-ui .modal-backdrop {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
+  bottom: 0;
   left: 0;
+  z-index: 1040;
   background-color: #000000;
 }
 
@@ -3768,7 +3795,6 @@
 
 .math-ui .hidden {
   display: none !important;
-  visibility: hidden !important;
 }
 
 .math-ui .affix {
@@ -4009,8 +4035,7 @@ math-item {
     padding: 5px;
     margin: 0;
     border-radius: 3px;
-    display: inline-block;
-    background-color: #fff; }
+    display: inline-block; }
     .math-ui-eqn-menu > .well > span {
       padding: 0 0.2em;
       display: inline-block;
