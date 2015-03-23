@@ -60,7 +60,7 @@ var FlorianMath;
             if (html.previousSibling && html.previousSibling.className === 'MathJax_Preview')
                 preview = html.previousSibling;
             mathitem = createMathItem({ 'display': display });
-            mathsrc = createMathSource({ 'type': mimetype, 'usage': 'norender' });
+            mathsrc = createMathSource({ 'type': mimetype, 'usage': 'markup' });
             mathsrc.appendChild(doc.createTextNode(jax.originalText));
             mathitem.appendChild(mathsrc);
             parent.insertBefore(mathitem, script);
@@ -74,7 +74,7 @@ var FlorianMath;
             output.done();
             FlorianMath.dispatchCustomEvent(mathitem, FlorianMath.WRAPPED_MATH_ITEM_EVENT, { bubbles: true });
             toMathML(jax, function (mml) {
-                mathsrc = createMathSource({ 'type': 'application/mathml+xml', 'name': 'MathJax', 'usage': 'norender' });
+                mathsrc = createMathSource({ 'type': 'application/mathml+xml', 'name': 'MathJax', 'usage': 'markup' });
                 mathsrc.appendChild(doc.createTextNode(mml));
                 mathitem.appendChild(mathsrc);
                 global.HTMLMathSourceElement.manualAttach(mathsrc);

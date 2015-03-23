@@ -247,13 +247,11 @@ var FlorianMath;
         mathItemRenderDone(mathItem);
     }
     FlorianMath.mathItemShowSources = mathItemShowSources;
-    function doPreview(mathItem) {
-        var previewSources = mathItem.getSources({ render: false, markup: false });
-        if (previewSources.length) {
-            FlorianMath.each(previewSources, function (source) {
-                source.style.display = '';
-            });
-        }
+    function showPreview(mathItem) {
+        var previewSources = mathItem.getSources({ preview: true });
+        FlorianMath.each(previewSources, function (source) {
+            source.style.display = '';
+        });
     }
     function mathItemEnqueueRender(mathItem) {
         if (mathItem._private.renderState === 0 /* Idle */) {
@@ -264,7 +262,7 @@ var FlorianMath;
                 if (mathItem._private.firstPass) {
                     mathItem._private.firstPass = false;
                     //normalize(el);
-                    doPreview(mathItem);
+                    showPreview(mathItem);
                 }
                 mathItem.render();
                 if (mathItem._private.renderState === 1 /* Pending */) {
@@ -306,14 +304,18 @@ var FlorianMath;
     }
     /*
      * render  markup  usage
-     * -       -       'preview'
-     * +       -       'nomarkup'
-     * -       +       'norender'
+     * -       -       'passive'/'preview'
+     * +       -       'render'
+     * -       +       'markup'
      * +       +       ''
      */
     function getSources(options) {
-        var result = [], render, markup, encoding;
+        var result = [], render, markup, preview, encoding;
         options = options || {};
+        if (options.preview !== undefined) {
+            preview = !!options.preview;
+            render = markup = false;
+        }
         if (options.render !== undefined)
             render = !!options.render;
         if (options.markup !== undefined)
@@ -321,13 +323,8 @@ var FlorianMath;
         encoding = options.type;
         iterateSourceElements(this, function (source) {
             var usage = source.getAttribute('usage');
-            if (render !== undefined && render === (usage === 'preview' || usage === 'norender'))
-                return;
-            if (markup !== undefined && markup === (usage === 'preview' || usage === 'nomarkup'))
-                return;
-            if (encoding !== undefined && encoding !== getSourceType(source))
-                return;
-            result.push(source);
+            if ((preview === undefined || preview === (usage === 'preview')) && (render === undefined || render === (!usage || usage === 'render')) && (markup === undefined || markup === (!usage || usage === 'markup')) && (encoding === undefined || encoding === getSourceType(source)))
+                result.push(source);
         });
         return result;
     }

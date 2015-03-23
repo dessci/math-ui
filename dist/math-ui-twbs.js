@@ -351,12 +351,11 @@ var FlorianMath;
             }).on('copy', function (ev) {
                 log('copy', ev);
                 if (ev.originalEvent.clipboardData) {
-                    log('decorating copy');
                     setDataTransfer(ev.originalEvent.clipboardData, mathItem);
                 }
                 FlorianMath.async(function () {
                     removeCopyItem();
-                    blur();
+                    //blur();
                 });
             }).on('blur', function () {
                 if (!copyItem) {
@@ -405,8 +404,6 @@ var FlorianMath;
                             dt.setData('text', mainMarkup.markup);
                     }
                 }
-            }).on('dragend', function () {
-                $mathItem.blur();
             });
         };
         BootstrapLookAndFeel.prototype.highlightAll = function () {
