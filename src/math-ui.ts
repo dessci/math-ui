@@ -420,12 +420,11 @@ module FlorianMath {
             }).on('copy', (ev: BaseJQueryEventObject) => {
                 log('copy', ev);
                 if ((<ClipboardEvent> ev.originalEvent).clipboardData) {
-                    log('decorating copy');
                     setDataTransfer((<ClipboardEvent> ev.originalEvent).clipboardData, mathItem);
                 }
                 async(() => {
                     removeCopyItem();
-                    blur();
+                    //blur();
                 });
             }).on('blur', () => {
                 if (!copyItem) {
@@ -476,9 +475,9 @@ module FlorianMath {
                             dt.setData('text', mainMarkup.markup);
                     }
                 }
-            }).on('dragend', () => {
+            })/*.on('dragend', () => {
                 $mathItem.blur();
-            });
+            })*/;
         };
 
         BootstrapLookAndFeel.prototype.highlightAll = function () {
