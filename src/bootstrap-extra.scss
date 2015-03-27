@@ -100,3 +100,119 @@ math-item {
     }
 
 }
+
+$delay: 0.5s;
+$bar-width: 250px;
+$bar-padding: 15px;
+
+#math-ui-bar {
+    display: none;
+    margin: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    padding: $bar-padding;
+    z-index: 100000;
+}
+
+html.math-ui-bar-dockleft {
+    margin-left: $bar-width+2*$bar-padding;
+
+    #math-ui-bar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: $bar-width;
+        &.show {
+            display: block;
+        }
+    }
+}
+
+html.math-ui-bar-floatleft {
+    #math-ui-bar {
+        display: block;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: -($bar-width+2*$bar-padding);
+        width: $bar-width;
+        -moz-transition: left $delay;
+        -webkit-transition: left $delay;
+        -ms-transition: left $delay;
+        -o-transition: left $delay;
+        transition: left $delay;
+        &.show {
+            left: 0;
+        }
+    }
+}
+
+html.math-ui-bar-dockright {
+    margin-right: $bar-width+2*$bar-padding;
+
+    #math-ui-bar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: $bar-width;
+        &.show {
+            display: block;
+        }
+    }
+}
+
+html.math-ui-bar-floatright {
+    #math-ui-bar {
+        display: block;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: -($bar-width+2*$bar-padding);
+        width: $bar-width;
+        -moz-transition: right $delay;
+        -webkit-transition: right $delay;
+        -ms-transition: right $delay;
+        -o-transition: right $delay;
+        transition: right $delay;
+        &.show {
+            right: 0;
+        }
+    }
+}
+
+html.math-ui-bar-dockbottom {
+    margin-bottom: $bar-width+2*$bar-padding;
+
+    #math-ui-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: $bar-width;
+        &.show {
+            display: block;
+        }
+    }
+}
+
+html.math-ui-bar-floatbottom {
+    #math-ui-bar {
+        display: block;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: -($bar-width+2*$bar-padding);
+        height: $bar-width;
+        -moz-transition: bottom $delay;
+        -webkit-transition: bottom $delay;
+        -ms-transition: bottom $delay;
+        -o-transition: bottom $delay;
+        transition: bottom $delay;
+        &.show {
+            bottom: 0;
+        }
+    }
+}
+

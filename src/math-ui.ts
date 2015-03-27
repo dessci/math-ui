@@ -88,6 +88,19 @@ module FlorianMath {
         var ACTIVE_CLASS = 'active',
             focusItem, hoverItem, menuItem, menuRemover;
 
+        var sidebarClass = (function (hash: string) {
+            var a = ['dockleft', 'dockright', 'dockbottom', 'floatleft', 'floatright', 'floatbottom'],
+                k = indexOf(a, hash.substr(1));
+            return 'math-ui-bar-' + a[k < 0 ? 0 : k];
+        })(location.hash);
+
+        $(doc.documentElement).addClass(sidebarClass);
+
+        $('#math-ui-bar-remove').click((ev) => {
+            ev.preventDefault();
+            $('#math-ui-bar').removeClass('show');
+        });
+
         // Zoom
 
         function zoomAction(item: HTMLMathItemElement) {
@@ -112,18 +125,10 @@ module FlorianMath {
             HTMLMathItemElement.manualAttach(mathItemClone, true);
         }
 
-        function getMarkupAction(item: HTMLMathItemElement) {
-            var panel = $('<div class="math-ui panel" />'),
-                pos = $(item).position();
-            panel.append($('<p>Foobar</p>'));
-            panel.css('left', pos.left).css('top', pos.top);
-            $(doc.body).append(panel);
-        }
-
         function showMenu(item: HTMLMathItemElement) {
             var $item = $(item), contentElement, display_inline, bodyHandler,
                 eraser = $('<div class="eraser"/>'),
-                icons = map(['triangle-bottom', 'zoom-in', 'star-empty', 'question-sign'], (i: string) =>
+                icons = map(['menu-hamburger', 'zoom-in', 'star-empty', 'question-sign'], (i: string) =>
                     $('<span class="glyphicon glyphicon-' + i + '" />')),
                 top = $('<div class="top" />').append($('<span class="eqn-name" />')
                     .append(getName(item)), icons),
@@ -131,25 +136,7 @@ module FlorianMath {
                 menu = $('<div class="math-ui focus-menu" />').append(eraser, top, body);
 
             function showCommands() {
-                var items = $('<ul class="nav nav-pills nav-stacked" />');
-                each(['Get markup', 'Convert to code', 'Open with', 'Share', 'Search', 'Speak'], (label: string) => {
-                    items.append($('<li/>').append($('<a href="#" />').append(label)));
-                });
-                body.empty().append(items);
-                bodyHandler = (ev: BaseJQueryEventObject) => {
-                    if (ev.type !== 'mousedown') return;
-                    items.find('a').each(function (k) {
-                        if (this === ev.target) {
-                            //$item.blur();
-                            switch (k) {
-                                case 0:
-                                    $item.blur();
-                                    getMarkupAction(item);
-                                    break;
-                            }
-                        }
-                    });
-                };
+                $('#math-ui-bar').addClass('show');
             }
             function doZoom() {
                 $item.blur();
