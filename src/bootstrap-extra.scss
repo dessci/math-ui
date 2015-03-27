@@ -1,81 +1,102 @@
-﻿$item-focus-border: #4f9fcf;
-$item-hover-border: lighten($item-focus-border, 20%);
+﻿// http://www.materialpalette.com/teal/indigo
+$primary-color: #009688;
+$light-primary-color: #b2dfdb;
+$primary-text: #212121;
+$accent-color: #536dfe;
 
-.math-ui a:focus {
-    outline: none;
+$item-focus-border: $primary-color;
+$item-hover-border: $light-primary-color;
+$item-padding: 2px;
+$item-bg: #f8f8f8;
+$focus-menu-padding: 3px;
+$focus-border-width: 2px;
+$focus-border-radius: 3px;
+
+.math-ui .nav-pills > li > a {
+    padding: 0 15px;
+    text-align: left;
 }
 
 math-item {
     position: relative;
-    border: 3px solid transparent;
-    padding: 1px;
-    margin: -4px;  /* -(border-width + padding) */
+    border: $focus-border-width solid transparent;
+    border-radius: $focus-border-radius;
+    padding: $item-padding;
+    margin: -($focus-border-width + $item-padding);
     outline: none;
     cursor: pointer;
     white-space: nowrap;
 
-    &:hover, &.highlight {
+    &:hover, &.active {
+        background-color: $item-bg;
+        box-shadow: $focus-border-width $focus-border-width 1px rgba(0, 0, 0, 0.8);
+    }
+    &:hover {
         border-color: $item-hover-border;
     }
-    &.focus {
+    &.active {
         border-color: $item-focus-border;
     }
 }
 
-.math-ui-zoom {
-    position: absolute;
-    margin: 0.5em 0 0 0.5em;
-    font-size: 200%;
+@mixin panel {
+    background-color: $item-bg;
+    box-shadow: $focus-border-width $focus-border-width 1px rgba(0, 0, 0, 0.8);
+    border: $focus-border-width solid $item-focus-border;
+    border-radius: $focus-border-radius;
+    padding: $focus-menu-padding;
     z-index: 1;
+    color: $primary-text;
+}
 
-    & > .panel {
-        margin: 0.1em;
-    }
+.math-ui.panel {
+    @include panel;
+    position: absolute;
+}
+
+.math-ui.item-zoom {
+    @include panel;
+    position: absolute;
+    font-size: 200%;
+    left: 0.2em;
+    top: 0.2em;
+
     math-item {
+        display: inline-block;
         border: none;
         padding: 0;
         margin: 0;
+        box-shadow: none;
     }
 }
 
-.math-ui-dashboard .btn-group-vertical {
-    width: 100%;
-}
-
-.math-ui-eqn-menu {
+.math-ui.focus-menu {
+    @include panel;
     position: absolute;
-    left: 0;
+    left: 8px;
     top: 100%;
-    z-index: 1;
-    margin-top: 3px;
 
-    & > .well {
-        padding: 5px;
-        margin: 0;
-        border-radius: 3px;
-        display: inline-block;
+    .eraser {
+        position: absolute;
+        left: 0;
+        top: -$focus-border-width - 1px;
+        width: 100%;
+        max-width: 100%;
+        height: $focus-border-width + $focus-menu-padding;
+        background-color: $item-bg;
+    }
 
+    .eqn-name {
+        font-weight: 700;
+    }
+
+    .top {
         & > span {
-            padding: 0 0.2em;
-            display: inline-block;
-            white-space: nowrap;
+            padding: $focus-menu-padding;
+            &.icon:hover {
+                color: $primary-color;
+            }
         }
     }
 
-    & > textarea {
-        position: fixed;
-        width: 20em;
-        left: -21em;
-        top: 0;
-    }
-}
-
-.math-ui-eqn-commands {
-    .list-group-item > span {
-        float: right;
-    }
-
-    .list-group {
-        margin-bottom: 0;
-    }
 }

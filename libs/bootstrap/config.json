@@ -11,7 +11,7 @@
     "@brand-info": "#9C27B0",
     "@brand-warning": "#ff9800",
     "@brand-danger": "#e51c23",
-    "@body-bg": "#fff",
+    "@body-bg": "#f8f8f8",
     "@text-color": "@gray",
     "@link-color": "@brand-primary",
     "@link-hover-color": "darken(@link-color, 15%)",
@@ -64,7 +64,7 @@
     "@table-border-color": "#ddd",
     "@btn-font-weight": "normal",
     "@btn-default-color": "@text-color",
-    "@btn-default-bg": "#fff",
+    "@btn-default-bg": "@body-bg",
     "@btn-default-border": "#eee",
     "@btn-primary-color": "#fff",
     "@btn-primary-bg": "@brand-primary",
@@ -395,5 +395,5 @@
   "js": [
     "modal.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=12341dfe573cc53464ef"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=9c47d97212021835b98c"
 }
