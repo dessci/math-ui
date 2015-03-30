@@ -88,17 +88,9 @@ module FlorianMath {
         var ACTIVE_CLASS = 'active',
             focusItem, hoverItem, menuItem, menuRemover;
 
-        var sidebarClass = (function (hash: string) {
-            var a = ['dockleft', 'dockright', 'dockbottom', 'floatleft', 'floatright', 'floatbottom'],
-                k = indexOf(a, hash.substr(1));
-            return 'math-ui-bar-' + a[k < 0 ? 0 : k];
-        })(location.hash);
-
-        $(doc.documentElement).addClass(sidebarClass);
-
         $('#math-ui-bar-remove').click((ev) => {
             ev.preventDefault();
-            $('#math-ui-bar').removeClass('show');
+            $(document.body).removeClass('math-ui-show');
         });
 
         // Zoom
@@ -136,8 +128,9 @@ module FlorianMath {
                 menu = $('<div class="math-ui focus-menu" />').append(eraser, top, body);
 
             function showCommands() {
-                $('#math-ui-bar').addClass('show');
+                $(document.body).addClass('math-ui-show');
             }
+
             function doZoom() {
                 $item.blur();
                 zoomAction(item);
