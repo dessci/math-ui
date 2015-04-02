@@ -107,30 +107,45 @@ $barPadding: 15px;
 $barMargin: 2px;
 $barHeaderHeight: 36px;
 
-#math-ui-bar {
+#math-ui-viewport {
     display: block;
     position: fixed;
+    visibility: hidden;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: none;
+    left: 0;
+    top: 0;
+    max-width: 100%;
+    width: 100%;
+    width: 100vw;
+    max-height: 100%;
+    height: 100%;
+    height: 100vh;
+}
+
+#math-ui-bar {
+    display: none;
     top: $barMargin;
     bottom: $barMargin;
-    right: -($barWidth + 2*$barMargin);
     width: $barWidth;
-    overflow: auto;
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    -moz-transition: right $delay;
-    -webkit-transition: right $delay;
-    -ms-transition: right $delay;
-    -o-transition: right $delay;
-    transition: right $delay;
-    & > .panel {
-        margin-bottom: 0;
-    }
+    z-index: 10000;
 }
 
 body.math-ui-show {
     #math-ui-bar {
+        display: block;
+        position: absolute;
+        visibility: visible;
         right: 2*$barMargin;
+        overflow: auto;
+        -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        & > .panel {
+            margin-bottom: 0;
+        }
     }
 }
 
@@ -149,8 +164,7 @@ body.math-ui-show {
         overflow: auto;
     }
 
-    #math-ui-bar {
-        display: none;
+    #math-ui-viewport {
     }
 
     body.math-ui-show {
@@ -161,8 +175,9 @@ body.math-ui-show {
         #math-ui-bar {
             display: block;
             position: fixed;
-            right: $barMargin;
+            visibility: visible;
             overflow: hidden;
+            right: $barMargin;
 
             & > .panel {
                 & > .panel-heading, & > .panel-body {
