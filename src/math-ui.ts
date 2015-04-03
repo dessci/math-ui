@@ -88,11 +88,6 @@ module FlorianMath {
         var ACTIVE_CLASS = 'active',
             focusItem, hoverItem, menuItem, menuRemover;
 
-        $('#math-ui-bar-remove').click((ev) => {
-            ev.preventDefault();
-            $(document.body).removeClass('math-ui-show');
-        });
-
         // Zoom
 
         function zoomAction(item: HTMLMathItemElement) {
@@ -120,7 +115,7 @@ module FlorianMath {
         function showMenu(item: HTMLMathItemElement) {
             var $item = $(item), contentElement, display_inline, bodyHandler,
                 eraser = $('<div class="eraser"/>'),
-                icons = map(['menu-hamburger', 'zoom-in', 'star-empty', 'question-sign'], (i: string) =>
+                icons = map(['cog', 'zoom-in', 'unchecked', 'question-sign'], (i: string) =>
                     $('<span class="glyphicon glyphicon-' + i + '" />')),
                 top = $('<div class="top" />').append($('<span class="eqn-name" />')
                     .append(getName(item)), icons),
@@ -137,7 +132,7 @@ module FlorianMath {
             }
             function toggleSelected() {
                 var on = (<HTMLMathItemElementPrivate> item).selected = !(<HTMLMathItemElementPrivate> item).selected;
-                icons[2].toggleClass('glyphicon-star-empty', !on).toggleClass('glyphicon-star', on);
+                icons[2].toggleClass('glyphicon-unchecked', !on).toggleClass('glyphicon-check', on);
             }
 
             if ($item.hasClass(ACTIVE_CLASS))
@@ -324,6 +319,53 @@ module FlorianMath {
             });
         else
             pagerendered();
+
+        function Sidebar() {
+            var body = $('<div class="panel-body" />'),
+                closer = $('<button type="button" class="close">&times;</button>');
+            $(document.body).append($('<div id="math-ui-viewport" />')
+                .append($('<div id="math-ui-bar" class="math-ui" />')
+                    .append($('<div class="panel panel-primary" />')
+                        .append($('<div class="panel-heading" />').append(closer, $('<h4 class="panel-title">Math UI</h4>')),
+                                body))));
+            closer.click((ev) => {
+                $(document.body).removeClass('math-ui-show');
+            });
+            body.append($(
+'  <div class="panel panel-default">'+
+'    <div class="panel-heading">'+
+'      <h4 class="panel-title">'+
+'        Active Selection'+
+'      </h4>'+
+'    </div>'+
+'    <div class="panel-body">'+
+'      Body 1'+
+'    </div>'+
+'  </div>'+
+'  <div class="panel panel-default">'+
+'    <div class="panel-heading">'+
+'      <h4 class="panel-title">'+
+'        Multiple Selection'+
+'      </h4>'+
+'    </div>'+
+'    <div class="panel-body">'+
+'      Body 2'+
+'    </div>'+
+'  </div>'+
+'  <div class="panel panel-default">'+
+'    <div class="panel-heading">'+
+'      <h4 class="panel-title">'+
+'        Page Options'+
+'      </h4>'+
+'    </div>'+
+'    <div class="panel-body">'+
+'      Body 3'+
+'    </div>'+
+'  </div>'));
+            this.body = body;
+        }
+
+        var sidebar = new Sidebar();
 
     });
 

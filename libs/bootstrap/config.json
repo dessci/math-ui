@@ -389,11 +389,11 @@
     "list-group.less",
     "panels.less",
     "wells.less",
-    "close.less",
-    "modals.less"
+    "close.less"
   ],
   "js": [
-    "modal.js"
+    "collapse.js",
+    "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=9c47d97212021835b98c"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=3003a1458cb89d5b5a70"
 }

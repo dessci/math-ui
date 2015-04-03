@@ -101,6 +101,10 @@ math-item {
 
 }
 
+.math-ui .panel-heading button.close {
+    margin-top: -7px;
+}
+
 $delay: 0.2s;
 $barWidth: 200px;
 $barPadding: 15px;
@@ -131,6 +135,12 @@ $barHeaderHeight: 36px;
     bottom: $barMargin;
     width: $barWidth;
     z-index: 10000;
+    .panel {
+        margin-bottom: 0;
+    }
+    & > .panel > .panel-body {
+        padding: 0;
+    }
 }
 
 body.math-ui-show {
@@ -143,9 +153,6 @@ body.math-ui-show {
         -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-        & > .panel {
-            margin-bottom: 0;
-        }
     }
 }
 
