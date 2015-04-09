@@ -86,7 +86,98 @@ module FlorianMath {
     requireLibs().then(($: JQueryStatic) => {
 
         var ACTIVE_CLASS = 'active',
-            focusItem, hoverItem, menuItem, menuRemover;
+            focusItem, hoverItem, menuItem, menuRemover, sidebar;
+
+        function Sidebar() {
+            var body = $('<div class="panel-body" />'),
+                closer = $('<button type="button" class="close">&times;</button>');
+            $(document.body).append($('<div id="math-ui-viewport" />')
+                .append($('<div id="math-ui-bar" class="math-ui" />')
+                    .append($('<div class="panel panel-primary" />')
+                        .append($('<div class="panel-heading" />').append(closer, $('<h4 class="panel-title">Math UI</h4>')),
+                                body))));
+            closer.click((ev) => {
+                this.hide();
+            });
+            this.body = body;
+            this.reset();
+        }
+
+        Sidebar.prototype.reset = function () {
+            var nav = $('<ul class="nav nav-pills nav-stacked" />'),
+                pagenav = $('<ul class="nav nav-pills nav-stacked" />'),
+                body = this.body;
+            each(['Markup', 'Permalink', 'Convert to code', 'Open with', 'Share', 'Search', 'Speak'], (label) => {
+                nav.append($('<li role="presentation" />').append($('<a href="#" />').append(label)));
+            });
+            each(['Highlight all equations', 'List all', 'Help', 'About'], (label) => {
+                pagenav.append($('<li role="presentation" />').append($('<a href="#" />').append(label)));
+            });
+            body.empty()
+                .append($('<h5>Equation 8</h5>'), $('<h6>Pythagoras\'s Theorem</h6>'), nav)
+                .append($('<h5>General</h5>'), pagenav);
+            nav.click((ev) => {
+                nav.find('a').each((k, elem) => {
+                    if (ev.target === elem) {
+                        if (k === 0) {
+                            body.empty();
+                            body.append($('<a href="#"><h5><i class="glyphicon glyphicon-chevron-left"></i> Markup</h5></a>'));
+                            body.append($('<h6>Equation 8 (Pythagoras\'s Theorem)</h6>'));
+                            body.append($(
+                                '<form>' +
+                                '  <div class="form-group">' +
+                                '    <label for="math-ui-markup-type">Type</label>' +
+                                '    <select id="math-ui-markup-type" class="form-control">' +
+                                '      <option>MathML</option>' +
+                                '      <option>TeX</option>' +
+                                '    </select>' +
+                                '  </div>' +
+                                '  <div class="form-group">' +
+                                '    <label for="math-ui-markup">Markup</label> <i class="glyphicon glyphicon-new-window"></i>' +
+                                '    <textarea id="math-ui-markup" class="form-control" rows="10"><math display="block">\n    <mstyle displaystyle="true">\n        <mi>f</mi>\n        <mrow>\n            <mo>(</mo>\n            <mi>a</mi>\n            <mo>)</mo>\n        </mrow>\n        <mo>=</mo>\n        <mfrac>\n            <mn>1</mn>\n            <mrow>\n                <mn>2</mn>\n                <mi>π<!-- π --></mi>\n                <mi>i</mi>\n            </mrow>\n        </mfrac>\n        <msub>\n            <mo>∮</mo>\n            <mrow>\n                <mi>γ</mi>\n            </mrow>\n        </msub>\n        <mfrac>\n            <mrow>\n                <mi>F</mi>\n                <mo>(</mo>\n                <mi>z</mi>\n                <mo>)</mo>\n            </mrow>\n            <mrow>\n                <mi>z</mi>\n                <mo>−</mo>\n                <mi>a</mi>\n            </mrow>\n        </mfrac>\n        <mi>d</mi>\n        <mi>z</mi>\n    </mstyle>\n</math></textarea>' +
+                                '  </div>' +
+                                '</form>'
+                            ));
+                        } else if (k === 1) {
+                            body.empty();
+                            body.append($('<h5><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>Permalink</h5>'));
+                            body.append($('<input type="text" class="form-control" value="http://example.com/kjgr983h">'));
+                        } else if (k === 2) {
+                            body.empty();
+                            body.append($('<ol class="breadcrumb"><li><a href="#">Top</a></li><li class="active">Convert to code</li></ol>'));
+                            body.append(
+                                '<form>' +
+                                '  <div class="form-group">' +
+                                '    <label for="math-ui-markup-type">Language</label>' +
+                                '    <select id="math-ui-markup-type" class="form-control">' +
+                                '      <option>JavaScript</option>' +
+                                '      <option>C++</option>' +
+                                '      <option>Mathematica</option>' +
+                                '    </select>' +
+                                '  </div>' +
+                                '  <div class="form-group">' +
+                                '    <label for="math-ui-markup">Code</label> <i class="glyphicon glyphicon-new-window"></i>' +
+                                '    <textarea id="math-ui-markup" class="form-control" rows="10">for (int i=0; i < 10; i++)\n  n += i;</textarea>' +
+                                '  </div>' +
+                                '</form>'
+                            );
+                        }
+                    }
+                });
+            });
+        }
+
+        Sidebar.prototype.show = function () {
+            $(document.body).addClass('math-ui-show');
+            this.body.find('a').first().focus();
+        }
+
+        Sidebar.prototype.hide = function () {
+            $(document.body).removeClass('math-ui-show');
+            this.reset();
+        }
+
+        sidebar = new Sidebar();
 
         // Zoom
 
@@ -121,10 +212,6 @@ module FlorianMath {
                     .append(getName(item)), icons),
                 body = $('<div class="body" />'),
                 menu = $('<div class="math-ui focus-menu" />').append(eraser, top, body);
-
-            function showCommands() {
-                $(document.body).addClass('math-ui-show');
-            }
 
             function doZoom() {
                 $item.blur();
@@ -163,7 +250,7 @@ module FlorianMath {
                         switch (k) {
                             case 0:
                             case 1:
-                                showCommands();
+                                sidebar.show();
                                 break;
                             case 2:
                                 doZoom();
@@ -255,42 +342,6 @@ module FlorianMath {
             });
         };
 
-        BootstrapLookAndFeel.prototype.showDashboard = function () {
-            var body = $('<div class="modal-body" />')
-                    .append($('<div class="list-group" />')
-                        .append($('<a href="#" class="list-group-item">Highlight All Equations</a>'))
-                        .append($('<a href="#" class="list-group-item">About</a>'))
-                        .append($('<a href="#" class="list-group-item" data-dismiss="modal">Close</a>'))
-                ),
-                modal = $('<div class="modal math-ui-dashboard" tabindex="-1" role="dialog" aria-hidden="true" />')
-                    .append($('<div class="modal-dialog modal-sm" />').append($('<div class="modal-content" />')
-                        .append($('<div class="modal-header" />')
-                            .append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'))
-                            .append($('<h4 class="modal-title" />').append('Dashboard')))
-                        .append(body)
-                    )
-                ),
-                wrapper = $('<div class="math-ui" />').append(modal);
-
-            body.on('click', (ev) => {
-                body.find('a').each((k, elem) => {
-                    if (k <= 1 && elem === ev.target) {
-                        ev.preventDefault();
-                        modal.modal('hide');
-                        if (k === 0) {
-                            this.highlightAll();
-                        } else {
-                            global.location.href = 'https://github.com/dessci/math-ui';
-                        }
-                    }
-                });
-            });
-            $(doc.body).append(wrapper);
-            modal.on('hidden.bs.modal', () => {
-                wrapper.remove();
-            }).modal();
-        };
-
         mathUI = new BootstrapLookAndFeel($);
         dispatchCustomEvent(doc, 'created.math-ui');
 
@@ -319,53 +370,6 @@ module FlorianMath {
             });
         else
             pagerendered();
-
-        function Sidebar() {
-            var body = $('<div class="panel-body" />'),
-                closer = $('<button type="button" class="close">&times;</button>');
-            $(document.body).append($('<div id="math-ui-viewport" />')
-                .append($('<div id="math-ui-bar" class="math-ui" />')
-                    .append($('<div class="panel panel-primary" />')
-                        .append($('<div class="panel-heading" />').append(closer, $('<h4 class="panel-title">Math UI</h4>')),
-                                body))));
-            closer.click((ev) => {
-                $(document.body).removeClass('math-ui-show');
-            });
-            body.append($(
-'  <div class="panel panel-default">'+
-'    <div class="panel-heading">'+
-'      <h4 class="panel-title">'+
-'        Active Selection'+
-'      </h4>'+
-'    </div>'+
-'    <div class="panel-body">'+
-'      Body 1'+
-'    </div>'+
-'  </div>'+
-'  <div class="panel panel-default">'+
-'    <div class="panel-heading">'+
-'      <h4 class="panel-title">'+
-'        Multiple Selection'+
-'      </h4>'+
-'    </div>'+
-'    <div class="panel-body">'+
-'      Body 2'+
-'    </div>'+
-'  </div>'+
-'  <div class="panel panel-default">'+
-'    <div class="panel-heading">'+
-'      <h4 class="panel-title">'+
-'        Page Options'+
-'      </h4>'+
-'    </div>'+
-'    <div class="panel-body">'+
-'      Body 3'+
-'    </div>'+
-'  </div>'));
-            this.body = body;
-        }
-
-        var sidebar = new Sidebar();
 
     });
 

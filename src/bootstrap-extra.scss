@@ -12,9 +12,31 @@ $focus-menu-padding: 3px;
 $focus-border-width: 2px;
 $focus-border-radius: 3px;
 
-.math-ui .nav-pills > li > a {
-    padding: 0 15px;
-    text-align: left;
+.math-ui {
+    .nav-pills > li > a {
+        padding: 0 15px;
+        text-align: left;
+    }
+    .form-control {
+        background-color: #fff;
+        border-color: #a9a9a9;
+        padding: 6px;
+    }
+    .breadcrumb {
+        padding: 0;
+        margin-bottom: 12px;
+        background-color: transparent;
+        & > .active {
+            color: #000;
+            font-weight: bold;
+        }
+    }
+    textarea {
+        font-family: monospace;
+        white-space: pre;
+        word-wrap: normal;
+        overflow: auto;
+    }
 }
 
 math-item {
@@ -101,10 +123,6 @@ math-item {
 
 }
 
-.math-ui .panel-heading button.close {
-    margin-top: -7px;
-}
-
 $delay: 0.2s;
 $barWidth: 200px;
 $barPadding: 15px;
@@ -131,15 +149,10 @@ $barHeaderHeight: 36px;
 
 #math-ui-bar {
     display: none;
-    top: $barMargin;
-    bottom: $barMargin;
     width: $barWidth;
     z-index: 10000;
     .panel {
         margin-bottom: 0;
-    }
-    & > .panel > .panel-body {
-        padding: 0;
     }
 }
 
@@ -148,11 +161,24 @@ body.math-ui-show {
         display: block;
         position: absolute;
         visibility: visible;
+        top: $barMargin;
+        bottom: $barMargin;
         right: 2*$barMargin;
         overflow: auto;
         -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+
+        & > .panel {
+            min-height: 100%;
+            background-color: transparent;
+
+            & > .panel-body {
+                padding-top: 0;
+                padding-bottom: 0;
+                overflow: auto;
+            }
+        }
     }
 }
 
@@ -176,7 +202,7 @@ body.math-ui-show {
 
     body.math-ui-show {
         #main {
-            right: $barWidth + 2*$barMargin;
+            right: $barWidth;
         }
 
         #math-ui-bar {
@@ -184,23 +210,25 @@ body.math-ui-show {
             position: fixed;
             visibility: visible;
             overflow: hidden;
-            right: $barMargin;
+            top: 0;
+            bottom: 0;
+            right: 0;
 
             & > .panel {
+                border-radius: 0;
                 & > .panel-heading, & > .panel-body {
                     position: fixed;
-                    right: $barMargin;
+                    right: 0;
                     width: $barWidth;
                 }
                 & > .panel-heading {
-                    top: $barMargin;
+                    top: 0;
                     height: 36px;
                     overflow: hidden;
                 }
                 & > .panel-body {
-                    top: $barHeaderHeight + $barMargin;
-                    bottom: $barMargin;
-                    overflow: auto;
+                    top: $barHeaderHeight;
+                    bottom: 0;
                 }
             }
         }

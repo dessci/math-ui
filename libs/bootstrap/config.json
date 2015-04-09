@@ -386,14 +386,12 @@
     "button-groups.less",
     "input-groups.less",
     "navs.less",
+    "breadcrumbs.less",
     "list-group.less",
     "panels.less",
     "wells.less",
     "close.less"
   ],
-  "js": [
-    "collapse.js",
-    "transition.js"
-  ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=3003a1458cb89d5b5a70"
+  "js": [],
+  "customizerUrl": "http://getbootstrap.com/customize/?id=a6317c115eceb91b950e"
 }
