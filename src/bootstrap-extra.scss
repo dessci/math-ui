@@ -49,11 +49,11 @@ math-item {
     cursor: pointer;
     white-space: nowrap;
 
-    &:hover, &.active {
+    &:hover, &.active, &.highlight {
         background-color: $item-bg;
         box-shadow: $focus-border-width $focus-border-width 1px rgba(0, 0, 0, 0.8);
     }
-    &:hover {
+    &:hover, &.highlight {
         border-color: $item-hover-border;
     }
     &.active {
@@ -173,10 +173,26 @@ body.math-ui-show {
             min-height: 100%;
             background-color: transparent;
 
+            & > .btn-group {
+                & > .btn {
+                    border-radius: 0;
+                    &.active {
+                        background-color: transparent;
+                        color: #000;
+                    }
+                    &.disabled {
+                        opacity: 1;
+                        filter: alpha(opacity=100);
+                        color: #d3d3d3;
+                    }
+                }
+            }
             & > .panel-body {
-                padding-top: 0;
-                padding-bottom: 0;
+                padding: 8px;
                 overflow: auto;
+                & > h5 > a {
+                    font-size: 60%;
+                }
             }
         }
     }
@@ -208,27 +224,14 @@ body.math-ui-show {
         #math-ui-bar {
             display: block;
             position: fixed;
-            visibility: visible;
-            overflow: hidden;
             top: 0;
             bottom: 0;
             right: 0;
 
             & > .panel {
                 border-radius: 0;
-                & > .panel-heading, & > .panel-body {
-                    position: fixed;
-                    right: 0;
-                    width: $barWidth;
-                }
                 & > .panel-heading {
-                    top: 0;
-                    height: 36px;
-                    overflow: hidden;
-                }
-                & > .panel-body {
-                    top: $barHeaderHeight;
-                    bottom: 0;
+                    border-radius: 0;
                 }
             }
         }
