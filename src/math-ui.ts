@@ -213,8 +213,8 @@ module FlorianMath {
             this.container.push(mathItem);
             if (!$mathItem.attr('id'))
                 $mathItem.attr('id', 'math-item-' + this.container.length);
-            $mathItem.attr('tabindex', 0).attr('draggable', 'true').focus(onFocus).blur(onBlur);
-            $mathItem.mousedown((ev) => {
+            $mathItem.attr('tabindex', 0).attr('draggable', 'true').on('focus', onFocus).on('blur', onBlur);
+            $mathItem.on('mousedown', (ev) => {
                 ev.stopPropagation();
             });
             $mathItem.mouseenter(onMouseEnter).mouseleave(onMouseLeave);
@@ -262,9 +262,22 @@ module FlorianMath {
         getRoot(): JQuery;
     }
 
+    function mimeTypeToName(mime: string) {
+        switch (mime) {
+            case 'application/mathml+xml':
+                return 'MathML';
+            case 'application/x-tex':
+                return 'TeX';
+            default:
+                return mime;
+        }
+    }
+
     class MarkupPage implements Page {
         static pageName = 'markup';
         private root: JQuery;
+        private selector: JQuery;
+        private sources: HTMLMathSourceElement[] = [];
         constructor(private controller: PageController) {
             this.root = $('<h5>Markup <a href="#">back</a></h5>'+
                             '<p class="text-info" />'+
@@ -274,23 +287,43 @@ module FlorianMath {
                             '    <select id="math-ui-markup-type" class="form-control" />' +
                             '  </div>' +
                             '  <div class="form-group">' +
-                            '    <label for="math-ui-markup">Markup</label> <i class="glyphicon glyphicon-new-window"></i>' +
+                            '    <label for="math-ui-markup">Markup</label> <a href="#"><i class="glyphicon glyphicon-new-window"></i></a>' +
                             '    <textarea id="math-ui-markup" class="form-control" rows="10" />' +
                             '  </div>' +
                             '</form>');
-            $(this.root[0]).find('a').click((ev) => {
+            $(this.root[0]).find('a').on('click', (ev) => {
                 ev.preventDefault();
                 controller.popPage();
             });
+            this.selector = $(this.root[2]).find('select');
+            var textarea = $(this.root[2]).find('textarea');
+            this.selector.on('change', (ev) => {
+                if (this.sources.length) {
+                    var value = +this.selector.val();
+                    textarea.val(getSourceMarkup(this.sources[value]));
+                }
+            });
+            textarea.on('focus', () => {
+                async(() => {
+                    textarea.select();
+                });
+            });
+            $(this.root[2]).find('a').on('click', (ev) => {
+                var popup = global.open('', 'Markup', 'width=800,height=600');
+                $(popup.document.body).append($('<pre/>').text(textarea.val()));
+            });
         }
         setEquation(item: HTMLMathItemElement) {
-            var selector = $(this.root[2]).find('select'),
-                sources = item ? item.getSources({ markup: true }) : [];
+            this.sources = item ? item.getSources({ markup: true }) : [];
             $(this.root[1]).text(item ? getFullName(item) : '');
-            selector.empty();
-            each(sources, (source: HTMLMathSourceElement) => {
-                selector.append($('<option/>').append(getSourceType(source)));
+            this.selector.empty();
+            each(this.sources, (source: HTMLMathSourceElement, k: number) => {
+                var name = mimeTypeToName(getSourceType(source));
+                if (source.hasAttribute('name'))
+                    name += ' (' + source.getAttribute('name') + ')';
+                this.selector.append($('<option value="' + k + '">' + name + '</option>'));
             });
+            this.selector.trigger('change');
         }
         getRoot(): JQuery {
             return this.root;
@@ -304,7 +337,7 @@ module FlorianMath {
             this.root = $('<h5>Permalink <a href="#">back</a></h5>'+
                             '<p class="text-info" />'+
                             '<input type="text" class="form-control" value="http://example.com/kjgr983h">');
-            $(this.root[0]).find('a').click((ev) => {
+            $(this.root[0]).find('a').on('click', (ev) => {
                 ev.preventDefault();
                 controller.popPage();
             });
@@ -338,7 +371,7 @@ module FlorianMath {
                             '    <textarea id="math-ui-markup" class="form-control" rows="10">for (int i=0; i < 10; i++)\n  n += i;</textarea>' +
                             '  </div>' +
                             '</form>');
-            $(this.root[0]).find('a').click((ev) => {
+            $(this.root[0]).find('a').on('click', (ev) => {
                 ev.preventDefault();
                 controller.popPage();
             });
@@ -359,7 +392,7 @@ module FlorianMath {
             each(['Markup', 'Permalink', 'Convert to code', 'Open with', 'Share', 'Search', 'Speak'], (label) => {
                 nav.append($('<li role="presentation" />').append($('<a href="#" />').append(label)));
             });
-            nav.click((ev) => {
+            nav.on('click', (ev) => {
                 nav.find('a').each((k, elem) => {
                     if (ev.target === elem) {
                         ev.preventDefault();
@@ -410,7 +443,7 @@ module FlorianMath {
             each(['Highlight all equations', 'List all', 'Help', 'About'], (label) => {
                 nav.append($('<li role="presentation" />').append($('<a href="#" />').append(label)));
             });
-            nav.click((ev) => {
+            nav.on('click', (ev) => {
                 nav.find('a').each((k, elem) => {
                     if (ev.target === elem) {
                         ev.preventDefault();
@@ -444,13 +477,13 @@ module FlorianMath {
                 .append(closer, $('<h4 class="panel-title">Math UI</h4>')
                 ),
                 this.topmenu, this.body))));
-            closer.click((ev) => {
+            closer.on('click', (ev) => {
                 this.hide();
             });
             this.registerPage(EqnPage.pageName, new EqnPage(this));
             this.registerPage(SelectionPage.pageName, new SelectionPage());
             this.registerPage(GeneralPage.pageName, new GeneralPage());
-            this.topmenu.click((ev) => {
+            this.topmenu.on('click', (ev) => {
                 ev.preventDefault();
                 this.topmenu.find('a').each((k, elem) => {
                     if (ev.target === elem) {
@@ -458,11 +491,11 @@ module FlorianMath {
                     }
                 });
             });
-            $(doc).mousedown(() => {
+            $(doc).on('mousedown', () => {
                 if (this.isShowing())
                     this.hide();
             });
-            $('#math-ui-bar').mousedown((ev) => {
+            $('#math-ui-bar').on('mousedown', (ev) => {
                 ev.stopPropagation();
             });
         }
